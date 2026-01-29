@@ -1,7 +1,7 @@
 import { StatusBar, StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-function App() {
+const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -10,7 +10,7 @@ function App() {
       </SafeAreaView>
     </SafeAreaProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
