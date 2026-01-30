@@ -10,7 +10,6 @@ module.exports = {
           '@app': './src/app',
           '@screens': './src/screens',
           '@widgets': './src/widgets',
-
           '@features': './src/features',
           '@entities': './src/entities',
           '@shared': './src/shared',
