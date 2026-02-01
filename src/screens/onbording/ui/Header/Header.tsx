@@ -2,10 +2,9 @@ import React from 'react';
 
 import { View, Text } from 'react-native';
 
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
 import { useStyles } from './styles';
 
+import { Icon } from '@/shared';
 import { colors } from '@/shared/config/theme/colors';
 
 export const Header = () => {
@@ -15,7 +14,12 @@ export const Header = () => {
     <View style={s.header}>
       <View style={s.headerRow}>
         <View style={s.iconWrapper}>
-          <MaterialIcons name="attach-money" size={30} color={colors.white} />
+          <Icon
+            family="materialIcons"
+            name="attach-money"
+            size={30}
+            color={colors.white}
+          />
         </View>
         <Text style={s.title}>Finance Tracker</Text>
       </View>
