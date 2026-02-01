@@ -49,7 +49,7 @@ module.exports = {
           { pattern: '^\\./', group: 'sibling' },
           { pattern: '\\.s?css$', group: 'internal' }
         ],
-        pathGroupsExcludedImportTypes: ['builtin', 'external'],
+        pathGroupsExcludedImportTypes: ['builtin'],
         alphabetize: { order: 'asc', caseInsensitive: true },
         'newlines-between': 'always'
       }
