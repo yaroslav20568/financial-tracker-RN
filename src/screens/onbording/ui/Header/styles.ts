@@ -5,6 +5,9 @@ export const useStyles = () => {
     const { fonts, colors } = theme;
 
     return {
+      header: {
+        marginBottom: 20
+      },
       headerRow: {
         flexDirection: 'row',
         alignItems: 'center',

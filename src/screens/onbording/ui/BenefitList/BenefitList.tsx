@@ -6,10 +6,9 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
-import { colors } from '@/shared/config/theme/colors';
-
 import { useStyles } from './styles';
 
+import { colors } from '@/shared/config/theme/colors';
 
 const benefitItems = [
   {

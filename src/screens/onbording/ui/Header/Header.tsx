@@ -4,16 +4,15 @@ import { View, Text } from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { colors } from '@/shared/config/theme/colors';
-
 import { useStyles } from './styles';
 
+import { colors } from '@/shared/config/theme/colors';
 
 export const Header = () => {
   const s = useStyles();
 
   return (
-    <View>
+    <View style={s.header}>
       <View style={s.headerRow}>
         <View style={s.iconWrapper}>
           <MaterialIcons name="attach-money" size={30} color={colors.white} />

@@ -7,6 +7,7 @@ export const useStyles = () => {
     return {
       list: {
         flexDirection: 'row',
+        paddingBottom: 25,
         gap: 10
       },
       benefit: {
