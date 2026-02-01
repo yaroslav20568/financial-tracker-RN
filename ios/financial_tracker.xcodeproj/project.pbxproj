@@ -11,6 +11,10 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		7741AB2071124ADA8278C0EA /* Inter-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7734359C3A7040A895A5B5C3 /* Inter-Medium.otf */; };
+		DECEC329F27B47FF808D51D3 /* Inter-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 464CBB6C77BA4AFC9984E58E /* Inter-Regular.otf */; };
+		A6FE70E941A7421AA3EC1D35 /* Inter-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 75D38C368BCF480690ADD587 /* Inter-Bold.otf */; };
+		7845E71DB89D4660B6D589BC /* Inter-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9162D6C7A52B4F4A9AF23603 /* Inter-SemiBold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = financial_tracker/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = financial_tracker/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		7734359C3A7040A895A5B5C3 /* Inter-Medium.otf */ = {isa = PBXFileReference; name = "Inter-Medium.otf"; path = "../assets/fonts/Inter-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		464CBB6C77BA4AFC9984E58E /* Inter-Regular.otf */ = {isa = PBXFileReference; name = "Inter-Regular.otf"; path = "../assets/fonts/Inter-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		75D38C368BCF480690ADD587 /* Inter-Bold.otf */ = {isa = PBXFileReference; name = "Inter-Bold.otf"; path = "../assets/fonts/Inter-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9162D6C7A52B4F4A9AF23603 /* Inter-SemiBold.otf */ = {isa = PBXFileReference; name = "Inter-SemiBold.otf"; path = "../assets/fonts/Inter-SemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +82,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				9BDE3CFE0E9545899259E3C1 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -96,6 +105,18 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		9BDE3CFE0E9545899259E3C1 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				7734359C3A7040A895A5B5C3 /* Inter-Medium.otf */,
+				464CBB6C77BA4AFC9984E58E /* Inter-Regular.otf */,
+				75D38C368BCF480690ADD587 /* Inter-Bold.otf */,
+				9162D6C7A52B4F4A9AF23603 /* Inter-SemiBold.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -159,6 +180,10 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				7741AB2071124ADA8278C0EA /* Inter-Medium.otf in Resources */,
+				DECEC329F27B47FF808D51D3 /* Inter-Regular.otf in Resources */,
+				A6FE70E941A7421AA3EC1D35 /* Inter-Bold.otf in Resources */,
+				7845E71DB89D4660B6D589BC /* Inter-SemiBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

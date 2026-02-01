@@ -4,6 +4,7 @@
     "types": ["jest"],
     "baseUrl": "src",
     "paths": {
+      "@/*": ["./*"],
       "@app/*": ["app/*"],
       "@screens/*": ["screens/*"],
       "@widgets/*": ["widgets/*"],
