@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
+
+import { ScreenLayout } from '@shared/index';
 
 export const AuthScreen = () => {
   return (
-    <View>
+    <ScreenLayout>
       <Text>Auth Screen</Text>
-    </View>
+    </ScreenLayout>
   );
 };
