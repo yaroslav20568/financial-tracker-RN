@@ -7,7 +7,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import { IconProps as VectorIconProps } from 'react-native-vector-icons/Icon';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { colors } from '@shared/config/theme/colors';
+import { colors } from '@/shared';
 
 export const IconFamily = {
   entypo: Entypo,

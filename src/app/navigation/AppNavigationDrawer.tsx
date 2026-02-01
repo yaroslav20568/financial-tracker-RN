@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { HomeScreen } from '@screens/index';
+import { HomeScreen } from '@/screens';
 
 export type TAppDrawerParamList = {
   Home: undefined;

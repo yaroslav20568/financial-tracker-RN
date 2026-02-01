@@ -2,11 +2,10 @@ import React from 'react';
 
 import { StackScreenProps } from '@react-navigation/stack';
 
-import { Button, ScreenLayout } from '@shared/index';
-
 import { Header, BenefitList, SecurityList } from './ui';
 
 import { TAuthStackParamList } from '@/app';
+import { Button, ScreenLayout } from '@/shared';
 
 export type TProps = StackScreenProps<TAuthStackParamList, 'Onboarding'>;
 

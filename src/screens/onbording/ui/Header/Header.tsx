@@ -4,8 +4,7 @@ import { View, Text } from 'react-native';
 
 import { useStyles } from './styles';
 
-import { Icon } from '@/shared';
-import { colors } from '@/shared/config/theme/colors';
+import { Icon, colors } from '@/shared';
 
 export const Header = () => {
   const s = useStyles();

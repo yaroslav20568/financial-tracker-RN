@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { AuthScreen, OnboardingScreen } from '@screens/index';
+import { AuthScreen, OnboardingScreen } from '@/screens';
 
 export type TAuthStackParamList = {
   Onboarding: undefined;
