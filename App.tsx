@@ -6,6 +6,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { NavigationProvider } from '@app/index';
 
+import '@shared/config/theme/unistyles';
+
 const App = () => {
   return (
     <SafeAreaProvider>

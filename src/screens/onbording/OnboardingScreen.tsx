@@ -2,12 +2,14 @@ import React from 'react';
 
 import { ScreenLayout } from '@shared/index';
 
-import { Header } from './ui';
+import { Header, BenefitList, SecurityList } from './ui';
 
 export const OnboardingScreen = () => {
   return (
-    <ScreenLayout>
+    <ScreenLayout isCenter>
       <Header />
+      <BenefitList />
+      <SecurityList />
     </ScreenLayout>
   );
 };
