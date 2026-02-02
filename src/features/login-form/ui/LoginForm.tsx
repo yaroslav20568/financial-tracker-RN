@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+
+import { Input } from '@/shared';
 
 export const LoginForm = () => {
   return (
     <View>
-      <Text>LoginForm</Text>
+      <Input />
     </View>
   );
 };

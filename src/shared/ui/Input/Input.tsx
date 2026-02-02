@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { View, Text, TextInputProps } from 'react-native';
+import { View, Text, TextInput, TextInputProps } from 'react-native';
+
+import { colors } from '@/shared';
+
+import { useStyles } from './styles';
 
 interface IProps extends TextInputProps {
   label?: string;
 }
 
-export const Input = ({ label = 'Login' }: IProps) => {
+export const Input = ({ label = 'Login', style, ...props }: IProps) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const s = useStyles();
+
   return (
     <View>
-      <Text>{label}</Text>
+      <View style={s.labelWrapper}>
+        <Text style={s.label}>{label}</Text>
+        <Text style={s.required}>*</Text>
+      </View>
+      <TextInput
+        style={[s.input(isFocused), style]}
+        selectionColor={colors.black}
+        onFocus={() => {
+          setIsFocused(true);
+        }}
+        onBlur={() => {
+          setIsFocused(false);
+        }}
+        {...props}
+      />
     </View>
   );
 };
