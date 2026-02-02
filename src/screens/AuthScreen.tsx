@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { Text } from 'react-native';
-
 import { ScreenLayout } from '@/shared';
+import { AuthForm } from '@/widgets';
 
 export const AuthScreen = () => {
   return (
-    <ScreenLayout>
-      <Text>Auth Screen</Text>
+    <ScreenLayout isCenter>
+      <AuthForm />
     </ScreenLayout>
   );
 };
