@@ -18,7 +18,7 @@ interface IProps extends PressableProps {
 
 export const Button = ({ title, onPress, ...props }: IProps) => {
   const s = useStyles();
-  s.useVariants({ color: undefined });
+  s.useVariants({});
 
   const scale = useSharedValue(1);
 

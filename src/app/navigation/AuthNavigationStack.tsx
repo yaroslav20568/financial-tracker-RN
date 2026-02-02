@@ -11,9 +11,18 @@ export type TAuthStackParamList = {
 
 const AuthStack = createStackNavigator<TAuthStackParamList>();
 
-export const AuthNavigationStack = () => {
+interface AuthNavigationStackProps {
+  initialRouteName?: keyof TAuthStackParamList;
+}
+
+export const AuthNavigationStack = ({
+  initialRouteName = 'Onboarding'
+}: AuthNavigationStackProps) => {
   return (
-    <AuthStack.Navigator screenOptions={{ headerShown: false }}>
+    <AuthStack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName={initialRouteName}
+    >
       <AuthStack.Screen name="Onboarding" component={OnboardingScreen} />
       <AuthStack.Screen name="Auth" component={AuthScreen} />
     </AuthStack.Navigator>
