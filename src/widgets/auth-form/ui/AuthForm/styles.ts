@@ -8,7 +8,8 @@ export const useStyles = () => {
       formWrapper: {
         backgroundColor: colors.white,
         borderRadius: 8,
-        padding: 16
+        paddingVertical: 24,
+        paddingHorizontal: 16
       }
     };
   });

@@ -41,11 +41,7 @@ export const LoginForm = () => {
           secureTextEntry
         />
       </View>
-      <Button
-        title="Sign In"
-        onPress={handleSubmit(onSubmit)}
-        style={s.button}
-      />
+      <Button title="Login" onPress={handleSubmit(onSubmit)} style={s.button} />
     </View>
   );
 };
