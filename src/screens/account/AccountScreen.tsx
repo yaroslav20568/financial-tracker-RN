@@ -1,11 +1,14 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { HeadScreenLayout, ScreenLayout } from '@/shared';
 
 export const AccountScreen = () => {
   return (
-    <View>
-      <Text>Account Screen</Text>
-    </View>
+    <ScreenLayout>
+      <HeadScreenLayout
+        title="Account Settings"
+        text="Manage your account information and preferences"
+      />
+    </ScreenLayout>
   );
 };
