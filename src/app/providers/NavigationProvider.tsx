@@ -1,31 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { ActivityIndicator } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 
 import { AppNavigationDrawer, AuthNavigationStack } from '@/app/navigation';
-import { CenterLayout, storageService } from '@/shared';
+import { useAuth } from '@/entities';
+import { CenterLayout } from '@/shared';
 
 export const NavigationProvider = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [token, setToken] = useState<string | null>(null);
-  const [isOnboardingCompleted, setIsOnboardingCompleted] = useState(false);
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      const userToken = await storageService.get<string>('token');
-      const isOnboarding = await storageService.get<boolean>(
-        'isCompletedOnbording'
-      );
-
-      setToken(userToken);
-      setIsOnboardingCompleted(!!isOnboarding);
-      setIsLoading(false);
-    };
-
-    checkAuth();
-  }, []);
+  const { token, isOnboardingCompleted, isLoading } = useAuth();
 
   if (isLoading) {
     return (
