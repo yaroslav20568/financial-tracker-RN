@@ -1,7 +1,9 @@
 import Toast from 'react-native-toast-message';
 
+import axios, { AxiosError } from 'axios';
+
 import { TLoginForm } from '@/features/login-form/model';
-import { axiosInstance } from '@/shared';
+import { axiosInstance, IErrorResponse } from '@/shared';
 
 interface ILoginResponse {}
 
@@ -21,12 +23,22 @@ export const loginRequest = async (
     });
 
     return response.data;
-  } catch (error: any) {
-    Toast.show({
-      type: 'error',
-      text1: 'Login Error',
-      text2: error?.response?.data?.message
-    });
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const err = error as AxiosError<IErrorResponse>;
+
+      Toast.show({
+        type: 'error',
+        text1: 'Login Error',
+        text2: err?.response?.data?.message
+      });
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Unexpected error occurred'
+      });
+    }
 
     throw error;
   }

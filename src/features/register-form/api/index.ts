@@ -1,7 +1,9 @@
 import Toast from 'react-native-toast-message';
 
+import axios, { AxiosError } from 'axios';
+
 import { TRegisterForm } from '@/features/register-form/model';
-import { axiosInstance } from '@/shared';
+import { axiosInstance, IErrorResponse } from '@/shared';
 
 interface IRegisterResponse {
   accessToken: string;
@@ -20,16 +22,26 @@ export const registerRequest = async (
     Toast.show({
       type: 'success',
       text1: 'Register Success',
-      text2: 'You are logged in'
+      text2: 'You are registered'
     });
 
     return response.data;
-  } catch (error: any) {
-    Toast.show({
-      type: 'error',
-      text1: 'Register Error',
-      text2: error?.response?.data?.errors?.join(', ')
-    });
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const err = error as AxiosError<IErrorResponse>;
+
+      Toast.show({
+        type: 'error',
+        text1: 'Register Error',
+        text2: err?.response?.data?.errors?.join(', ')
+      });
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Unexpected error occurred'
+      });
+    }
 
     throw error;
   }
