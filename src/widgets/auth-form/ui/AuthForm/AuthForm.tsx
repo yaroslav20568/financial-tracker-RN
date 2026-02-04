@@ -16,7 +16,11 @@ export const AuthForm = () => {
   return (
     <View>
       <AuthTabs activeTab={activeTab} onSelect={setActiveTab} />
-      <Animated.View key={activeTab} entering={FadeInDown} style={s.content}>
+      <Animated.View
+        key={activeTab}
+        entering={FadeInDown}
+        style={s.formWrapper}
+      >
         {activeTab === 'login' ? <LoginForm /> : <RegisterForm />}
       </Animated.View>
     </View>

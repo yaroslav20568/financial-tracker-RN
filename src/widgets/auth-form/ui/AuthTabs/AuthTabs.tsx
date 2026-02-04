@@ -27,12 +27,12 @@ export const AuthTabs = ({ activeTab, onSelect }: IProps) => {
       />
       <Pressable style={s.tab} onPress={() => onSelect('login')}>
         <Text style={[s.tabText, activeTab === 'login' && s.activeText]}>
-          Вход
+          Login
         </Text>
       </Pressable>
       <Pressable style={s.tab} onPress={() => onSelect('register')}>
         <Text style={[s.tabText, activeTab === 'register' && s.activeText]}>
-          Регистрация
+          Register
         </Text>
       </Pressable>
     </View>

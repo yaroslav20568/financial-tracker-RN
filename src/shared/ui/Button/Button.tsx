@@ -16,7 +16,7 @@ interface IProps extends PressableProps {
   title: string;
 }
 
-export const Button = ({ title, onPress, ...props }: IProps) => {
+export const Button = ({ title, onPress, style, ...props }: IProps) => {
   const s = useStyles();
   s.useVariants({});
 
@@ -40,7 +40,7 @@ export const Button = ({ title, onPress, ...props }: IProps) => {
       onPress={onPress}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
-      style={[s.button, animatedStyle]}
+      style={[s.button, style, animatedStyle]}
     >
       <Text style={s.text}>{title}</Text>
     </AnimatedPressable>

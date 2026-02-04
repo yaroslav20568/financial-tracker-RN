@@ -28,7 +28,13 @@ export const useStyles = () => {
         fontSize: 14,
         fontFamily: fonts.interRegular,
         color: colors.black
-      })
+      }),
+      error: {
+        fontSize: 12,
+        fontFamily: fonts.interMedium,
+        color: colors.red,
+        marginTop: 5
+      }
     };
   });
 };

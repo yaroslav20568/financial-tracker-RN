@@ -5,7 +5,7 @@ export const useStyles = () => {
     const { colors } = theme;
 
     return {
-      content: {
+      formWrapper: {
         backgroundColor: colors.white,
         borderRadius: 8,
         padding: 16
