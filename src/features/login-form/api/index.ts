@@ -2,16 +2,15 @@ import Toast from 'react-native-toast-message';
 
 import axios, { AxiosError } from 'axios';
 
+import { IAuthResponse } from '@/entities';
 import { TLoginForm } from '@/features/login-form/model';
 import { axiosInstance, IErrorResponse } from '@/shared';
 
-interface ILoginResponse {}
-
 export const loginRequest = async (
   data: TLoginForm
-): Promise<ILoginResponse> => {
+): Promise<IAuthResponse> => {
   try {
-    const response = await axiosInstance.post<ILoginResponse>(
+    const response = await axiosInstance.post<IAuthResponse>(
       '/auth/login',
       data
     );

@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
+import { useAuth } from '@/entities';
 import { loginRequest } from '@/features/login-form/api';
 import { loginSchema, TLoginForm } from '@/features/login-form/model';
 import { Button, FormInput } from '@/shared';
@@ -13,6 +14,7 @@ import { useStyles } from './styles';
 
 export const LoginForm = () => {
   const s = useStyles();
+  const { setToken } = useAuth();
 
   const { control, handleSubmit } = useForm<TLoginForm>({
     resolver: yupResolver(loginSchema),
@@ -20,8 +22,12 @@ export const LoginForm = () => {
     mode: 'all'
   });
 
-  const onSubmit = (data: TLoginForm) => {
-    loginRequest(data);
+  const onSubmit = async (data: TLoginForm) => {
+    const response = await loginRequest(data);
+
+    if (response.accessToken && response.refreshToken) {
+      await setToken(response.accessToken);
+    }
   };
 
   return (

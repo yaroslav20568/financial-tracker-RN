@@ -2,19 +2,15 @@ import Toast from 'react-native-toast-message';
 
 import axios, { AxiosError } from 'axios';
 
+import { IAuthResponse } from '@/entities';
 import { TRegisterForm } from '@/features/register-form/model';
 import { axiosInstance, IErrorResponse } from '@/shared';
 
-interface IRegisterResponse {
-  accessToken: string;
-  refreshToken: string;
-}
-
 export const registerRequest = async (
   data: TRegisterForm
-): Promise<IRegisterResponse> => {
+): Promise<IAuthResponse> => {
   try {
-    const response = await axiosInstance.post<IRegisterResponse>(
+    const response = await axiosInstance.post<IAuthResponse>(
       '/auth/registration',
       data
     );
