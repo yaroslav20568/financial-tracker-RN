@@ -3,6 +3,7 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 
 import { NavigationProvider } from '@/app';
 
@@ -13,6 +14,7 @@ const App = () => {
     <SafeAreaProvider>
       <StatusBar barStyle="dark-content" />
       <NavigationProvider />
+      <Toast />
     </SafeAreaProvider>
   );
 };

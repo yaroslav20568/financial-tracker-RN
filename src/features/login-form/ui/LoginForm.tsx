@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
+import { loginRequest } from '@/features/login-form/api';
 import { loginSchema, TLoginForm } from '@/features/login-form/model';
 import { Button, FormInput } from '@/shared';
 
@@ -20,7 +21,7 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (data: TLoginForm) => {
-    console.log('data: ', data);
+    loginRequest(data);
   };
 
   return (
