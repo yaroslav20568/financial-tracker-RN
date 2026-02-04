@@ -2,9 +2,11 @@ import React from 'react';
 
 import { View, Text } from 'react-native';
 
-import { useStyles } from './styles';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 import { Icon, colors } from '@/shared';
+
+import { useStyles } from './styles';
 
 const benefitItems = [
   {
@@ -30,13 +32,17 @@ export const SecurityList = () => {
   return (
     <View style={s.list}>
       {benefitItems.map((benefit, index) => (
-        <View style={s.benefit} key={index}>
+        <Animated.View
+          key={index}
+          style={s.benefit}
+          entering={FadeInDown.delay(index * 500).duration(500)}
+        >
           <View style={s.iconWrapper}>{benefit.icon}</View>
           <View style={s.textContent}>
             <Text style={s.title}>{benefit.title}</Text>
             <Text style={s.text}>{benefit.text}</Text>
           </View>
-        </View>
+        </Animated.View>
       ))}
     </View>
   );
