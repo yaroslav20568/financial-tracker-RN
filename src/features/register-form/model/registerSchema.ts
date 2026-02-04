@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 export const registerSchema = yup.object({
   login: yup.string().required('Login is required'),
-  accountName: yup.string().required('AccountName is required'),
+  accountName: yup.string().required('Account Name is required'),
   password: yup
     .string()
     .required('Password is required')
@@ -13,7 +13,7 @@ export const registerSchema = yup.object({
     .matches(/[!@#$%^&*(),.?":{}|<>]/, 'At least one special character'),
   checkPassword: yup
     .string()
-    .required('Confirm password is required')
+    .required('Confirm Password is required')
     .oneOf([yup.ref('password')], 'Passwords must match')
 });
 
