@@ -4,3 +4,4 @@ export * from './Icon';
 export * from './CenterLayout';
 export * from './Input';
 export * from './HeadScreenLayout';
+export * from './LogoHeader';

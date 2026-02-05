@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 import Animated, { FadeInDown, FadeInLeft } from 'react-native-reanimated';
 
-import { Icon, colors } from '@/shared';
+import { LogoHeader } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -13,19 +13,8 @@ export const Header = () => {
 
   return (
     <View style={s.header}>
-      <Animated.View
-        entering={FadeInLeft.duration(500).delay(100)}
-        style={s.headerRow}
-      >
-        <View style={s.iconWrapper}>
-          <Icon
-            family="materialIcons"
-            name="attach-money"
-            size={30}
-            color={colors.white}
-          />
-        </View>
-        <Text style={s.title}>Finance Tracker</Text>
+      <Animated.View entering={FadeInLeft.duration(500).delay(100)}>
+        <LogoHeader />
       </Animated.View>
       <Animated.Text
         entering={FadeInDown.duration(500).delay(200)}

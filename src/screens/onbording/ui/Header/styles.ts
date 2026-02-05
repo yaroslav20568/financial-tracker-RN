@@ -8,26 +8,6 @@ export const useStyles = () => {
       header: {
         marginBottom: 20
       },
-      headerRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 10,
-        marginBottom: 10
-      },
-      iconWrapper: {
-        width: 48,
-        height: 48,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: colors.blue,
-        padding: 8,
-        borderRadius: 8
-      },
-      title: {
-        fontSize: 24,
-        fontFamily: fonts.interBold,
-        color: colors.black
-      },
       text: {
         fontSize: 30,
         fontFamily: fonts.interBold,
