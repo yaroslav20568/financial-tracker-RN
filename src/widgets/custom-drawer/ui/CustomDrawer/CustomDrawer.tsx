@@ -2,6 +2,8 @@ import React from 'react';
 
 import { View } from 'react-native';
 
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -17,16 +19,21 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
   const s = useStyles();
 
   return (
-    <DrawerContentScrollView {...props}>
-      <View style={s.logoHeaderWhapper}>
-        <LogoHeader size="s" />
-      </View>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Log out"
-        onPress={() => {}}
-        inactiveTintColor={colors.red}
-      />
-    </DrawerContentScrollView>
+    <SafeAreaView style={s.container}>
+      <DrawerContentScrollView
+        {...props}
+        contentContainerStyle={s.contentContainer}
+      >
+        <View style={s.logoHeaderWhapper}>
+          <LogoHeader size="s" />
+        </View>
+        <DrawerItemList {...props} />
+        <DrawerItem
+          label="Log out"
+          onPress={() => {}}
+          inactiveTintColor={colors.red}
+        />
+      </DrawerContentScrollView>
+    </SafeAreaView>
   );
 };
