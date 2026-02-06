@@ -2,12 +2,12 @@ import React from 'react';
 
 import { View, Text } from 'react-native';
 
-import { colors, Icon } from '@/shared';
+import { colors, Icon, TSizeSL } from '@/shared';
 
 import { useStyles } from './styles';
 
 interface IProps {
-  size?: 's' | 'l';
+  size?: TSizeSL;
 }
 
 export const LogoHeader = ({ size = 'l' }: IProps) => {
