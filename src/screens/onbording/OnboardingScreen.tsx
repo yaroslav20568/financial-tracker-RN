@@ -7,9 +7,9 @@ import { Button, ScreenLayout, storageService } from '@/shared';
 
 import { Header, BenefitList, SecurityList } from './ui';
 
-export type TProps = StackScreenProps<TAuthStackParamList, 'Onboarding'>;
+interface IProps extends StackScreenProps<TAuthStackParamList, 'Onboarding'> {}
 
-export const OnboardingScreen = ({ navigation }: TProps) => {
+export const OnboardingScreen = ({ navigation }: IProps) => {
   const navigateToAuth = () => {
     navigation.navigate('Auth');
 
