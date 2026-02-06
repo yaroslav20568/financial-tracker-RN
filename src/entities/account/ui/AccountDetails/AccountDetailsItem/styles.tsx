@@ -16,14 +16,15 @@ export const useStyles = () => {
       },
       texts: { flex: 1 },
       title: {
-        fontSize: 16,
-        fontFamily: fonts.interSemiBold,
-        color: colors.black
+        fontSize: 14,
+        fontFamily: fonts.interMedium,
+        color: colors.gray
       },
       subtitle: {
-        fontSize: 14,
+        fontSize: 12,
+        lineHeight: 18,
         fontFamily: fonts.interRegular,
-        color: colors.gray
+        color: colors.black
       }
     };
   });
