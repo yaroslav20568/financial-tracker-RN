@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 
 import { Text, View } from 'react-native';
 
@@ -7,7 +7,7 @@ import { useStyles } from './styles';
 interface IProps {
   title: string;
   text: string;
-  rightSlot?: ReactElement;
+  rightSlot?: ReactNode;
 }
 
 export const HeadScreenLayout = ({ title, text, rightSlot }: IProps) => {

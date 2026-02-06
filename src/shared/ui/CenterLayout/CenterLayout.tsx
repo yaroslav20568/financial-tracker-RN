@@ -1,11 +1,11 @@
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 
 import { View } from 'react-native';
 
 import { useStyles } from './styles';
 
 interface IProps {
-  children: ReactElement;
+  children: ReactNode;
 }
 
 export const CenterLayout = ({ children }: IProps) => {
