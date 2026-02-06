@@ -3,7 +3,7 @@ import { axiosInstance } from '@/shared';
 
 class AccountApi {
   getAccount = async (): Promise<IAccount> => {
-    const response = await axiosInstance.get<IAccount>('/auth/account');
+    const response = await axiosInstance.get<IAccount>('/account');
 
     return response.data;
   };
