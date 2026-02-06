@@ -1,3 +1,3 @@
-export * from './storageService';
-export * from './dateUtils';
+export * from './services';
+export * from './utils';
 export * from './hooks';
