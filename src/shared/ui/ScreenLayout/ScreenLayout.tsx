@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 
 import { ScrollView, View } from 'react-native';
 
@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useStyles } from './styles';
 
 interface IProps {
-  children: ReactNode;
+  children: ReactElement;
   paddingVertical?: number;
   paddingHorizontal?: number;
   isCenter?: boolean;

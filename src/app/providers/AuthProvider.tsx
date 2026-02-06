@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback, ReactNode } from 'react';
+import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 
 import { AuthContext } from '@/entities';
 import { storageService } from '@/shared';
 
 interface IProps {
-  children: ReactNode;
+  children: ReactElement;
 }
 
 export const AuthProvider = ({ children }: IProps) => {

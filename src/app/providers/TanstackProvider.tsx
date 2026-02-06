@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
+import { ReactElement } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { STALE_TIME_FIVE_MINUTES } from '@/shared';
 
 interface IProps {
-  children: ReactNode;
+  children: ReactElement;
 }
 
 export const queryClient = new QueryClient({
