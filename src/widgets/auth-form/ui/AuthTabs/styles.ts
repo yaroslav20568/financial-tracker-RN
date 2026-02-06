@@ -27,7 +27,7 @@ export const useStyles = () => {
         width: '49%',
         backgroundColor: colors.white,
         borderRadius: 10,
-        shadowColor: '#000',
+        shadowColor: colors.black,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,

@@ -19,9 +19,9 @@ export const useStyles = () => {
         color: colors.red
       },
       input: (isFocused: boolean) => ({
-        backgroundColor: '#fafafa',
+        backgroundColor: colors.ghostWhite,
         borderWidth: 1,
-        borderColor: isFocused ? colors.blue : '#e2e8f0',
+        borderColor: isFocused ? colors.blue : colors.borderGray,
         borderRadius: 8,
         paddingVertical: 10,
         paddingHorizontal: 15,
