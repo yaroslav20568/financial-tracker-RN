@@ -1,11 +1,15 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { AccountDetails, AccountHeader, useGetAccount } from '@/entities';
+import { BorderLayout } from '@/shared';
 
 export const AccountProfile = () => {
+  const { data } = useGetAccount();
+
   return (
-    <View>
-      <Text>AccountProfile</Text>
-    </View>
+    <BorderLayout
+      header={<AccountHeader id={data?.id} name={data?.name} />}
+      content={<AccountDetails {...data} />}
+    />
   );
 };
