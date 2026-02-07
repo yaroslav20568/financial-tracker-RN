@@ -18,17 +18,24 @@ export const useStyles = () => {
       required: {
         color: colors.red
       },
-      input: (isFocused: boolean) => ({
+      input: (isFocused: boolean, isPassword: boolean) => ({
         backgroundColor: colors.ghostWhite,
         borderWidth: 1,
         borderColor: isFocused ? colors.blue : colors.borderGray,
         borderRadius: 8,
         paddingVertical: 10,
         paddingHorizontal: 15,
+        paddingRight: isPassword ? 40 : 15,
         fontSize: 14,
         fontFamily: fonts.interRegular,
         color: colors.black
       }),
+      showPasswordBtn: {
+        position: 'absolute',
+        right: 10,
+        top: '50%',
+        transform: [{ translateY: -10 }]
+      },
       error: {
         fontSize: 12,
         fontFamily: fonts.interMedium,
