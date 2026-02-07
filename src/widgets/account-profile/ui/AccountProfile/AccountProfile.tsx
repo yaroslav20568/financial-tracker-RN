@@ -4,12 +4,13 @@ import { AccountDetails, AccountHeader, useGetAccount } from '@/entities';
 import {
   BorderLayout,
   CenterLayout,
+  ErrorData,
   Loader,
   useRefreshOnFocus
 } from '@/shared';
 
 export const AccountProfile = () => {
-  const { data, isFetching } = useGetAccount();
+  const { data, isFetching, isError, error } = useGetAccount();
 
   useRefreshOnFocus();
 
@@ -19,6 +20,10 @@ export const AccountProfile = () => {
         <Loader />
       </CenterLayout>
     );
+  }
+
+  if (isError) {
+    return <ErrorData title={error.message} />;
   }
 
   return (

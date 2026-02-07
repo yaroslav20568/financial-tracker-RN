@@ -1,11 +1,23 @@
+import { AxiosError } from 'axios';
+
 import { IAccount } from '@/entities/account/model';
-import { axiosInstance } from '@/shared';
+import { axiosInstance, IErrorResponse } from '@/shared';
 
 class AccountApi {
   getAccount = async (): Promise<IAccount> => {
-    const response = await axiosInstance.get<IAccount>('/account');
+    try {
+      const response = await axiosInstance.get<IAccount>('/account');
 
-    return response.data;
+      return response.data;
+    } catch (err) {
+      const error = err as AxiosError<IErrorResponse>;
+
+      throw new Error(
+        error.response?.data?.errors?.join(', ') ||
+          error.response?.data?.message ||
+          'Unexpected error occurred'
+      );
+    }
   };
 }
 
