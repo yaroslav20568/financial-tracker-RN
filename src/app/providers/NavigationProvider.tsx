@@ -1,12 +1,10 @@
 import React from 'react';
 
-import { ActivityIndicator } from 'react-native';
-
 import { NavigationContainer } from '@react-navigation/native';
 
 import { AppNavigationDrawer, AuthNavigationStack } from '@/app/navigation';
 import { useAuth } from '@/entities';
-import { CenterLayout } from '@/shared';
+import { CenterLayout, Loader } from '@/shared';
 
 export const NavigationProvider = () => {
   const { token, isOnboardingCompleted, isLoading } = useAuth();
@@ -14,7 +12,7 @@ export const NavigationProvider = () => {
   if (isLoading) {
     return (
       <CenterLayout>
-        <ActivityIndicator size="large" />
+        <Loader />
       </CenterLayout>
     );
   }

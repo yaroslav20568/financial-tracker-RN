@@ -1,9 +1,12 @@
 import React from 'react';
 
-import { ActivityIndicator } from 'react-native';
-
 import { AccountDetails, AccountHeader, useGetAccount } from '@/entities';
-import { BorderLayout, CenterLayout, useRefreshOnFocus } from '@/shared';
+import {
+  BorderLayout,
+  CenterLayout,
+  Loader,
+  useRefreshOnFocus
+} from '@/shared';
 
 export const AccountProfile = () => {
   const { data, isFetching } = useGetAccount();
@@ -13,7 +16,7 @@ export const AccountProfile = () => {
   if (isFetching) {
     return (
       <CenterLayout>
-        <ActivityIndicator size="large" />
+        <Loader />
       </CenterLayout>
     );
   }
