@@ -8,6 +8,7 @@ import Toast from 'react-native-toast-message';
 import { AuthProvider, NavigationProvider, TanstackProvider } from '@/app';
 
 import '@/shared/config/theme/unistyles';
+import '@/entities/session/api/interceptors';
 
 const App = () => {
   return (

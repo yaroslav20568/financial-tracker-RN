@@ -1,8 +1,9 @@
 import { AxiosError, AxiosResponse } from 'axios';
 
-import { sessionApi, sessionUtils } from '@/entities';
+import { sessionUtils } from '@/entities/session/lib/utils';
+import { axiosInstance, TFailedRequestPromise } from '@/shared';
 
-import { axiosInstance, TFailedRequestPromise } from './axios';
+import { sessionApi } from './sessionApi';
 
 let isRefreshing: boolean = false;
 let failedQueue: Array<TFailedRequestPromise> = [];
