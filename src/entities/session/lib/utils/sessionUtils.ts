@@ -1,4 +1,4 @@
-import { IAuthResponse } from '@/entities/session/model';
+import { ITokens } from '@/entities/session/model';
 import { storageService, TNullable } from '@/shared';
 
 class SessionUtils {
@@ -8,18 +8,18 @@ class SessionUtils {
     this.logoutCallback = callback;
   }
 
-  async getTokens(): Promise<TNullable<IAuthResponse>> {
-    const accessToken = await storageService.get<IAuthResponse['accessToken']>(
+  async getTokens(): Promise<TNullable<ITokens>> {
+    const accessToken = await storageService.get<ITokens['accessToken']>(
       'accessToken'
     );
-    const refreshToken = await storageService.get<
-      IAuthResponse['refreshToken']
-    >('refreshToken');
+    const refreshToken = await storageService.get<ITokens['refreshToken']>(
+      'refreshToken'
+    );
 
     return { accessToken, refreshToken };
   }
 
-  async saveTokens(tokens: IAuthResponse) {
+  async saveTokens(tokens: ITokens) {
     await storageService.set('accessToken', tokens.accessToken);
     await storageService.set('refreshToken', tokens.refreshToken);
   }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, ReactNode } from 'react';
 
-import { AuthContext, IAuthResponse, sessionUtils } from '@/entities';
+import { AuthContext, ITokens, sessionUtils } from '@/entities';
 import { storageService } from '@/shared';
 
 interface IProps {
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }: IProps) => {
     setIsOnboardingCompleted(!!isOnboarding);
   }, []);
 
-  const setToken = useCallback(async (tokens: IAuthResponse) => {
+  const setToken = useCallback(async (tokens: ITokens) => {
     if (tokens.accessToken && tokens.refreshToken) {
       await sessionUtils.saveTokens(tokens);
     } else {
