@@ -1,10 +1,13 @@
 import { createContext, useContext } from 'react';
 
+import { IAuthResponse } from './types';
+
 export interface IAuthContext {
   token: string | null;
   isOnboardingCompleted: boolean;
   isLoading: boolean;
-  setToken: (token: string | null) => Promise<void>;
+  // setToken: (token: string | null) => Promise<void>;
+  setToken: (tokens: IAuthResponse) => Promise<void>;
   refreshAuth: () => Promise<void>;
 }
 

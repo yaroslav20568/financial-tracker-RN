@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, ReactNode } from 'react';
 
-import { AuthContext } from '@/entities';
+import { AuthContext, IAuthResponse, sessionUtils } from '@/entities';
 import { storageService } from '@/shared';
 
 interface IProps {
@@ -13,23 +13,23 @@ export const AuthProvider = ({ children }: IProps) => {
   const [isOnboardingCompleted, setIsOnboardingCompleted] = useState(false);
 
   const refreshAuth = useCallback(async () => {
-    const userToken = await storageService.get<string>('accessToken');
+    const { accessToken } = await sessionUtils.getTokens();
     const isOnboarding = await storageService.get<boolean>(
       'isCompletedOnbording'
     );
 
-    setTokenState(userToken);
+    setTokenState(accessToken);
     setIsOnboardingCompleted(!!isOnboarding);
   }, []);
 
-  const setToken = useCallback(async (newToken: string | null) => {
-    if (newToken) {
-      await storageService.set('accessToken', newToken);
+  const setToken = useCallback(async (tokens: IAuthResponse) => {
+    if (tokens.accessToken && tokens.refreshToken) {
+      await sessionUtils.saveTokens(tokens);
     } else {
-      await storageService.remove('accessToken');
+      await sessionUtils.clearTokens();
     }
 
-    setTokenState(newToken);
+    setTokenState(tokens.accessToken);
   }, []);
 
   useEffect(() => {

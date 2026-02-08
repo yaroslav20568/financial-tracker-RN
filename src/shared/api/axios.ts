@@ -1,7 +1,17 @@
 import { API_URL } from '@env';
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
-import { storageService } from '@/shared';
+declare module 'axios' {
+  export interface AxiosRequestConfig {
+    _retry?: boolean;
+  }
+}
+
+export type TFailedRequestPromise = {
+  resolve: (value: string | PromiseLike<string>) => void;
+  reject: (reason?: any) => void;
+  config: AxiosRequestConfig;
+};
 
 export const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -10,18 +20,3 @@ export const axiosInstance = axios.create({
     'Content-Type': 'application/json'
   }
 });
-
-axiosInstance.interceptors.request.use(
-  async config => {
-    const accessToken = await storageService.get('accessToken');
-
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);

@@ -28,10 +28,10 @@ export const RegisterForm = () => {
   });
 
   const onSubmit = async (data: TRegisterForm) => {
-    const response = await registerRequest(data);
+    const tokens = await registerRequest(data);
 
-    if (response.accessToken && response.refreshToken) {
-      await setToken(response.accessToken);
+    if (tokens.accessToken && tokens.refreshToken) {
+      await setToken(tokens);
     }
   };
 

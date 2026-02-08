@@ -23,10 +23,10 @@ export const LoginForm = () => {
   });
 
   const onSubmit = async (data: TLoginForm) => {
-    const response = await loginRequest(data);
+    const tokens = await loginRequest(data);
 
-    if (response.accessToken && response.refreshToken) {
-      await setToken(response.accessToken);
+    if (tokens.accessToken && tokens.refreshToken) {
+      await setToken(tokens);
     }
   };
 

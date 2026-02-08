@@ -1,0 +1,92 @@
+import { AxiosError, AxiosResponse } from 'axios';
+
+import { sessionApi, sessionUtils } from '@/entities';
+
+import { axiosInstance, TFailedRequestPromise } from './axios';
+
+let isRefreshing: boolean = false;
+let failedQueue: Array<TFailedRequestPromise> = [];
+
+const processQueue = (
+  error: AxiosError | null,
+  token: string | null = null
+) => {
+  failedQueue.forEach((prom: TFailedRequestPromise) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token as string);
+    }
+  });
+
+  failedQueue = [];
+};
+
+axiosInstance.interceptors.request.use(
+  async config => {
+    const { accessToken } = await sessionUtils.getTokens();
+
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  async (error: AxiosError) => {
+    const originalRequest = error.config;
+
+    if (
+      error.response?.status === 401 &&
+      originalRequest &&
+      !originalRequest._retry
+    ) {
+      if (isRefreshing) {
+        return new Promise<string>((resolve, reject) => {
+          failedQueue.push({ resolve, reject, config: originalRequest });
+        })
+          .then(token => {
+            originalRequest.headers = originalRequest.headers || {};
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+
+            return axiosInstance(originalRequest);
+          })
+          .catch(err => {
+            return Promise.reject(err);
+          });
+      }
+
+      originalRequest._retry = true;
+      isRefreshing = true;
+
+      try {
+        const { accessToken: newAccessToken } =
+          await sessionApi.refreshTokenRequest();
+
+        axiosInstance.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
+        processQueue(null, newAccessToken);
+
+        originalRequest.headers = originalRequest.headers || {};
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+
+        return axiosInstance(originalRequest);
+      } catch (refreshError) {
+        await sessionUtils.clearTokens();
+
+        processQueue(refreshError as AxiosError, null);
+
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
