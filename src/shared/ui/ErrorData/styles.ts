@@ -17,6 +17,7 @@ export const useStyles = () => {
         fontSize: 14,
         fontFamily: fonts.interMedium,
         color: colors.red,
+        textAlign: 'center',
         marginTop: 5
       }
     };

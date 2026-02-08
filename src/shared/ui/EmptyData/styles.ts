@@ -12,13 +12,15 @@ export const useStyles = () => {
         fontSize: 14,
         fontFamily: fonts.interMedium,
         color: colors.gray,
+        textAlign: 'center',
         marginTop: 8,
         marginBottom: 2
       },
       text: {
         fontSize: 13,
         fontFamily: fonts.interRegular,
-        color: colors.gray
+        color: colors.gray,
+        textAlign: 'center'
       }
     };
   });
