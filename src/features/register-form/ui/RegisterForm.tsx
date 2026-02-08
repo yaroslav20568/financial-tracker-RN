@@ -12,18 +12,20 @@ import { Button, FormInput } from '@/shared';
 
 import { useStyles } from './styles';
 
+const registerDefaultValues: TRegisterForm = {
+  login: '',
+  accountName: '',
+  password: '',
+  checkPassword: ''
+} as const;
+
 export const RegisterForm = () => {
   const s = useStyles();
   const { setToken } = useAuth();
 
   const { control, handleSubmit } = useForm<TRegisterForm>({
     resolver: yupResolver(registerSchema),
-    defaultValues: {
-      login: '',
-      accountName: '',
-      password: '',
-      checkPassword: ''
-    },
+    defaultValues: registerDefaultValues,
     mode: 'all'
   });
 

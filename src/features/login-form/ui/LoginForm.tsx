@@ -12,13 +12,18 @@ import { Button, FormInput } from '@/shared';
 
 import { useStyles } from './styles';
 
+const loginDefaultValues: TLoginForm = {
+  login: '',
+  password: ''
+} as const;
+
 export const LoginForm = () => {
   const s = useStyles();
   const { setToken } = useAuth();
 
   const { control, handleSubmit } = useForm<TLoginForm>({
     resolver: yupResolver(loginSchema),
-    defaultValues: { login: '', password: '' },
+    defaultValues: loginDefaultValues,
     mode: 'all'
   });
 
