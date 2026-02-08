@@ -14,9 +14,16 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 interface IProps extends PressableProps {
   title: string;
+  isLoading?: boolean;
 }
 
-export const Button = ({ title, onPress, style, ...props }: IProps) => {
+export const Button = ({
+  title,
+  onPress,
+  style,
+  isLoading,
+  ...props
+}: IProps) => {
   const s = useStyles();
   s.useVariants({});
 
@@ -42,7 +49,7 @@ export const Button = ({ title, onPress, style, ...props }: IProps) => {
       onPressOut={handlePressOut}
       style={[s.button, style, animatedStyle]}
     >
-      <Text style={s.text}>{title}</Text>
+      <Text style={s.text}>{!isLoading ? title : 'Loading...'}</Text>
     </AnimatedPressable>
   );
 };

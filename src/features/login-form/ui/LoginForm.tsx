@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
-import { useAuth, authApi } from '@/entities';
+import { useLoginMutation } from '@/entities';
 import { loginSchema, TLoginForm } from '@/features/login-form/model';
 import { Button, FormInput } from '@/shared';
 
@@ -18,7 +18,7 @@ const loginDefaultValues: TLoginForm = {
 
 export const LoginForm = () => {
   const s = useStyles();
-  const { setToken } = useAuth();
+  const { mutate: loginMutate, isPending } = useLoginMutation();
 
   const { control, handleSubmit } = useForm<TLoginForm>({
     resolver: yupResolver(loginSchema),
@@ -26,13 +26,7 @@ export const LoginForm = () => {
     mode: 'all'
   });
 
-  const onSubmit = async (data: TLoginForm) => {
-    const tokens = await authApi.login(data);
-
-    if (tokens.accessToken && tokens.refreshToken) {
-      await setToken(tokens);
-    }
-  };
+  const onSubmit = (data: TLoginForm) => loginMutate(data);
 
   return (
     <View>
@@ -51,7 +45,13 @@ export const LoginForm = () => {
           secureTextEntry
         />
       </View>
-      <Button title="Login" onPress={handleSubmit(onSubmit)} style={s.button} />
+      <Button
+        title="Login"
+        onPress={handleSubmit(onSubmit)}
+        style={s.button}
+        disabled={isPending}
+        isLoading={isPending}
+      />
     </View>
   );
 };

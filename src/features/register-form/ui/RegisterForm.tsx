@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
-import { useAuth, authApi } from '@/entities';
+import { useRegisterMutation } from '@/entities';
 import { registerSchema, TRegisterForm } from '@/features/register-form/model';
 import { Button, FormInput } from '@/shared';
 
@@ -20,7 +20,7 @@ const registerDefaultValues: TRegisterForm = {
 
 export const RegisterForm = () => {
   const s = useStyles();
-  const { setToken } = useAuth();
+  const { mutate: registerMutate, isPending } = useRegisterMutation();
 
   const { control, handleSubmit } = useForm<TRegisterForm>({
     resolver: yupResolver(registerSchema),
@@ -28,13 +28,7 @@ export const RegisterForm = () => {
     mode: 'all'
   });
 
-  const onSubmit = async (data: TRegisterForm) => {
-    const tokens = await authApi.register(data);
-
-    if (tokens.accessToken && tokens.refreshToken) {
-      await setToken(tokens);
-    }
-  };
+  const onSubmit = async (data: TRegisterForm) => registerMutate(data);
 
   return (
     <View>
@@ -70,6 +64,8 @@ export const RegisterForm = () => {
         title="Register"
         onPress={handleSubmit(onSubmit)}
         style={s.button}
+        disabled={isPending}
+        isLoading={isPending}
       />
     </View>
   );
