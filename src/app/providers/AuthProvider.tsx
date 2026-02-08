@@ -33,6 +33,18 @@ export const AuthProvider = ({ children }: IProps) => {
   }, []);
 
   useEffect(() => {
+    const handleLogout = () => {
+      setTokenState(null);
+    };
+
+    sessionUtils.setLogoutCallback(handleLogout);
+
+    return () => {
+      sessionUtils.setLogoutCallback(() => {});
+    };
+  }, []);
+
+  useEffect(() => {
     refreshAuth().finally(() => setIsLoading(false));
   }, [refreshAuth]);
 

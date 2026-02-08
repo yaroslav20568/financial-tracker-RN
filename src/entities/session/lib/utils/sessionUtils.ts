@@ -2,6 +2,12 @@ import { IAuthResponse } from '@/entities/session/model';
 import { storageService, TNullable } from '@/shared';
 
 class SessionUtils {
+  private logoutCallback: (() => void) | null = null;
+
+  setLogoutCallback(callback: () => void) {
+    this.logoutCallback = callback;
+  }
+
   async getTokens(): Promise<TNullable<IAuthResponse>> {
     const accessToken = await storageService.get<IAuthResponse['accessToken']>(
       'accessToken'
@@ -21,6 +27,10 @@ class SessionUtils {
   async clearTokens() {
     await storageService.remove('accessToken');
     await storageService.remove('refreshToken');
+
+    if (this.logoutCallback) {
+      this.logoutCallback();
+    }
   }
 }
 
