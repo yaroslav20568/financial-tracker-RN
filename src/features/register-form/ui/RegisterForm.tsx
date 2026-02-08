@@ -5,8 +5,7 @@ import { View } from 'react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
-import { useAuth } from '@/entities';
-import { registerRequest } from '@/features/register-form/api';
+import { useAuth, authApi } from '@/entities';
 import { registerSchema, TRegisterForm } from '@/features/register-form/model';
 import { Button, FormInput } from '@/shared';
 
@@ -30,7 +29,7 @@ export const RegisterForm = () => {
   });
 
   const onSubmit = async (data: TRegisterForm) => {
-    const tokens = await registerRequest(data);
+    const tokens = await authApi.register(data);
 
     if (tokens.accessToken && tokens.refreshToken) {
       await setToken(tokens);

@@ -5,8 +5,7 @@ import { View } from 'react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
-import { useAuth } from '@/entities';
-import { loginRequest } from '@/features/login-form/api';
+import { useAuth, authApi } from '@/entities';
 import { loginSchema, TLoginForm } from '@/features/login-form/model';
 import { Button, FormInput } from '@/shared';
 
@@ -28,7 +27,7 @@ export const LoginForm = () => {
   });
 
   const onSubmit = async (data: TLoginForm) => {
-    const tokens = await loginRequest(data);
+    const tokens = await authApi.login(data);
 
     if (tokens.accessToken && tokens.refreshToken) {
       await setToken(tokens);
