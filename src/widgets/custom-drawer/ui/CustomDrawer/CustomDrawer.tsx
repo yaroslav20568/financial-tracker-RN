@@ -11,12 +11,17 @@ import {
   DrawerContentComponentProps
 } from '@react-navigation/drawer';
 
+import { sessionUtils } from '@/entities';
 import { colors, LogoHeader } from '@/shared';
 
 import { useStyles } from './styles';
 
 export const CustomDrawer = (props: DrawerContentComponentProps) => {
   const s = useStyles();
+
+  const handleLogout = () => {
+    sessionUtils.clearTokens();
+  };
 
   return (
     <SafeAreaView style={s.container}>
@@ -30,7 +35,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
         <DrawerItemList {...props} />
         <DrawerItem
           label="Log out"
-          onPress={() => {}}
+          onPress={handleLogout}
           inactiveTintColor={colors.red}
         />
       </DrawerContentScrollView>
