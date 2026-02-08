@@ -16,6 +16,9 @@ interface IProps {
 export const AuthTabs = ({ activeTab, onSelect }: IProps) => {
   const s = useStyles();
 
+  const handlePressLogin = () => onSelect('login');
+  const handlePressRegister = () => onSelect('register');
+
   return (
     <View style={s.tabBar}>
       <Animated.View
@@ -25,12 +28,12 @@ export const AuthTabs = ({ activeTab, onSelect }: IProps) => {
           activeTab === 'register' ? s.indicatorRight : s.indicatorLeft
         ]}
       />
-      <Pressable style={s.tab} onPress={() => onSelect('login')}>
+      <Pressable style={s.tab} onPress={handlePressLogin}>
         <Text style={[s.tabText, activeTab === 'login' && s.activeText]}>
           Login
         </Text>
       </Pressable>
-      <Pressable style={s.tab} onPress={() => onSelect('register')}>
+      <Pressable style={s.tab} onPress={handlePressRegister}>
         <Text style={[s.tabText, activeTab === 'register' && s.activeText]}>
           Register
         </Text>

@@ -30,8 +30,11 @@ export const Input = ({
   const s = useStyles();
 
   const toggleShowPassword = () => {
-    setIsShowPassword(!isShowPassword);
+    setIsShowPassword(prevState => !prevState);
   };
+
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
 
   return (
     <View>
@@ -46,12 +49,8 @@ export const Input = ({
           style={[s.input(isFocused, isPassword), style]}
           selectionColor={colors.gray}
           secureTextEntry={secureTextEntry && !isShowPassword}
-          onFocus={() => {
-            setIsFocused(true);
-          }}
-          onBlur={() => {
-            setIsFocused(false);
-          }}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           {...props}
         />
         {isPassword && (
