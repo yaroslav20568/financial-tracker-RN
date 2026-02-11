@@ -37,6 +37,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           label="Log out"
           onPress={handleLogout}
           inactiveTintColor={colors.red}
+          style={s.logoutDrawerItem}
         />
       </DrawerContentScrollView>
     </SafeAreaView>

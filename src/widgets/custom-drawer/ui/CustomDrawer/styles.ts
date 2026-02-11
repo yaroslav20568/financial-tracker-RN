@@ -12,6 +12,9 @@ export const useStyles = () => {
       },
       logoHeaderWhapper: {
         marginVertical: 10
+      },
+      logoutDrawerItem: {
+        marginTop: 10
       }
     };
   });
