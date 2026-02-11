@@ -27,7 +27,7 @@ axiosInstance.interceptors.request.use(
   async config => {
     const { accessToken } = await sessionUtils.getTokens();
 
-    if (accessToken) {
+    if (accessToken && config.headers) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
@@ -49,32 +49,41 @@ axiosInstance.interceptors.response.use(
       !originalRequest._retry
     ) {
       if (isRefreshing) {
-        return new Promise<string>((resolve, reject) => {
-          failedQueue.push({ resolve, reject, config: originalRequest });
-        })
-          .then(token => {
-            originalRequest.headers = originalRequest.headers || {};
-            originalRequest.headers.Authorization = `Bearer ${token}`;
-
-            return axiosInstance(originalRequest);
-          })
-          .catch(err => {
-            return Promise.reject(err);
+        try {
+          const token = await new Promise((resolve, reject) => {
+            failedQueue.push({ resolve, reject, config: originalRequest });
           });
+
+          if (originalRequest.headers) {
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+          }
+
+          return await axiosInstance(originalRequest);
+        } catch (err) {
+          await sessionUtils.clearTokens();
+
+          return Promise.reject(err);
+        }
       }
 
       originalRequest._retry = true;
       isRefreshing = true;
 
       try {
-        const { accessToken: newAccessToken } =
+        const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
           await sessionApi.refreshTokenRequest();
+
+        await sessionUtils.saveTokens({
+          accessToken: newAccessToken,
+          refreshToken: newRefreshToken
+        });
 
         axiosInstance.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
         processQueue(null, newAccessToken);
 
-        originalRequest.headers = originalRequest.headers || {};
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        if (originalRequest.headers) {
+          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        }
 
         return axiosInstance(originalRequest);
       } catch (refreshError) {
