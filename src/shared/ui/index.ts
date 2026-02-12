@@ -5,3 +5,4 @@ export * from './layouts';
 export * from './Loader';
 export * from './ErrorData';
 export * from './EmptyData';
+export * from './LogoHeader';
