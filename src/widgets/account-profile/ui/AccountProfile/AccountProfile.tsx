@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { AccountDetails, AccountHeader, useGetAccount } from '@/entities';
+import { Text } from 'react-native';
+
 import {
-  BorderLayout,
-  CenterLayout,
-  ErrorData,
-  Loader,
-  useRefreshOnFocus
-} from '@/shared';
+  AccountDetails,
+  AccountHeader,
+  AccountToolbar,
+  useGetAccount
+} from '@/entities';
+import { BorderLayout, CenterLayout, ErrorData, Loader } from '@/shared';
 
 export const AccountProfile = () => {
   const { data, isFetching, isError, error } = useGetAccount();
+  const [isShowEditForm, setIsShowEditForm] = useState(false);
 
-  useRefreshOnFocus();
+  const showEditForm = () => {
+    setIsShowEditForm(true);
+  };
 
   if (isFetching) {
     return (
@@ -29,7 +33,19 @@ export const AccountProfile = () => {
   return (
     <BorderLayout
       header={<AccountHeader id={data?.id} name={data?.name} />}
-      content={<AccountDetails {...data} />}
+      content={
+        <>
+          <AccountToolbar
+            isShowEditForm={isShowEditForm}
+            showEditForm={showEditForm}
+          />
+          {!isShowEditForm ? (
+            <AccountDetails {...data} />
+          ) : (
+            <Text>Edit Form</Text>
+          )}
+        </>
+      }
     />
   );
 };

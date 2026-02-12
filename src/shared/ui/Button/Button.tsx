@@ -8,6 +8,8 @@ import Animated, {
   withSpring
 } from 'react-native-reanimated';
 
+import { TSize } from '@/shared/model';
+
 import { useStyles } from './styles';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
@@ -15,6 +17,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 interface IProps extends PressableProps {
   title: string;
   isLoading?: boolean;
+  size: TSize;
 }
 
 export const Button = ({
@@ -22,10 +25,11 @@ export const Button = ({
   onPress,
   style,
   isLoading,
+  size = 'l',
   ...props
 }: IProps) => {
   const s = useStyles();
-  s.useVariants({});
+  s.useVariants({ size });
 
   const scale = useSharedValue(1);
 

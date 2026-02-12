@@ -8,6 +8,20 @@ export const useStyles = () => {
       button: {
         borderRadius: 8,
         variants: {
+          size: {
+            s: {
+              paddingVertical: 3,
+              paddingHorizontal: 7
+            },
+            m: {
+              paddingVertical: 5,
+              paddingHorizontal: 10
+            },
+            l: {
+              paddingVertical: 10,
+              paddingHorizontal: 20
+            }
+          },
           color: {
             default: {
               backgroundColor: colors.blue
@@ -16,12 +30,20 @@ export const useStyles = () => {
         }
       },
       text: {
-        fontSize: 16,
         fontFamily: fonts.interMedium,
         textAlign: 'center',
-        paddingVertical: 10,
-        paddingHorizontal: 10,
         variants: {
+          size: {
+            s: {
+              fontSize: 14
+            },
+            m: {
+              fontSize: 15
+            },
+            l: {
+              fontSize: 16
+            }
+          },
           color: {
             default: {
               color: colors.white
