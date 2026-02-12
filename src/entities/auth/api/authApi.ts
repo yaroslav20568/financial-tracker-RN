@@ -5,7 +5,9 @@ import { axiosInstance } from '@/shared';
 
 class AuthApi {
   login = async (data: TLoginForm): Promise<ITokens> => {
-    const response = await axiosInstance.post<ITokens>('/auth/login', data);
+    const response = await axiosInstance.post<ITokens>('/auth/login', data, {
+      _skipAuth: true
+    });
 
     return response.data;
   };
@@ -13,7 +15,10 @@ class AuthApi {
   register = async (data: TRegisterForm): Promise<ITokens> => {
     const response = await axiosInstance.post<ITokens>(
       '/auth/registration',
-      data
+      data,
+      {
+        _skipAuth: true
+      }
     );
 
     return response.data;

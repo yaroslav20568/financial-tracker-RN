@@ -5,6 +5,12 @@ import { axiosInstance, TFailedRequestPromise } from '@/shared';
 
 import { sessionApi } from './sessionApi';
 
+declare module 'axios' {
+  export interface AxiosRequestConfig {
+    _skipAuth?: boolean;
+  }
+}
+
 let isRefreshing: boolean = false;
 let failedQueue: Array<TFailedRequestPromise> = [];
 
@@ -25,6 +31,10 @@ const processQueue = (
 
 axiosInstance.interceptors.request.use(
   async config => {
+    if (config._skipAuth) {
+      return config;
+    }
+
     const { accessToken } = await sessionUtils.getTokens();
 
     if (accessToken && config.headers) {
@@ -43,14 +53,14 @@ axiosInstance.interceptors.response.use(
   async (error: AxiosError) => {
     const originalRequest = error.config;
 
-    if (
-      error.response?.status === 401 &&
-      originalRequest &&
-      !originalRequest._retry
-    ) {
+    if (!originalRequest || originalRequest._skipAuth) {
+      return Promise.reject(error);
+    }
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
         try {
-          const token = await new Promise((resolve, reject) => {
+          const token = await new Promise<string>((resolve, reject) => {
             failedQueue.push({ resolve, reject, config: originalRequest });
           });
 
