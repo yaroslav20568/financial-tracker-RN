@@ -10,7 +10,7 @@ import { EditAccountForm } from '@/features';
 import { BorderLayout, CenterLayout, ErrorData, Loader } from '@/shared';
 
 export const AccountProfile = () => {
-  const { data, isFetching, isError, error } = useGetAccount();
+  const { data, isLoading, isError, error } = useGetAccount();
   const [isShowEditForm, setIsShowEditForm] = useState(false);
 
   const showEditForm = () => {
@@ -21,7 +21,7 @@ export const AccountProfile = () => {
     setIsShowEditForm(false);
   };
 
-  if (isFetching) {
+  if (isLoading) {
     return (
       <CenterLayout>
         <Loader />
