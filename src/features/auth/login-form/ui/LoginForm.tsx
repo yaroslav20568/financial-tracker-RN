@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
 import { useLoginMutation } from '@/entities';
-import { loginSchema, TLoginForm } from '@/features/login-form/model';
+import { loginSchema, TLoginForm } from '@/features/auth/login-form/model';
 import { Button, FormInput } from '@/shared';
 
 import { useStyles } from './styles';

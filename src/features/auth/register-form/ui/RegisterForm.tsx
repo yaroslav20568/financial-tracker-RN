@@ -6,7 +6,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
 import { useRegisterMutation } from '@/entities';
-import { registerSchema, TRegisterForm } from '@/features/register-form/model';
+import {
+  registerSchema,
+  TRegisterForm
+} from '@/features/auth/register-form/model';
 import { Button, FormInput } from '@/shared';
 
 import { useStyles } from './styles';

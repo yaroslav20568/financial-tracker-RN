@@ -17,7 +17,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 interface IProps extends PressableProps {
   title: string;
   isLoading?: boolean;
-  size: TSize;
+  size?: TSize;
 }
 
 export const Button = ({
