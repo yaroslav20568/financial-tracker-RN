@@ -5,7 +5,7 @@ import { storageService } from '@/shared';
 import { ITokens } from '@entities/session/model';
 
 class SessionApi {
-  refreshTokenRequest = async (): Promise<ITokens> => {
+  refreshToken = async (): Promise<ITokens> => {
     const refreshToken = await storageService.get('refreshToken');
 
     if (!refreshToken) {

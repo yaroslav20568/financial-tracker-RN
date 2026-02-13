@@ -14,10 +14,13 @@ import { useStyles } from './styles';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
+type TVariant = 'background' | 'outline';
+
 interface IProps extends PressableProps {
   title: string;
   isLoading?: boolean;
   size?: TSize;
+  variant?: TVariant;
 }
 
 export const Button = ({
@@ -26,10 +29,11 @@ export const Button = ({
   style,
   isLoading,
   size = 'l',
+  variant = 'background',
   ...props
 }: IProps) => {
   const s = useStyles();
-  s.useVariants({ size });
+  s.useVariants({ size, variant });
 
   const scale = useSharedValue(1);
 

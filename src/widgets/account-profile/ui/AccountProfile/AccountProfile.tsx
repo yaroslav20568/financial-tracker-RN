@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
-import { Text } from 'react-native';
-
 import {
   AccountDetails,
   AccountHeader,
   AccountToolbar,
   useGetAccount
 } from '@/entities';
+import { EditAccountForm } from '@/features';
 import { BorderLayout, CenterLayout, ErrorData, Loader } from '@/shared';
 
 export const AccountProfile = () => {
@@ -16,6 +15,10 @@ export const AccountProfile = () => {
 
   const showEditForm = () => {
     setIsShowEditForm(true);
+  };
+
+  const closeEditForm = () => {
+    setIsShowEditForm(false);
   };
 
   if (isFetching) {
@@ -42,7 +45,7 @@ export const AccountProfile = () => {
           {!isShowEditForm ? (
             <AccountDetails {...data} />
           ) : (
-            <Text>Edit Form</Text>
+            <EditAccountForm {...data} closeEditForm={closeEditForm} />
           )}
         </>
       }

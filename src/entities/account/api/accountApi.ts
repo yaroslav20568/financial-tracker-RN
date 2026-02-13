@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 
 import { IAccount } from '@/entities/account/model';
+import { TEditAccountForm } from '@/features/account/edit-account-form/model';
 import { axiosInstance, IErrorResponse } from '@/shared';
 
 class AccountApi {
@@ -18,6 +19,12 @@ class AccountApi {
           'Unexpected error occurred'
       );
     }
+  };
+
+  editAccount = async (data: TEditAccountForm): Promise<IAccount> => {
+    const response = await axiosInstance.put<IAccount>('/account', data);
+
+    return response.data;
   };
 }
 

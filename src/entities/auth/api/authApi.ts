@@ -1,6 +1,6 @@
 import { ITokens } from '@/entities';
-import { TLoginForm } from '@/features/login-form/model';
-import { TRegisterForm } from '@/features/register-form/model';
+import { TLoginForm } from '@/features/auth/login-form/model';
+import { TRegisterForm } from '@/features/auth/register-form/model';
 import { axiosInstance } from '@/shared';
 
 class AuthApi {

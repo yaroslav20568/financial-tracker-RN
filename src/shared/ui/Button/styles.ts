@@ -6,6 +6,7 @@ export const useStyles = () => {
 
     return {
       button: {
+        borderWidth: 1,
         borderRadius: 8,
         variants: {
           size: {
@@ -14,17 +15,22 @@ export const useStyles = () => {
               paddingHorizontal: 7
             },
             m: {
-              paddingVertical: 5,
-              paddingHorizontal: 10
+              paddingVertical: 6,
+              paddingHorizontal: 9
             },
             l: {
-              paddingVertical: 10,
-              paddingHorizontal: 20
+              paddingVertical: 9,
+              paddingHorizontal: 19
             }
           },
-          color: {
-            default: {
-              backgroundColor: colors.blue
+          variant: {
+            background: {
+              backgroundColor: colors.blue,
+              borderColor: 'transparent'
+            },
+            outline: {
+              backgroundColor: 'transparent',
+              borderColor: colors.blue
             }
           }
         }
@@ -44,9 +50,12 @@ export const useStyles = () => {
               fontSize: 16
             }
           },
-          color: {
-            default: {
+          variant: {
+            background: {
               color: colors.white
+            },
+            outline: {
+              color: colors.blue
             }
           }
         }

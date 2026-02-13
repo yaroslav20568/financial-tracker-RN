@@ -81,7 +81,7 @@ axiosInstance.interceptors.response.use(
 
       try {
         const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
-          await sessionApi.refreshTokenRequest();
+          await sessionApi.refreshToken();
 
         await sessionUtils.saveTokens({
           accessToken: newAccessToken,
