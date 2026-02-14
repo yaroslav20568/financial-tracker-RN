@@ -1,11 +1,14 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { HeadScreenLayout, ScreenLayout } from '@/shared';
 
 export const CategoriesScreen = () => {
   return (
-    <View>
-      <Text>Categories Screen</Text>
-    </View>
+    <ScreenLayout>
+      <HeadScreenLayout
+        title="Category Management"
+        text="Organize your transactions with categories and subcategories"
+      />
+    </ScreenLayout>
   );
 };

@@ -1,11 +1,14 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { HeadScreenLayout, ScreenLayout } from '@/shared';
 
 export const DashboardScreen = () => {
   return (
-    <View>
-      <Text>Dashboard Screen</Text>
-    </View>
+    <ScreenLayout>
+      <HeadScreenLayout
+        title="Financial Dashboard"
+        text="Overview of your financial activities"
+      />
+    </ScreenLayout>
   );
 };

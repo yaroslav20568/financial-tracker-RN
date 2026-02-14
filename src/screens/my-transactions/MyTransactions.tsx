@@ -1,11 +1,14 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { HeadScreenLayout, ScreenLayout } from '@/shared';
 
 export const MyTransactionsScreen = () => {
   return (
-    <View>
-      <Text>My Transactions Screen</Text>
-    </View>
+    <ScreenLayout>
+      <HeadScreenLayout
+        title="Transaction Management"
+        text="Track and manage your financial transactions"
+      />
+    </ScreenLayout>
   );
 };

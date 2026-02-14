@@ -1,11 +1,14 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { HeadScreenLayout, ScreenLayout } from '@/shared';
 
 export const SourcesScreen = () => {
   return (
-    <View>
-      <Text>Sources Screen</Text>
-    </View>
+    <ScreenLayout>
+      <HeadScreenLayout
+        title="Source Management"
+        text="Manage your transaction sources like bank accounts, cash, and credit cards"
+      />
+    </ScreenLayout>
   );
 };
