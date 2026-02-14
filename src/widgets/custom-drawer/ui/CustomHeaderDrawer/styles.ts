@@ -19,7 +19,7 @@ export const useStyles = () => {
         shadowOpacity: 0.2
       },
       title: {
-        fontSize: 20,
+        fontSize: 22,
         fontFamily: fonts.interBold,
         color: colors.black
       },

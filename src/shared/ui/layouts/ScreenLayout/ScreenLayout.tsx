@@ -1,8 +1,10 @@
 import React, { ReactNode } from 'react';
 
-import { ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Edges, SafeAreaView } from 'react-native-safe-area-context';
+
+import { useHeaderHeight } from '@react-navigation/elements';
 
 import { useStyles } from './styles';
 
@@ -20,11 +22,22 @@ export const ScreenLayout = ({
   isCenter = false
 }: IProps) => {
   const s = useStyles();
+  const headerHeight = useHeaderHeight();
+
+  const edges: Edges =
+    headerHeight > 0
+      ? ['bottom', 'left', 'right']
+      : ['top', 'bottom', 'left', 'right'];
 
   return (
-    <SafeAreaView style={s.container}>
-      <ScrollView contentContainerStyle={s.scrollContainer(isCenter)}>
-        <View style={{ paddingVertical, paddingHorizontal }}>{children}</View>
+    <SafeAreaView style={s.container} edges={edges}>
+      <ScrollView
+        contentContainerStyle={[
+          s.scrollContainer(isCenter),
+          { paddingVertical, paddingHorizontal }
+        ]}
+      >
+        {children}
       </ScrollView>
     </SafeAreaView>
   );
