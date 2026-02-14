@@ -13,7 +13,7 @@ import {
   CategoriesScreen,
   SourcesScreen
 } from '@/screens';
-import { colors } from '@/shared';
+import { colors, Icon } from '@/shared';
 import { CustomDrawer, CustomHeaderDrawer } from '@/widgets';
 
 export type TAppDrawerParamList = {
@@ -23,6 +23,44 @@ export type TAppDrawerParamList = {
   Categories: undefined;
   Sources: undefined;
 };
+
+const drawerItems = [
+  {
+    name: 'Dashboard',
+    label: 'Dashboard',
+    component: DashboardScreen,
+    iconFamily: 'materialIcons',
+    iconName: 'dashboard'
+  },
+  {
+    name: 'MyTransactions',
+    label: 'My Transactions',
+    component: MyTransactionsScreen,
+    iconFamily: 'fontAwesome6',
+    iconName: 'money-bill-1-wave'
+  },
+  {
+    name: 'Account',
+    label: 'Account',
+    component: AccountScreen,
+    iconFamily: 'octicons',
+    iconName: 'person'
+  },
+  {
+    name: 'Categories',
+    label: 'Categories',
+    component: CategoriesScreen,
+    iconFamily: 'fontAwesome6',
+    iconName: 'layer-group'
+  },
+  {
+    name: 'Sources',
+    label: 'Sources',
+    component: SourcesScreen,
+    iconFamily: 'materialIcons',
+    iconName: 'source'
+  }
+] as const;
 
 const Drawer = createDrawerNavigator<TAppDrawerParamList>();
 
@@ -42,19 +80,28 @@ export const AppNavigationDrawer = () => {
         header: renderDrawerHeder,
         drawerActiveBackgroundColor: colors.blue,
         drawerActiveTintColor: colors.white,
-        drawerStyle: {
-          width: 280
-        },
-        drawerItemStyle: {
-          borderRadius: 8
-        }
+        drawerStyle: { width: 280 },
+        drawerItemStyle: { borderRadius: 8 }
       }}
     >
-      <Drawer.Screen name="Dashboard" component={DashboardScreen} />
-      <Drawer.Screen name="MyTransactions" component={MyTransactionsScreen} />
-      <Drawer.Screen name="Account" component={AccountScreen} />
-      <Drawer.Screen name="Categories" component={CategoriesScreen} />
-      <Drawer.Screen name="Sources" component={SourcesScreen} />
+      {drawerItems.map(screen => (
+        <Drawer.Screen
+          key={screen.name}
+          name={screen.name}
+          component={screen.component}
+          options={{
+            drawerLabel: screen.label,
+            // eslint-disable-next-line react/no-unstable-nested-components
+            drawerIcon: ({ focused }) => (
+              <Icon
+                family={screen.iconFamily}
+                name={screen.iconName}
+                color={focused ? colors.white : colors.blue}
+              />
+            )
+          }}
+        />
+      ))}
     </Drawer.Navigator>
   );
 };

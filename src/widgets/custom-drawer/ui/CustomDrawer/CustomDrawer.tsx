@@ -12,7 +12,7 @@ import {
 } from '@react-navigation/drawer';
 
 import { sessionUtils } from '@/entities';
-import { colors, LogoHeader } from '@/shared';
+import { colors, Icon, LogoHeader } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -38,6 +38,10 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           onPress={handleLogout}
           inactiveTintColor={colors.red}
           style={s.logoutDrawerItem}
+          // eslint-disable-next-line react/no-unstable-nested-components
+          icon={() => (
+            <Icon family="materialIcons" name="logout" color={colors.red} />
+          )}
         />
       </DrawerContentScrollView>
     </SafeAreaView>

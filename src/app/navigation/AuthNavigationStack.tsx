@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  StackNavigationOptions
+} from '@react-navigation/stack';
 
 import { AuthScreen, OnboardingScreen } from '@/screens';
 
@@ -8,6 +11,17 @@ export type TAuthStackParamList = {
   Onboarding: undefined;
   Auth: undefined;
 };
+
+type TAuthStackItem = {
+  name: keyof TAuthStackParamList;
+  component: React.ComponentType<any>;
+  options?: StackNavigationOptions;
+};
+
+const stackItems: Array<TAuthStackItem> = [
+  { name: 'Onboarding', component: OnboardingScreen },
+  { name: 'Auth', component: AuthScreen }
+] as const;
 
 const AuthStack = createStackNavigator<TAuthStackParamList>();
 
@@ -23,8 +37,13 @@ export const AuthNavigationStack = ({
       screenOptions={{ headerShown: false }}
       initialRouteName={initialRouteName}
     >
-      <AuthStack.Screen name="Onboarding" component={OnboardingScreen} />
-      <AuthStack.Screen name="Auth" component={AuthScreen} />
+      {stackItems.map(screen => (
+        <AuthStack.Screen
+          key={screen.name}
+          name={screen.name}
+          component={screen.component}
+        />
+      ))}
     </AuthStack.Navigator>
   );
 };
