@@ -5,6 +5,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { IconProps as VectorIconProps } from 'react-native-vector-icons/Icon';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 
@@ -16,7 +17,8 @@ export const IconFamily = {
   materialIcons: MaterialIcons,
   fontAwesome6: FontAwesome6,
   fontisto: Fontisto,
-  octicons: Octicons
+  octicons: Octicons,
+  ionicons: Ionicons
 } as const;
 
 type TIconFamilyType = keyof typeof IconFamily;

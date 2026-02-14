@@ -43,7 +43,7 @@ const drawerItems = [
     name: 'Account',
     label: 'Account',
     component: AccountScreen,
-    iconFamily: 'octicons',
+    iconFamily: 'ionicons',
     iconName: 'person'
   },
   {
