@@ -80,7 +80,11 @@ export const AppNavigationDrawer = () => {
         header: renderDrawerHeder,
         drawerActiveBackgroundColor: colors.blue,
         drawerActiveTintColor: colors.white,
-        drawerStyle: { width: 280 },
+        drawerStyle: {
+          width: 280,
+          borderTopRightRadius: 0,
+          borderBottomRightRadius: 0
+        },
         drawerItemStyle: { borderRadius: 8 }
       }}
     >
