@@ -2,7 +2,7 @@ import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 
-import { AppNavigationDrawer, AuthNavigationStack } from '@/app/navigation';
+import { AppNavigationDrawer, AppNavigationStack } from '@/app/navigation';
 import { useAuth } from '@/entities';
 import { CenterLayout, Loader } from '@/shared';
 
@@ -22,7 +22,7 @@ export const NavigationProvider = () => {
       {token ? (
         <AppNavigationDrawer />
       ) : (
-        <AuthNavigationStack
+        <AppNavigationStack
           initialRouteName={isOnboardingCompleted ? 'Auth' : 'Onboarding'}
         />
       )}

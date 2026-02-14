@@ -29,7 +29,7 @@ interface IProps {
   initialRouteName?: keyof TAuthStackParamList;
 }
 
-export const AuthNavigationStack = ({
+export const AppNavigationStack = ({
   initialRouteName = 'Onboarding'
 }: IProps) => {
   return (

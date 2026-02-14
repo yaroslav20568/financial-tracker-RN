@@ -1,2 +1,2 @@
-export * from './AuthNavigationStack';
+export * from './AppNavigationStack';
 export * from './AppNavigationDrawer';
