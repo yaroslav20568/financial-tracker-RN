@@ -14,6 +14,7 @@ import {
 import { sessionUtils } from '@/entities';
 import { colors, Icon, LogoHeader } from '@/shared';
 
+import { DrawerIconWrapper } from './DrawerIconWrapper';
 import { useStyles } from './styles';
 
 export const CustomDrawer = (props: DrawerContentComponentProps) => {
@@ -40,7 +41,9 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           style={s.logoutDrawerItem}
           // eslint-disable-next-line react/no-unstable-nested-components
           icon={() => (
-            <Icon family="materialIcons" name="logout" color={colors.red} />
+            <DrawerIconWrapper>
+              <Icon family="materialIcons" name="logout" color={colors.red} />
+            </DrawerIconWrapper>
           )}
         />
       </DrawerContentScrollView>

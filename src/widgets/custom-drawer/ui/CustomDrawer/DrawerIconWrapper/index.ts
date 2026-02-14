@@ -1,2 +1,1 @@
-export * from './CustomDrawer';
 export * from './DrawerIconWrapper';

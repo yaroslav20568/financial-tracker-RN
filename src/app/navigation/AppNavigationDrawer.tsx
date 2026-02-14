@@ -14,7 +14,7 @@ import {
   SourcesScreen
 } from '@/screens';
 import { colors, Icon } from '@/shared';
-import { CustomDrawer, CustomHeaderDrawer } from '@/widgets';
+import { CustomDrawer, CustomHeaderDrawer, DrawerIconWrapper } from '@/widgets';
 
 export type TAppDrawerParamList = {
   Dashboard: undefined;
@@ -93,11 +93,13 @@ export const AppNavigationDrawer = () => {
             drawerLabel: screen.label,
             // eslint-disable-next-line react/no-unstable-nested-components
             drawerIcon: ({ focused }) => (
-              <Icon
-                family={screen.iconFamily}
-                name={screen.iconName}
-                color={focused ? colors.white : colors.blue}
-              />
+              <DrawerIconWrapper>
+                <Icon
+                  family={screen.iconFamily}
+                  name={screen.iconName}
+                  color={focused ? colors.white : colors.blue}
+                />
+              </DrawerIconWrapper>
             )
           }}
         />
