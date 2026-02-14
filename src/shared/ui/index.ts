@@ -6,3 +6,4 @@ export * from './Loader';
 export * from './ErrorData';
 export * from './EmptyData';
 export * from './LogoHeader';
+export * from './IconButton';

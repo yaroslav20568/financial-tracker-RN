@@ -19,9 +19,9 @@ export const IconFamily = {
   octicons: Octicons
 } as const;
 
-export type TIconFamilyType = keyof typeof IconFamily;
+type TIconFamilyType = keyof typeof IconFamily;
 
-interface IconProps extends VectorIconProps {
+export interface IIconProps extends VectorIconProps {
   family: TIconFamilyType;
 }
 
@@ -31,7 +31,7 @@ export const Icon = ({
   size = 20,
   color = colors.black,
   ...props
-}: IconProps) => {
+}: IIconProps) => {
   const IconComponent = IconFamily[family];
 
   return <IconComponent name={name} size={size} color={color} {...props} />;

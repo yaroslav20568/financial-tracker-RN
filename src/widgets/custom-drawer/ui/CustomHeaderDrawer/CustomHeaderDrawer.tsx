@@ -1,8 +1,8 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import { DrawerHeaderProps } from '@react-navigation/drawer';
 
-import { Icon } from '@/shared';
+import { IconButton } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -12,16 +12,12 @@ export const CustomHeaderDrawer = ({
 }: DrawerHeaderProps) => {
   const s = useStyles();
 
+  const showDrawer = () => navigation.openDrawer();
+
   return (
     <View style={s.container}>
       <Text style={s.title}>{route.name}</Text>
-      <TouchableOpacity
-        onPress={() => navigation.openDrawer()}
-        style={s.menuButton}
-        activeOpacity={0.5}
-      >
-        <Icon family="entypo" name="menu" size={30} />
-      </TouchableOpacity>
+      <IconButton family="entypo" name="menu" size={30} onPress={showDrawer} />
     </View>
   );
 };

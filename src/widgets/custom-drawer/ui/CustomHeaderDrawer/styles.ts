@@ -22,9 +22,6 @@ export const useStyles = () => {
         fontSize: 22,
         fontFamily: fonts.interBold,
         color: colors.black
-      },
-      menuButton: {
-        padding: 5
       }
     };
   });

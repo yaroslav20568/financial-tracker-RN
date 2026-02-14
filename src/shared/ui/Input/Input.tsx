@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 
-import {
-  View,
-  Text,
-  TextInput,
-  TextInputProps,
-  TouchableOpacity
-} from 'react-native';
+import { View, Text, TextInput, TextInputProps } from 'react-native';
 
-import { colors, Icon } from '@/shared';
+import { colors, IconButton } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -54,17 +48,13 @@ export const Input = ({
           {...props}
         />
         {isPassword && (
-          <TouchableOpacity
-            style={s.showPasswordBtn}
+          <IconButton
+            family="feather"
+            name={!isShowPassword ? 'eye' : 'eye-off'}
+            color={colors.gray}
             onPress={toggleShowPassword}
-            activeOpacity={0.5}
-          >
-            <Icon
-              family="feather"
-              name={!isShowPassword ? 'eye' : 'eye-off'}
-              color={colors.gray}
-            />
-          </TouchableOpacity>
+            style={s.showPasswordBtn}
+          />
         )}
       </View>
       {error && <Text style={s.error}>{error}</Text>}
