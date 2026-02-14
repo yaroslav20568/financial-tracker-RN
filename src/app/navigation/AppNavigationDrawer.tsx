@@ -2,7 +2,8 @@ import React from 'react';
 
 import {
   createDrawerNavigator,
-  DrawerContentComponentProps
+  DrawerContentComponentProps,
+  DrawerHeaderProps
 } from '@react-navigation/drawer';
 
 import {
@@ -13,7 +14,7 @@ import {
   SourcesScreen
 } from '@/screens';
 import { colors } from '@/shared';
-import { CustomDrawer } from '@/widgets';
+import { CustomDrawer, CustomHeaderDrawer } from '@/widgets';
 
 export type TAppDrawerParamList = {
   Dashboard: undefined;
@@ -29,11 +30,16 @@ const renderDrawerContent = (props: DrawerContentComponentProps) => (
   <CustomDrawer {...props} />
 );
 
+const renderDrawerHeder = (props: DrawerHeaderProps) => (
+  <CustomHeaderDrawer {...props} />
+);
+
 export const AppNavigationDrawer = () => {
   return (
     <Drawer.Navigator
       drawerContent={renderDrawerContent}
       screenOptions={{
+        header: renderDrawerHeder,
         drawerActiveBackgroundColor: colors.blue,
         drawerActiveTintColor: colors.white,
         drawerStyle: {

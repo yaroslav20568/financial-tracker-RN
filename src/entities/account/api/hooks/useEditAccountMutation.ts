@@ -16,8 +16,8 @@ export const useEditAccount = () => {
     onSuccess: () => {
       Toast.show({
         type: 'success',
-        text1: 'Account Updated',
-        text2: 'Your changes have been successfully saved'
+        text1: 'Account Update Success',
+        text2: 'Your changes have been saved'
       });
 
       queryClient.invalidateQueries({ queryKey: ['account'] });
@@ -25,7 +25,7 @@ export const useEditAccount = () => {
     onError: (error: AxiosError<IErrorResponse>) => {
       Toast.show({
         type: 'error',
-        text1: 'Account Update Failed',
+        text1: 'Account Update Error',
         text2: error.response?.data?.errors?.join(', ') || 'Unexpected error'
       });
     }
