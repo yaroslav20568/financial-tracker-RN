@@ -1,11 +1,9 @@
 import Toast from 'react-native-toast-message';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 
 import { accountApi } from '@/entities/account/api';
 import { TEditAccountForm } from '@/features/account/edit-account-form/model';
-import { IErrorResponse } from '@/shared';
 
 export const useEditAccount = () => {
   const queryClient = useQueryClient();
@@ -22,11 +20,11 @@ export const useEditAccount = () => {
 
       queryClient.invalidateQueries({ queryKey: ['account'] });
     },
-    onError: (error: AxiosError<IErrorResponse>) => {
+    onError: error => {
       Toast.show({
         type: 'error',
         text1: 'Account Update Error',
-        text2: error.response?.data?.errors?.join(', ') || 'Unexpected error'
+        text2: error.message
       });
     }
   });

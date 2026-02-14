@@ -1,14 +1,31 @@
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { sessionUtils } from '@/entities/session/lib/utils';
-import { axiosInstance } from '@/shared';
+import { axiosInstance, IErrorResponse } from '@/shared';
 
 import { sessionApi } from './sessionApi';
+
+declare module 'axios' {
+  export interface AxiosRequestConfig {
+    _skipAuth?: boolean;
+    _retry?: boolean;
+  }
+}
 
 export type TFailedRequestPromise = {
   resolve: (value: string | PromiseLike<string>) => void;
   reject: (reason?: any) => void;
   config: AxiosRequestConfig;
+};
+
+const getErrorMessage = (error: AxiosError<IErrorResponse>): string => {
+  const data = error.response?.data;
+
+  if (data?.errors && Array.isArray(data.errors)) {
+    return data.errors.join(', ');
+  }
+
+  return data?.message || error.message || 'Unexpected error occurred';
 };
 
 let isRefreshing: boolean = false;
@@ -43,17 +60,17 @@ axiosInstance.interceptors.request.use(
 
     return config;
   },
-  error => {
-    return Promise.reject(error);
-  }
+  error => Promise.reject(error)
 );
 
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
-  async (error: AxiosError) => {
+  async (error: AxiosError<IErrorResponse>) => {
     const originalRequest = error.config;
 
     if (!originalRequest || originalRequest._skipAuth) {
+      error.message = getErrorMessage(error);
+
       return Promise.reject(error);
     }
 
@@ -72,7 +89,10 @@ axiosInstance.interceptors.response.use(
         } catch (err) {
           await sessionUtils.clearTokens();
 
-          return Promise.reject(err);
+          const finalError = err as AxiosError<IErrorResponse>;
+          finalError.message = getErrorMessage(finalError);
+
+          return Promise.reject(finalError);
         }
       }
 
@@ -99,13 +119,17 @@ axiosInstance.interceptors.response.use(
       } catch (refreshError) {
         await sessionUtils.clearTokens();
 
-        processQueue(refreshError as AxiosError, null);
+        const finalError = refreshError as AxiosError<IErrorResponse>;
+        finalError.message = getErrorMessage(finalError);
+        processQueue(finalError, null);
 
-        return Promise.reject(refreshError);
+        return Promise.reject(finalError);
       } finally {
         isRefreshing = false;
       }
     }
+
+    error.message = getErrorMessage(error);
 
     return Promise.reject(error);
   }

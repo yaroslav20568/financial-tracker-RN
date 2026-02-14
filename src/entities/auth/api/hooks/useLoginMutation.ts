@@ -1,11 +1,9 @@
 import Toast from 'react-native-toast-message';
 
 import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 
 import { authApi } from '@/entities/auth/api';
 import { useAuth } from '@/entities/session';
-import { IErrorResponse } from '@/shared';
 
 export const useLoginMutation = () => {
   const { setToken } = useAuth();
@@ -23,11 +21,11 @@ export const useLoginMutation = () => {
         text2: 'You are logged in'
       });
     },
-    onError: (error: AxiosError<IErrorResponse>) => {
+    onError: error => {
       Toast.show({
         type: 'error',
         text1: 'Login Error',
-        text2: error.response?.data?.message || 'Unexpected error'
+        text2: error.message
       });
     }
   });
