@@ -1,7 +1,6 @@
 import { API_URL } from '@env';
-import axios from 'axios';
 
-import { storageService } from '@/shared';
+import { axiosInstance, storageService } from '@/shared';
 import { ITokens } from '@entities/session/model';
 
 class SessionApi {
@@ -12,9 +11,13 @@ class SessionApi {
       throw new Error('Refresh token not available, logout');
     }
 
-    const response = await axios.post<ITokens>(`${API_URL}/auth/refresh`, {
-      refreshToken
-    });
+    const response = await axiosInstance.post<ITokens>(
+      `${API_URL}/auth/refresh`,
+      {
+        refreshToken
+      },
+      { _skipAuth: true }
+    );
 
     return response.data;
   };

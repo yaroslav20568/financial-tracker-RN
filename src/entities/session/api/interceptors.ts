@@ -1,15 +1,15 @@
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { sessionUtils } from '@/entities/session/lib/utils';
-import { axiosInstance, TFailedRequestPromise } from '@/shared';
+import { axiosInstance } from '@/shared';
 
 import { sessionApi } from './sessionApi';
 
-declare module 'axios' {
-  export interface AxiosRequestConfig {
-    _skipAuth?: boolean;
-  }
-}
+export type TFailedRequestPromise = {
+  resolve: (value: string | PromiseLike<string>) => void;
+  reject: (reason?: any) => void;
+  config: AxiosRequestConfig;
+};
 
 let isRefreshing: boolean = false;
 let failedQueue: Array<TFailedRequestPromise> = [];

@@ -1,17 +1,12 @@
 import { API_URL } from '@env';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
 declare module 'axios' {
   export interface AxiosRequestConfig {
     _retry?: boolean;
+    _skipAuth?: boolean;
   }
 }
-
-export type TFailedRequestPromise = {
-  resolve: (value: string | PromiseLike<string>) => void;
-  reject: (reason?: any) => void;
-  config: AxiosRequestConfig;
-};
 
 export const axiosInstance = axios.create({
   baseURL: API_URL,
