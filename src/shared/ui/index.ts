@@ -7,4 +7,4 @@ export * from './ErrorData';
 export * from './EmptyData';
 export * from './LogoHeader';
 export * from './IconButton';
-export * from './Table';
+export * from './InfiniteTable';
