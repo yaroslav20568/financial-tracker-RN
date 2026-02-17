@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { Edges, SafeAreaView } from 'react-native-safe-area-context';
 
@@ -13,12 +13,14 @@ interface IProps {
   paddingVertical?: number;
   paddingHorizontal?: number;
   isCenter?: boolean;
+  isScrollable?: boolean;
 }
 
 export const ScreenLayout = ({
   children,
   paddingVertical = 15,
   paddingHorizontal = 20,
+  isScrollable = true,
   isCenter = false
 }: IProps) => {
   const s = useStyles();
@@ -29,16 +31,20 @@ export const ScreenLayout = ({
       ? ['bottom', 'left', 'right']
       : ['top', 'bottom', 'left', 'right'];
 
+  const containerStyle = [
+    s.scrollContainer(isCenter),
+    { paddingVertical, paddingHorizontal }
+  ];
+
   return (
     <SafeAreaView style={s.container} edges={edges}>
-      <ScrollView
-        contentContainerStyle={[
-          s.scrollContainer(isCenter),
-          { paddingVertical, paddingHorizontal }
-        ]}
-      >
-        {children}
-      </ScrollView>
+      {isScrollable ? (
+        <ScrollView contentContainerStyle={containerStyle}>
+          {children}
+        </ScrollView>
+      ) : (
+        <View style={containerStyle}>{children}</View>
+      )}
     </SafeAreaView>
   );
 };
