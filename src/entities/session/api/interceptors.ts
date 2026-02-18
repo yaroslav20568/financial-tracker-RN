@@ -100,12 +100,10 @@ axiosInstance.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
-          await sessionApi.refreshToken();
+        const { accessToken: newAccessToken } = await sessionApi.refreshToken();
 
         await sessionUtils.saveTokens({
-          accessToken: newAccessToken,
-          refreshToken: newRefreshToken
+          accessToken: newAccessToken
         });
 
         axiosInstance.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;

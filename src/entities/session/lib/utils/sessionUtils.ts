@@ -1,6 +1,10 @@
 import { ITokens } from '@/entities/session/model';
 import { storageService, TNullable } from '@/shared';
 
+interface ISaveTokens
+  extends Pick<ITokens, 'accessToken'>,
+    Partial<Pick<ITokens, 'refreshToken'>> {}
+
 class SessionUtils {
   private logoutCallback: (() => void) | null = null;
 
@@ -19,9 +23,12 @@ class SessionUtils {
     return { accessToken, refreshToken };
   }
 
-  async saveTokens(tokens: ITokens) {
+  async saveTokens(tokens: ISaveTokens) {
     await storageService.set('accessToken', tokens.accessToken);
-    await storageService.set('refreshToken', tokens.refreshToken);
+
+    if (tokens.refreshToken) {
+      await storageService.set('refreshToken', tokens.refreshToken);
+    }
   }
 
   async clearTokens() {
