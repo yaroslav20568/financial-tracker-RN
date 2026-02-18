@@ -106,7 +106,6 @@ axiosInstance.interceptors.response.use(
           accessToken: newAccessToken
         });
 
-        axiosInstance.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
         processQueue(null, newAccessToken);
 
         if (originalRequest.headers) {
