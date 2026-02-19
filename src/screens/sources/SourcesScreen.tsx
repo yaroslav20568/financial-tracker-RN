@@ -2,45 +2,59 @@ import React from 'react';
 
 import { Text } from 'react-native';
 
+import { ISource, sourceApi } from '@/entities';
 import {
+  DateUtils,
   HeadScreenLayout,
-  IColumn,
+  ITableColumn,
   InfiniteTable,
   ScreenLayout
 } from '@/shared';
 
-interface IPhoto {
-  id: number;
-  title: string;
-  url: string;
-  thumbnailUrl: string;
-}
-
-const PHOTO_COLUMNS: Array<IColumn<IPhoto>> = [
-  { key: 'id', title: 'ID', width: 150 },
-  { key: 'title', title: 'Заголовок', width: 150 },
+const SOURCE_COLUMNS: Array<ITableColumn<ISource>> = [
   {
-    key: 'url',
-    title: 'Ссылка',
+    key: 'name',
+    title: 'Name',
     width: 150,
-    render: item => <Text>{item.url}</Text>
+    render: item => <Text>{item.name}</Text>
   },
   {
-    key: 'thumbnailUrl',
-    title: 'Заголовок',
+    key: 'transaction_count',
+    title: 'Transactions',
     width: 150,
-    render: item => <Text>{item.thumbnailUrl}</Text>
+    render: item => <Text>{item.transaction_count || 0}</Text>
+  },
+  {
+    key: 'created_at',
+    title: 'Created',
+    width: 150,
+    render: item => (
+      <Text>{DateUtils.format(item.created_at, 'dd.MM.yyyy')}</Text>
+    )
+  },
+  {
+    key: 'updated_at',
+    title: 'Updated',
+    width: 150,
+    render: item => (
+      <Text>{DateUtils.format(item.updated_at, 'dd.MM.yyyy')}</Text>
+    )
   }
 ];
 
 export const SourcesScreen = () => {
-  const fetchPhotos = async ({ pageParam = 0 }) => {
-    const res = await fetch(
-      `https://jsonplaceholder.typicode.com/photos?_start=${pageParam}&_limit=${20}`
-    );
-    const data = await res.json();
+  const fetchSources = async ({ pageParam = 0 }) => {
+    const response = await sourceApi.getSources({
+      page: pageParam,
+      size: 20
+    });
 
-    return { data, nextStart: data.length === 20 ? pageParam + 20 : undefined };
+    const { content, currentPage, totalPages } = response;
+
+    return {
+      data: content,
+      nextStart: currentPage < totalPages - 1 ? currentPage + 1 : undefined
+    };
   };
 
   return (
@@ -49,10 +63,10 @@ export const SourcesScreen = () => {
         title="Source Management"
         text="Manage your transaction sources like bank accounts, cash, and credit cards"
       />
-      <InfiniteTable<IPhoto>
-        queryKey={['photos']}
-        fetchFn={fetchPhotos}
-        columns={PHOTO_COLUMNS}
+      <InfiniteTable<ISource>
+        queryKey={['sources']}
+        fetchFn={fetchSources}
+        columns={SOURCE_COLUMNS}
       />
     </ScreenLayout>
   );

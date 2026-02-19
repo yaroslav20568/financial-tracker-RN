@@ -8,7 +8,7 @@ import { CenterLayout, Loader } from '@/shared/ui';
 
 import { useStyles } from './styles';
 
-export interface IColumn<T> {
+export interface ITableColumn<T> {
   key: keyof T | string;
   title: string;
   width: number;
@@ -20,7 +20,7 @@ interface IProps<T> {
   fetchFn: (context: {
     pageParam?: any;
   }) => Promise<{ data: Array<T>; nextStart: number | undefined }>;
-  columns: Array<IColumn<T>>;
+  columns: Array<ITableColumn<T>>;
   initialPageParam?: number;
 }
 
