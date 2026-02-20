@@ -24,6 +24,12 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
     sessionUtils.clearTokens();
   };
 
+  const renderIcon = () => (
+    <DrawerIconWrapper>
+      <Icon family="materialIcons" name="logout" color={colors.red} />
+    </DrawerIconWrapper>
+  );
+
   return (
     <SafeAreaView style={s.container}>
       <DrawerContentScrollView
@@ -39,12 +45,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           onPress={handleLogout}
           inactiveTintColor={colors.red}
           style={s.logoutDrawerItem}
-          // eslint-disable-next-line react/no-unstable-nested-components
-          icon={() => (
-            <DrawerIconWrapper>
-              <Icon family="materialIcons" name="logout" color={colors.red} />
-            </DrawerIconWrapper>
-          )}
+          icon={renderIcon}
         />
       </DrawerContentScrollView>
     </SafeAreaView>
