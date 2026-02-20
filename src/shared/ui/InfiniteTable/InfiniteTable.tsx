@@ -1,12 +1,13 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
-import { View, Text, ScrollView, FlatList, ListRenderItem } from 'react-native';
+import { View, ScrollView, FlatList, ListRenderItem } from 'react-native';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { CenterLayout, EmptyData, ErrorData, Loader } from '@/shared/ui';
 
 import { useStyles } from './styles';
+import { TableHeader, TableRow } from './ui';
 
 export interface ITableColumn<T> {
   key: keyof T | string;
@@ -57,30 +58,13 @@ export const InfiniteTable = <T extends Record<string, any>>({
     [columns]
   );
 
-  const renderHeader = () => (
-    <View style={s.header}>
-      {columns.map(col => (
-        <Text key={String(col.key)} style={[s.thead, { width: col.width }]}>
-          {col.title}
-        </Text>
-      ))}
-    </View>
-  );
+  const renderHeader = useCallback(() => {
+    return <TableHeader columns={columns} />;
+  }, [columns]);
 
-  const renderItem: ListRenderItem<T> = ({ item }) => (
-    <View style={s.row}>
-      {columns.map(col => (
-        <View key={String(col.key)} style={{ width: col.width }}>
-          {col.render ? (
-            col.render(item)
-          ) : (
-            <Text style={s.cell} numberOfLines={1}>
-              {item[col.key as keyof T]}
-            </Text>
-          )}
-        </View>
-      ))}
-    </View>
+  const renderItem: ListRenderItem<T> = useCallback(
+    ({ item }) => <TableRow item={item} columns={columns} />,
+    [columns]
   );
 
   if (isLoading) {
