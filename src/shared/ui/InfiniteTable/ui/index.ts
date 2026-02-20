@@ -1,3 +1,4 @@
 export * from './TableHeader';
 export * from './TableRow';
 export * from './IconCell';
+export * from './TableActions';

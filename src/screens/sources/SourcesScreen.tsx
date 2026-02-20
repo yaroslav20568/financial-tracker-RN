@@ -6,11 +6,13 @@ import { ISource, sourceApi } from '@/entities';
 import {
   DateUtils,
   HeadScreenLayout,
+  ITableAction,
   ITableColumn,
   Icon,
   IconCell,
   InfiniteTable,
   ScreenLayout,
+  TableActions,
   colors
 } from '@/shared';
 import { useStyles } from '@/shared/ui/InfiniteTable/ui/TableRow/styles';
@@ -18,7 +20,25 @@ import { useStyles } from '@/shared/ui/InfiniteTable/ui/TableRow/styles';
 export const SourcesScreen = () => {
   const tableRowS = useStyles();
 
-  const SOURCE_COLUMNS: Array<ITableColumn<ISource>> = useMemo(() => {
+  const rowActions: Array<ITableAction> = [
+    {
+      iconProps: {
+        family: 'feather',
+        name: 'edit'
+      },
+      onPress: () => {}
+    },
+    {
+      iconProps: {
+        family: 'materialIcons',
+        name: 'delete-outline',
+        color: colors.red
+      },
+      onPress: () => {}
+    }
+  ];
+
+  const columns: Array<ITableColumn<ISource>> = useMemo(() => {
     return [
       {
         key: 'name',
@@ -67,6 +87,12 @@ export const SourcesScreen = () => {
             {DateUtils.format(item.updated_at, 'dd.MM.yyyy')}
           </Text>
         )
+      },
+      {
+        key: 'actions',
+        title: 'Actions',
+        width: 150,
+        render: () => <TableActions actions={rowActions} />
       }
     ];
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -95,7 +121,7 @@ export const SourcesScreen = () => {
       <InfiniteTable<ISource>
         queryKey={['sources']}
         fetchFn={fetchSources}
-        columns={SOURCE_COLUMNS}
+        columns={columns}
       />
     </ScreenLayout>
   );
