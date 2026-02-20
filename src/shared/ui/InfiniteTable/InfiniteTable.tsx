@@ -67,6 +67,16 @@ export const InfiniteTable = <T extends Record<string, any>>({
     [columns]
   );
 
+  const keyExtractor = useCallback((item: T, index: number) => {
+    return item.id.toString() || index.toString();
+  }, []);
+
+  const handleEndReached = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
   if (isLoading) {
     return (
       <CenterLayout>
@@ -96,10 +106,8 @@ export const InfiniteTable = <T extends Record<string, any>>({
           renderItem={renderItem}
           ListHeaderComponent={renderHeader}
           stickyHeaderIndices={[0]}
-          keyExtractor={item => item.id?.toString()}
-          onEndReached={() => {
-            if (hasNextPage && !isFetchingNextPage) fetchNextPage();
-          }}
+          keyExtractor={keyExtractor}
+          onEndReached={handleEndReached}
           onEndReachedThreshold={0.3}
           contentContainerStyle={{ minWidth: totalWidth }}
           ListFooterComponent={
