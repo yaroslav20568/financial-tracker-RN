@@ -5,19 +5,15 @@ export const useStyles = () => {
     const { fonts, colors } = theme;
 
     return {
-      row: {
+      container: {
         flexDirection: 'row',
-        borderBottomWidth: 1,
-        borderBottomColor: colors.gray,
-        paddingVertical: 10
+        alignItems: 'center',
+        gap: 8
       },
-      col: {
-        alignItems: 'center'
-      },
-      cell: {
+      title: {
         fontSize: 13,
         fontFamily: fonts.interRegular,
-        color: colors.gray
+        color: colors.black
       }
     };
   });

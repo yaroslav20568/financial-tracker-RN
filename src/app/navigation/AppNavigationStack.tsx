@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 
 import {
   createStackNavigator,
@@ -14,7 +14,7 @@ export type TAuthStackParamList = {
 
 type TAuthStackItem = {
   name: keyof TAuthStackParamList;
-  component: React.ComponentType<any>;
+  component: ComponentType<any>;
   options?: StackNavigationOptions;
 };
 

@@ -17,7 +17,7 @@ export const TableRow = <T,>({ item, columns }: IProps<T>) => {
   return (
     <View style={s.row}>
       {columns.map(col => (
-        <View key={String(col.key)} style={{ width: col.width }}>
+        <View key={String(col.key)} style={[s.col, { width: col.width }]}>
           {col.render ? (
             col.render(item)
           ) : (

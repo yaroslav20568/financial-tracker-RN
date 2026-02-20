@@ -7,8 +7,11 @@ import {
   DateUtils,
   HeadScreenLayout,
   ITableColumn,
+  Icon,
+  IconCell,
   InfiniteTable,
-  ScreenLayout
+  ScreenLayout,
+  colors
 } from '@/shared';
 import { useStyles } from '@/shared/ui/InfiniteTable/ui/TableRow/styles';
 
@@ -21,13 +24,29 @@ export const SourcesScreen = () => {
         key: 'name',
         title: 'Name',
         width: 150,
-        render: item => <Text>{item.name}</Text>
+        render: item => (
+          <IconCell
+            icon={<Icon family="ionicons" name="wallet" color={colors.blue} />}
+            title={item.name}
+          />
+        )
       },
       {
         key: 'transaction_count',
         title: 'Transactions',
         width: 150,
-        render: item => <Text>{item.transaction_count || 0}</Text>
+        render: item => (
+          <IconCell
+            icon={
+              <Icon
+                family="fontAwesome6"
+                name="money-bill-1-wave"
+                color={colors.blue}
+              />
+            }
+            title={item.transaction_count || 0}
+          />
+        )
       },
       {
         key: 'created_at',

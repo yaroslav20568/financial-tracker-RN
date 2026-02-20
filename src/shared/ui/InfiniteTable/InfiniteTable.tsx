@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { ReactNode, useCallback, useMemo } from 'react';
 
 import { View, ScrollView, FlatList, ListRenderItem } from 'react-native';
 
@@ -13,7 +13,7 @@ export interface ITableColumn<T> {
   key: keyof T | string;
   title: string;
   width: number;
-  render?: (item: T) => React.ReactNode;
+  render?: (item: T) => ReactNode;
 }
 
 interface IProps<T> {
