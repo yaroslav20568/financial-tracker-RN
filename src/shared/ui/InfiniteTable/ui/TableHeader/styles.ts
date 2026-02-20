@@ -13,6 +13,7 @@ export const useStyles = () => {
         borderBottomColor: colors.gray
       },
       thead: {
+        flex: 1,
         fontSize: 15,
         fontFamily: fonts.interMedium,
         color: colors.black,

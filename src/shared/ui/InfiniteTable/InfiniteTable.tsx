@@ -100,7 +100,7 @@ export const InfiniteTable = <T extends Record<string, any>>({
 
   return (
     <View style={s.container}>
-      <ScrollView horizontal>
+      <ScrollView horizontal contentContainerStyle={s.scrollContainer}>
         <FlatList
           data={flatData}
           renderItem={renderItem}

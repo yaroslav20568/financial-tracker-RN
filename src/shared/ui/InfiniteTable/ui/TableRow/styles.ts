@@ -11,7 +11,8 @@ export const useStyles = () => {
         borderBottomColor: colors.gray,
         paddingVertical: 10
       },
-      col: {
+      column: {
+        flex: 1,
         alignItems: 'center'
       },
       cell: {

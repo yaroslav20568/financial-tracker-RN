@@ -10,6 +10,9 @@ export const useStyles = () => {
         borderRadius: 10,
         overflow: 'hidden'
       },
+      scrollContainer: {
+        flexGrow: 1
+      },
       tableMinWidth: {
         minWidth: '100%'
       },
