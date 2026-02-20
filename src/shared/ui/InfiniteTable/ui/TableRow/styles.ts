@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native-unistyles';
 
 export const useStyles = () => {
   return StyleSheet.create(theme => {
-    const { colors } = theme;
+    const { fonts, colors } = theme;
 
     return {
       row: {
@@ -11,7 +11,12 @@ export const useStyles = () => {
         borderBottomColor: colors.gray,
         paddingVertical: 10
       },
-      cell: { flex: 1, textAlign: 'center' }
+      cell: {
+        fontSize: 13,
+        fontFamily: fonts.interRegular,
+        color: colors.gray,
+        textAlign: 'center'
+      }
     };
   });
 };

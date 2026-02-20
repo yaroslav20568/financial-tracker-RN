@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { Text } from 'react-native';
 
@@ -10,39 +10,49 @@ import {
   InfiniteTable,
   ScreenLayout
 } from '@/shared';
-
-const SOURCE_COLUMNS: Array<ITableColumn<ISource>> = [
-  {
-    key: 'name',
-    title: 'Name',
-    width: 150,
-    render: item => <Text>{item.name}</Text>
-  },
-  {
-    key: 'transaction_count',
-    title: 'Transactions',
-    width: 150,
-    render: item => <Text>{item.transaction_count || 0}</Text>
-  },
-  {
-    key: 'created_at',
-    title: 'Created',
-    width: 150,
-    render: item => (
-      <Text>{DateUtils.format(item.created_at, 'dd.MM.yyyy')}</Text>
-    )
-  },
-  {
-    key: 'updated_at',
-    title: 'Updated',
-    width: 150,
-    render: item => (
-      <Text>{DateUtils.format(item.updated_at, 'dd.MM.yyyy')}</Text>
-    )
-  }
-];
+import { useStyles } from '@/shared/ui/InfiniteTable/ui/TableRow/styles';
 
 export const SourcesScreen = () => {
+  const tableRowS = useStyles();
+
+  const SOURCE_COLUMNS: Array<ITableColumn<ISource>> = useMemo(() => {
+    return [
+      {
+        key: 'name',
+        title: 'Name',
+        width: 150,
+        render: item => <Text>{item.name}</Text>
+      },
+      {
+        key: 'transaction_count',
+        title: 'Transactions',
+        width: 150,
+        render: item => <Text>{item.transaction_count || 0}</Text>
+      },
+      {
+        key: 'created_at',
+        title: 'Created',
+        width: 150,
+        render: item => (
+          <Text style={tableRowS.cell}>
+            {DateUtils.format(item.created_at, 'dd.MM.yyyy')}
+          </Text>
+        )
+      },
+      {
+        key: 'updated_at',
+        title: 'Updated',
+        width: 150,
+        render: item => (
+          <Text style={tableRowS.cell}>
+            {DateUtils.format(item.updated_at, 'dd.MM.yyyy')}
+          </Text>
+        )
+      }
+    ];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const fetchSources = async ({ pageParam = 0 }) => {
     const response = await sourceApi.getSources({
       page: pageParam,
