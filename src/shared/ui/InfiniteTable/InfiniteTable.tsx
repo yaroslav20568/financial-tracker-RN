@@ -4,7 +4,7 @@ import { View, Text, ScrollView, FlatList, ListRenderItem } from 'react-native';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { CenterLayout, Loader } from '@/shared/ui';
+import { CenterLayout, EmptyData, ErrorData, Loader } from '@/shared/ui';
 
 import { useStyles } from './styles';
 
@@ -32,13 +32,20 @@ export const InfiniteTable = <T extends Record<string, any>>({
 }: IProps<T>) => {
   const s = useStyles();
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useInfiniteQuery({
-      queryKey,
-      queryFn: fetchFn,
-      initialPageParam,
-      getNextPageParam: lastPage => lastPage.nextStart
-    });
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isError,
+    error
+  } = useInfiniteQuery({
+    queryKey,
+    queryFn: fetchFn,
+    initialPageParam,
+    getNextPageParam: lastPage => lastPage.nextStart
+  });
 
   const flatData = useMemo(
     () => data?.pages.flatMap(page => page.data) || [],
@@ -81,6 +88,19 @@ export const InfiniteTable = <T extends Record<string, any>>({
       <CenterLayout>
         <Loader />
       </CenterLayout>
+    );
+  }
+
+  if (isError) {
+    return <ErrorData title={error.message} />;
+  }
+
+  if (!flatData.length) {
+    return (
+      <EmptyData
+        title="Table is empty"
+        text="No data available. Please create a new record to see it here."
+      />
     );
   }
 
