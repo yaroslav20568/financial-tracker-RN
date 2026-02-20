@@ -6,6 +6,9 @@ export const useStyles = () => {
 
     return {
       button: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 4,
         borderWidth: 1,
         borderRadius: 8,
         variants: {

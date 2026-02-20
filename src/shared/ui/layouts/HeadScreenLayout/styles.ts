@@ -9,7 +9,7 @@ export const useStyles = () => {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: 10,
+        gap: 30,
         marginBottom: 16
       },
       texts: {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { Text, Pressable, PressableProps } from 'react-native';
 
@@ -21,6 +21,7 @@ interface IProps extends PressableProps {
   isLoading?: boolean;
   size?: TSize;
   variant?: TVariant;
+  icon?: ReactNode;
 }
 
 export const Button = ({
@@ -30,6 +31,7 @@ export const Button = ({
   isLoading,
   size = 'l',
   variant = 'background',
+  icon,
   ...props
 }: IProps) => {
   const s = useStyles();
@@ -57,6 +59,7 @@ export const Button = ({
       onPressOut={handlePressOut}
       style={[s.button, style, animatedStyle]}
     >
+      {!isLoading && icon}
       <Text style={s.text}>{!isLoading ? title : 'Loading...'}</Text>
     </AnimatedPressable>
   );

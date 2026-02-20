@@ -4,6 +4,7 @@ import { Text } from 'react-native';
 
 import { ISource, sourceApi } from '@/entities';
 import {
+  Button,
   DateUtils,
   HeadScreenLayout,
   ITableAction,
@@ -117,6 +118,21 @@ export const SourcesScreen = () => {
       <HeadScreenLayout
         title="Source Management"
         text="Manage your transaction sources like bank accounts, cash, and credit cards"
+        rightSlot={
+          <Button
+            title={'Add Source'}
+            onPress={null}
+            size="m"
+            icon={
+              <Icon
+                family="entypo"
+                name="plus"
+                size={15}
+                color={colors.white}
+              />
+            }
+          />
+        }
       />
       <InfiniteTable<ISource>
         queryKey={['sources']}
