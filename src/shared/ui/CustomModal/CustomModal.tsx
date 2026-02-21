@@ -6,7 +6,7 @@ import { Button, colors, IconButton } from '@/shared';
 
 import { useStyles } from './styles';
 
-interface IProps {
+export interface ICustomModalProps {
   visible: boolean;
   onClose: () => void;
   onSubmit?: () => void;
@@ -28,7 +28,7 @@ export const CustomModal = ({
   cancelBtnText = 'Cancel',
   submitBtnText = 'Add',
   isLoading
-}: IProps) => {
+}: ICustomModalProps) => {
   const s = useStyles();
 
   return (
