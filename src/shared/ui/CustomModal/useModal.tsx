@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react';
 
 import { CustomModal, ICustomModalProps } from './CustomModal';
 
-interface IProps extends Omit<ICustomModalProps, 'visible'> {}
+interface IProps extends Omit<ICustomModalProps, 'visible' | 'onClose'> {}
 
 export const useModal = (props: IProps) => {
   const [visible, setVisible] = useState(false);

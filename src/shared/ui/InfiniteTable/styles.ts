@@ -6,6 +6,7 @@ export const useStyles = () => {
 
     return {
       container: {
+        flex: 1,
         backgroundColor: colors.white,
         borderRadius: 10,
         overflow: 'hidden'
