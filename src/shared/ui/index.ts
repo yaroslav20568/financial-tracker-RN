@@ -8,3 +8,4 @@ export * from './EmptyData';
 export * from './LogoHeader';
 export * from './IconButton';
 export * from './InfiniteTable';
+export * from './CustomModal';

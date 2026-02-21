@@ -8,6 +8,7 @@ export const useStyles = () => {
       button: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         gap: 4,
         borderWidth: 1,
         borderRadius: 8,
