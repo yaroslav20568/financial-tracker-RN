@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useMemo } from 'react';
+import React, { JSX, memo, ReactNode, useCallback, useMemo } from 'react';
 
 import { View, ScrollView, FlatList, ListRenderItem } from 'react-native';
 
@@ -25,7 +25,7 @@ interface IProps<T> {
   initialPageParam?: number;
 }
 
-export const InfiniteTable = <T extends Record<string, any>>({
+const InfiniteTableInner = <T extends Record<string, any>>({
   queryKey,
   fetchFn,
   columns,
@@ -68,7 +68,7 @@ export const InfiniteTable = <T extends Record<string, any>>({
   );
 
   const keyExtractor = useCallback((item: T, index: number) => {
-    return item.id.toString() || index.toString();
+    return item?.id?.toString() || index.toString();
   }, []);
 
   const handleEndReached = useCallback(() => {
@@ -122,3 +122,9 @@ export const InfiniteTable = <T extends Record<string, any>>({
     </View>
   );
 };
+
+export const InfiniteTable = memo(InfiniteTableInner) as <
+  T extends Record<string, any>
+>(
+  props: IProps<T>
+) => JSX.Element;

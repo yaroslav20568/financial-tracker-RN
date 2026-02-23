@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { Text } from 'react-native';
 
@@ -15,26 +15,30 @@ import {
 } from '@/shared';
 import { useStyles } from '@/shared/ui/InfiniteTable/ui/TableRow/styles';
 
+const SOURCES_QUERY_KEY = ['sources'];
+
 export const SourcesTable = () => {
   const tableRowS = useStyles();
 
-  const rowActions: Array<ITableAction> = [
-    {
-      iconProps: {
-        family: 'feather',
-        name: 'edit'
+  const rowActions: Array<ITableAction> = useMemo(() => {
+    return [
+      {
+        iconProps: {
+          family: 'feather',
+          name: 'edit'
+        },
+        onPress: () => {}
       },
-      onPress: () => {}
-    },
-    {
-      iconProps: {
-        family: 'materialIcons',
-        name: 'delete-outline',
-        color: colors.red
-      },
-      onPress: () => {}
-    }
-  ];
+      {
+        iconProps: {
+          family: 'materialIcons',
+          name: 'delete-outline',
+          color: colors.red
+        },
+        onPress: () => {}
+      }
+    ];
+  }, []);
 
   const columns: Array<ITableColumn<ISource>> = useMemo(() => {
     return [
@@ -96,7 +100,7 @@ export const SourcesTable = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const fetchSources = async ({ pageParam = 0 }) => {
+  const fetchSources = useCallback(async ({ pageParam = 0 }) => {
     const response = await sourceApi.getSources({
       page: pageParam,
       size: 20
@@ -108,11 +112,11 @@ export const SourcesTable = () => {
       data: content,
       nextStart: currentPage < totalPages - 1 ? currentPage + 1 : undefined
     };
-  };
+  }, []);
 
   return (
     <InfiniteTable<ISource>
-      queryKey={['sources']}
+      queryKey={SOURCES_QUERY_KEY}
       fetchFn={fetchSources}
       columns={columns}
     />
