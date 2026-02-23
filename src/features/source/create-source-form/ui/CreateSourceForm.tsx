@@ -43,8 +43,8 @@ export const CreateSourceForm = ({ onSuccess, onCancel }: IProps) => {
       <FormInput
         control={control}
         name="name"
-        label="Account Name"
-        placeholder="Enter Account Name"
+        label="Source Name"
+        placeholder="e.g., Cash, Bank Account, Credit Card"
       />
       <ButtonGroupLayout style={s.btnsWrapper}>
         <Button
