@@ -25,6 +25,12 @@ class SourceApi {
 
     return response.data;
   };
+
+  // TODO: Edit Source
+
+  deleteSource = async (id: ISource['id']): Promise<void> => {
+    await axiosInstance.delete<void>(`/source/${id}`);
+  };
 }
 
 export const sourceApi = new SourceApi();

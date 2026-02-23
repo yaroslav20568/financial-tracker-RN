@@ -68,7 +68,7 @@ const InfiniteTableInner = <T extends Record<string, any>>({
   );
 
   const keyExtractor = useCallback((item: T, index: number) => {
-    return item?.id?.toString() || index.toString();
+    return item?.id || index;
   }, []);
 
   const handleEndReached = useCallback(() => {

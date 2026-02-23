@@ -1,8 +1,9 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { Text } from 'react-native';
 
-import { ISource, sourceApi } from '@/entities';
+import { sourceApi, useDeleteSource } from '@/entities/source/api';
+import { ISource } from '@/entities/source/model';
 import {
   DateUtils,
   ITableAction,
@@ -11,7 +12,8 @@ import {
   IconCell,
   InfiniteTable,
   TableActions,
-  colors
+  colors,
+  useConfirmModal
 } from '@/shared';
 import { useStyles } from '@/shared/ui/InfiniteTable/ui/TableRow/styles';
 
@@ -19,26 +21,44 @@ const SOURCES_QUERY_KEY = ['sources'];
 
 export const SourcesTable = () => {
   const tableRowS = useStyles();
+  const [selectedSource, setSelectedSource] = useState<Pick<
+    ISource,
+    'id' | 'name'
+  > | null>(null);
+  const { mutateAsync: deleteSourceMutate, isPending } = useDeleteSource();
 
-  const rowActions: Array<ITableAction> = useMemo(() => {
-    return [
-      {
-        iconProps: {
-          family: 'feather',
-          name: 'edit'
-        },
-        onPress: () => {}
-      },
-      {
-        iconProps: {
-          family: 'materialIcons',
-          name: 'delete-outline',
-          color: colors.red
-        },
-        onPress: () => {}
+  const [confirmModal, openConfirmModal] = useConfirmModal({
+    title: 'Delete Source',
+    text: `You want to delete a source with the name: ${selectedSource?.name}?`,
+    onPress: async () => {
+      if (selectedSource) {
+        await deleteSourceMutate(selectedSource.id);
       }
-    ];
-  }, []);
+    },
+    isLoading: isPending
+  });
+
+  const getRowActions = (source: ISource): Array<ITableAction> => [
+    {
+      iconProps: { family: 'feather', name: 'edit' },
+      onPress: () => {
+        console.log('Edit ID:', source.id);
+      }
+    },
+    {
+      iconProps: {
+        family: 'materialIcons',
+        name: 'delete-outline',
+        color: colors.red
+      },
+      onPress: () => {
+        const { id, name } = source;
+
+        setSelectedSource({ id, name });
+        openConfirmModal();
+      }
+    }
+  ];
 
   const columns: Array<ITableColumn<ISource>> = useMemo(() => {
     return [
@@ -94,7 +114,7 @@ export const SourcesTable = () => {
         key: 'actions',
         title: 'Actions',
         width: 150,
-        render: () => <TableActions actions={rowActions} />
+        render: item => <TableActions actions={getRowActions(item)} />
       }
     ];
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -115,10 +135,13 @@ export const SourcesTable = () => {
   }, []);
 
   return (
-    <InfiniteTable<ISource>
-      queryKey={SOURCES_QUERY_KEY}
-      fetchFn={fetchSources}
-      columns={columns}
-    />
+    <>
+      <InfiniteTable<ISource>
+        queryKey={SOURCES_QUERY_KEY}
+        fetchFn={fetchSources}
+        columns={columns}
+      />
+      {confirmModal}
+    </>
   );
 };

@@ -6,7 +6,7 @@ import { colors, IconButton } from '@/shared';
 
 import { useStyles } from './styles';
 
-interface IProps {
+export interface ICustomModalProps {
   visible: boolean;
   onClose: () => void;
   title: string;
@@ -20,7 +20,7 @@ export const CustomModal = ({
   title,
   icon,
   children
-}: IProps) => {
+}: ICustomModalProps) => {
   const s = useStyles();
 
   return (
