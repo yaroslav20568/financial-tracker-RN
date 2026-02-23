@@ -1,24 +1,10 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback } from 'react';
 
-import { CustomModal, ICustomModalProps } from './CustomModal';
+export const useModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-interface IProps extends Omit<ICustomModalProps, 'visible' | 'onClose'> {}
+  const openModal = useCallback(() => setIsOpen(true), []);
+  const closeModal = useCallback(() => setIsOpen(false), []);
 
-export const useModal = (props: IProps) => {
-  const [visible, setVisible] = useState(false);
-
-  const open = useCallback(() => setVisible(true), []);
-  const close = useCallback(() => setVisible(false), []);
-
-  const modalElement = useMemo(() => {
-    if (!visible) return null;
-
-    return <CustomModal {...props} visible={visible} onClose={close} />;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible]);
-
-  return {
-    open,
-    modalElement
-  };
+  return [isOpen, openModal, closeModal] as const;
 };

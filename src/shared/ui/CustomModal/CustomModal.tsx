@@ -2,33 +2,25 @@ import React, { ReactNode } from 'react';
 
 import { Modal, View, Text, Pressable } from 'react-native';
 
-import { Button, colors, IconButton } from '@/shared';
+import { colors, IconButton } from '@/shared';
 
 import { useStyles } from './styles';
 
-export interface ICustomModalProps {
+interface IProps {
   visible: boolean;
   onClose: () => void;
-  onSubmit?: () => void;
   title: string;
   icon?: ReactNode;
-  children: React.ReactNode;
-  cancelBtnText?: string;
-  submitBtnText?: string;
-  isLoading?: boolean;
+  children: ReactNode;
 }
 
 export const CustomModal = ({
   visible,
   onClose,
-  onSubmit,
   title,
   icon,
-  children,
-  cancelBtnText = 'Cancel',
-  submitBtnText = 'Add',
-  isLoading
-}: ICustomModalProps) => {
+  children
+}: IProps) => {
   const s = useStyles();
 
   return (
@@ -53,26 +45,7 @@ export const CustomModal = ({
               color={colors.gray}
             />
           </View>
-          <View style={s.body}>{children}</View>
-          {onSubmit && submitBtnText && (
-            <View style={s.footer}>
-              <Button
-                title={cancelBtnText}
-                onPress={onClose}
-                size="m"
-                variant="outline"
-                disabled={isLoading}
-                isLoading={isLoading}
-              />
-              <Button
-                title={submitBtnText}
-                onPress={onSubmit}
-                size="m"
-                disabled={isLoading}
-                isLoading={isLoading}
-              />
-            </View>
-          )}
+          {children}
         </Pressable>
       </Pressable>
     </Modal>

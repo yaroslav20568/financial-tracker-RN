@@ -38,15 +38,6 @@ export const useStyles = () => {
         fontSize: 16,
         fontFamily: fonts.interBold,
         color: colors.black
-      },
-      body: {
-        marginBottom: 20
-      },
-      footer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        gap: 12
       }
     };
   });

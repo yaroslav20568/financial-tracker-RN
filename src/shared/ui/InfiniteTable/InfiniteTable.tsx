@@ -89,7 +89,7 @@ export const InfiniteTable = <T extends Record<string, any>>({
     return <ErrorData title={error.message} />;
   }
 
-  if (!flatData.length) {
+  if (!flatData.length && !isError) {
     return (
       <EmptyData
         title="Table is empty"

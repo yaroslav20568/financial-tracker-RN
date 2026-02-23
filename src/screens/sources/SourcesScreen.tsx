@@ -1,9 +1,20 @@
 import React from 'react';
 
 import { SourcesTable } from '@/entities';
-import { Button, HeadScreenLayout, Icon, ScreenLayout, colors } from '@/shared';
+import { CreateSourceForm } from '@/features';
+import {
+  Button,
+  CustomModal,
+  HeadScreenLayout,
+  Icon,
+  ScreenLayout,
+  colors,
+  useModal
+} from '@/shared';
 
 export const SourcesScreen = () => {
+  const [isOpen, openModal, closeModal] = useModal();
+
   return (
     <ScreenLayout isScrollable={false}>
       <HeadScreenLayout
@@ -12,7 +23,7 @@ export const SourcesScreen = () => {
         rightSlot={
           <Button
             title={'Add Source'}
-            onPress={null}
+            onPress={openModal}
             size="m"
             icon={
               <Icon
@@ -26,6 +37,14 @@ export const SourcesScreen = () => {
         }
       />
       <SourcesTable />
+      <CustomModal
+        visible={isOpen}
+        onClose={closeModal}
+        title="Add Source"
+        icon={<Icon family="ionicons" name="wallet" color={colors.blue} />}
+      >
+        <CreateSourceForm onSuccess={closeModal} onCancel={closeModal} />
+      </CustomModal>
     </ScreenLayout>
   );
 };

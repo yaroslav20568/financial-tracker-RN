@@ -1,4 +1,5 @@
 import { ISource } from '@/entities/source/model';
+import { TCreateSourceForm } from '@/features/source/create-source-form/model';
 import { axiosInstance, IDataResponse, IParamsRequest } from '@/shared';
 
 class SourceApi {
@@ -11,6 +12,16 @@ class SourceApi {
         params
       }
     );
+
+    return response.data;
+  };
+
+  createSource = async (
+    data: TCreateSourceForm
+  ): Promise<Omit<ISource, 'transaction_count'>> => {
+    const response = await axiosInstance.post<
+      Omit<ISource, 'transaction_count'>
+    >('/source', data);
 
     return response.data;
   };
