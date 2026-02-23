@@ -12,8 +12,6 @@ import {
 } from '@/features/source/create-source-form/model';
 import { Button, ButtonGroupLayout, FormInput } from '@/shared';
 
-import { useStyles } from './styles';
-
 interface IProps {
   onSuccess: () => void;
   onCancel: () => void;
@@ -24,7 +22,6 @@ const createSourceDefaultValues: TCreateSourceForm = {
 } as const;
 
 export const CreateSourceForm = ({ onSuccess, onCancel }: IProps) => {
-  const s = useStyles();
   const { mutateAsync: createSourceMutate, isPending } = useCreateSource();
 
   const { control, handleSubmit } = useForm<TCreateSourceForm>({
@@ -46,7 +43,7 @@ export const CreateSourceForm = ({ onSuccess, onCancel }: IProps) => {
         label="Source Name"
         placeholder="e.g., Cash, Bank Account, Credit Card"
       />
-      <ButtonGroupLayout style={s.btnsWrapper}>
+      <ButtonGroupLayout>
         <Button
           title="Cancel"
           onPress={onCancel}

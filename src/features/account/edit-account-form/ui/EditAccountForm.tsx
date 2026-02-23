@@ -45,7 +45,7 @@ export const EditAccountForm = ({ name, closeEditForm }: IProps) => {
         label="Account Name"
         placeholder="Enter Account Name"
       />
-      <ButtonGroupLayout style={s.btnsWrapper}>
+      <ButtonGroupLayout>
         <Button
           title="Save Changes"
           onPress={handleSubmit(onSubmit)}

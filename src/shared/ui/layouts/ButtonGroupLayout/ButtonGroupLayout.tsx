@@ -11,6 +11,7 @@ interface IProps {
     'flex-start' | 'center' | 'flex-end' | 'space-between'
   >;
   gap?: number;
+  marginTop?: number;
   style?: ViewStyle;
 }
 
@@ -18,12 +19,15 @@ export const ButtonGroupLayout = ({
   children,
   align = 'flex-end',
   gap = 12,
+  marginTop = 15,
   style
 }: IProps) => {
   const s = useStyles();
 
   return (
-    <View style={[s.container, { justifyContent: align, gap }, style]}>
+    <View
+      style={[s.container, { justifyContent: align, gap, marginTop }, style]}
+    >
       {children}
     </View>
   );
