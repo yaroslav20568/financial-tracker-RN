@@ -3,14 +3,13 @@ import Toast from 'react-native-toast-message';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { sourceApi } from '@/entities/source/api';
-import { TCreateSourceForm } from '@/features/source/create-source-form/model';
 
 export const useCreateSource = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ['createSource'],
-    mutationFn: (data: TCreateSourceForm) => sourceApi.createSource(data),
+    mutationFn: sourceApi.createSource,
     onSuccess: () => {
       Toast.show({
         type: 'success',

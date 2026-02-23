@@ -3,14 +3,13 @@ import Toast from 'react-native-toast-message';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { sourceApi } from '@/entities/source/api';
-import { ISource } from '@/entities/source/model';
 
 export const useDeleteSource = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ['deleteSource'],
-    mutationFn: (id: ISource['id']) => sourceApi.deleteSource(id),
+    mutationFn: sourceApi.deleteSource,
     onSuccess: () => {
       Toast.show({
         type: 'success',

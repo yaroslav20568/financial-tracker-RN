@@ -3,14 +3,13 @@ import Toast from 'react-native-toast-message';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { accountApi } from '@/entities/account/api';
-import { TEditAccountForm } from '@/features/account/edit-account-form/model';
 
 export const useEditAccount = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ['editAccount'],
-    mutationFn: (data: TEditAccountForm) => accountApi.editAccount(data),
+    mutationFn: accountApi.editAccount,
     onSuccess: () => {
       Toast.show({
         type: 'success',
