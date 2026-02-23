@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { ConfirmModal, IConfirmModalProps } from './ConfirmModal';
 
-interface IOptions extends Omit<IConfirmModalProps, 'visible' | 'onClose'> {}
+interface IOptions extends Omit<IConfirmModalProps, 'isOpen' | 'onClose'> {}
 
 export const useConfirmModal = (options: IOptions) => {
   const { onPress, isLoading, ...otherOptions } = options;
@@ -20,7 +20,7 @@ export const useConfirmModal = (options: IOptions) => {
   const confirmModal = useMemo(
     () => (
       <ConfirmModal
-        visible={isOpen}
+        isOpen={isOpen}
         onClose={closeConfirmModal}
         onPress={handleOnPress}
         isLoading={isLoading}

@@ -20,7 +20,7 @@ export interface IConfirmModalProps
 }
 
 export const ConfirmModal = ({
-  visible,
+  isOpen,
   onClose,
   title,
   text = 'Are you sure you want to confirm your action?',
@@ -31,7 +31,7 @@ export const ConfirmModal = ({
   const s = useStyles();
 
   return (
-    <CustomModal visible={visible} onClose={onClose} title={title}>
+    <CustomModal isOpen={isOpen} onClose={onClose} title={title}>
       <Text style={s.text}>{text}</Text>
       <ButtonGroupLayout>
         <Button title="Cancel" onPress={onClose} size="m" variant="outline" />

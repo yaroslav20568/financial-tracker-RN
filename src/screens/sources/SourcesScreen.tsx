@@ -38,7 +38,7 @@ export const SourcesScreen = () => {
       />
       <SourcesTable />
       <CustomModal
-        visible={isOpen}
+        isOpen={isOpen}
         onClose={closeModal}
         title="Add Source"
         icon={<Icon family="ionicons" name="wallet" color={colors.blue} />}

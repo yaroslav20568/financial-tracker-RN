@@ -7,7 +7,7 @@ import { colors, IconButton } from '@/shared';
 import { useStyles } from './styles';
 
 export interface ICustomModalProps {
-  visible: boolean;
+  isOpen: boolean;
   onClose: () => void;
   title: string;
   icon?: ReactNode;
@@ -15,7 +15,7 @@ export interface ICustomModalProps {
 }
 
 export const CustomModal = ({
-  visible,
+  isOpen,
   onClose,
   title,
   icon,
@@ -25,7 +25,7 @@ export const CustomModal = ({
 
   return (
     <Modal
-      visible={visible}
+      visible={isOpen}
       transparent
       animationType="fade"
       onRequestClose={onClose}
