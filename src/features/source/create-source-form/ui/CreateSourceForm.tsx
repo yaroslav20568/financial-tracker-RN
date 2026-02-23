@@ -44,14 +44,7 @@ export const CreateSourceForm = ({ onSuccess, onCancel }: IProps) => {
         placeholder="e.g., Cash, Bank Account, Credit Card"
       />
       <ButtonGroupLayout>
-        <Button
-          title="Cancel"
-          onPress={onCancel}
-          size="m"
-          variant="outline"
-          disabled={isPending}
-          isLoading={isPending}
-        />
+        <Button title="Cancel" onPress={onCancel} size="m" variant="outline" />
         <Button
           title="Add Source"
           onPress={handleSubmit(onSubmit)}
