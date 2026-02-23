@@ -4,10 +4,6 @@ export const useStyles = () => {
   return StyleSheet.create(() => {
     return {
       btnsWrapper: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        gap: 20,
         marginTop: 15
       },
       btn: {

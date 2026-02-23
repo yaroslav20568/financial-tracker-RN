@@ -10,7 +10,7 @@ import {
   editAccountSchema,
   TEditAccountForm
 } from '@/features/account/edit-account-form/model';
-import { Button, FormInput } from '@/shared';
+import { Button, ButtonGroupLayout, FormInput } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -45,7 +45,7 @@ export const EditAccountForm = ({ name, closeEditForm }: IProps) => {
         label="Account Name"
         placeholder="Enter Account Name"
       />
-      <View style={s.btnsWrapper}>
+      <ButtonGroupLayout style={s.btnsWrapper}>
         <Button
           title="Save Changes"
           onPress={handleSubmit(onSubmit)}
@@ -61,7 +61,7 @@ export const EditAccountForm = ({ name, closeEditForm }: IProps) => {
           variant="outline"
           size="m"
         />
-      </View>
+      </ButtonGroupLayout>
     </View>
   );
 };

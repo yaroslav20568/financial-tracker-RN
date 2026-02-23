@@ -1,2 +1,2 @@
 export * from './useGetAccount';
-export * from './useEditAccountMutation';
+export * from './useEditAccount';
