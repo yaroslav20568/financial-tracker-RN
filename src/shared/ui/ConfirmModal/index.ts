@@ -1,2 +1,2 @@
 export * from './ConfirmModal';
-export * from './useConfirmModal';
+export * from './hooks';

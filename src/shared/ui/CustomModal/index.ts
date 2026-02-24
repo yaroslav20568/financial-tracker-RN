@@ -1,2 +1,2 @@
 export * from './CustomModal';
-export * from './useModal';
+export * from './hooks';

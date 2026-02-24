@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { ConfirmModal, IConfirmModalProps } from './ConfirmModal';
+import { ConfirmModal, IConfirmModalProps } from '@/shared/ui';
 
 interface IOptions extends Omit<IConfirmModalProps, 'isOpen' | 'onClose'> {}
 
