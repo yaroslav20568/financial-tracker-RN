@@ -14,16 +14,17 @@ import { Button, ButtonGroupLayout, FormInput } from '@/shared';
 
 import { useStyles } from './styles';
 
-interface IProps extends Partial<IAccount> {
+interface IProps {
+  account: IAccount | undefined;
   closeEditForm: () => void;
 }
 
-export const EditAccountForm = ({ name, closeEditForm }: IProps) => {
+export const EditAccountForm = ({ account, closeEditForm }: IProps) => {
   const s = useStyles();
   const { mutateAsync: editAccountMutate, isPending } = useEditAccount();
 
   const editAccountDefaultValues: TEditAccountForm = {
-    name: name || ''
+    name: account?.name || ''
   } as const;
 
   const { control, handleSubmit } = useForm<TEditAccountForm>({

@@ -45,7 +45,7 @@ export const AccountProfile = () => {
           {!isShowEditForm ? (
             <AccountDetails {...data} />
           ) : (
-            <EditAccountForm {...data} closeEditForm={closeEditForm} />
+            <EditAccountForm account={data} closeEditForm={closeEditForm} />
           )}
         </>
       }

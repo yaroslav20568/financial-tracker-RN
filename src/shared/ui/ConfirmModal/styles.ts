@@ -6,8 +6,8 @@ export const useStyles = () => {
 
     return {
       text: {
-        fontSize: 16,
-        lineHeight: 20,
+        fontSize: 14,
+        lineHeight: 16,
         fontFamily: fonts.interMedium,
         color: colors.gray
       }
