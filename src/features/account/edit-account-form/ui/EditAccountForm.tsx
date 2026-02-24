@@ -10,7 +10,7 @@ import {
   editAccountSchema,
   TEditAccountForm
 } from '@/features/account/edit-account-form/model';
-import { Button, ButtonGroupLayout, FormInput } from '@/shared';
+import { Button, ButtonGroupLayout, FormInput, FormUtils } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -23,9 +23,8 @@ export const EditAccountForm = ({ account, closeEditForm }: IProps) => {
   const s = useStyles();
   const { mutateAsync: editAccountMutate, isPending } = useEditAccount();
 
-  const editAccountDefaultValues: TEditAccountForm = {
-    name: account?.name || ''
-  } as const;
+  const editAccountDefaultValues: TEditAccountForm =
+    FormUtils.getDefaultsValues(account);
 
   const { control, handleSubmit } = useForm<TEditAccountForm>({
     resolver: yupResolver(editAccountSchema),

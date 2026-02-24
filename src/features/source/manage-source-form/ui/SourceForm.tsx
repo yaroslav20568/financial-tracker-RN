@@ -10,7 +10,7 @@ import {
   sourceFormSchema,
   TSourceForm
 } from '@/features/source/manage-source-form/model';
-import { Button, ButtonGroupLayout, FormInput } from '@/shared';
+import { Button, ButtonGroupLayout, FormInput, FormUtils } from '@/shared';
 
 interface IProps {
   source?: ISource | null;
@@ -26,9 +26,8 @@ export const SourceForm = ({ source, onSuccess, onCancel }: IProps) => {
   const isEdit = !!source;
   const isPending = isCreatePending || isEditPending;
 
-  const createSourceDefaultValues: TSourceForm = {
-    name: source?.name || ''
-  } as const;
+  const createSourceDefaultValues: TSourceForm =
+    FormUtils.getDefaultsValues(source);
 
   const { control, handleSubmit } = useForm<TSourceForm>({
     resolver: yupResolver(sourceFormSchema),
