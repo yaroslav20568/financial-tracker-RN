@@ -1,5 +1,5 @@
 import { ISource } from '@/entities/source/model';
-import { TCreateSourceForm } from '@/features/source/create-source-form/model';
+import { TSourceForm } from '@/features/source/manage-source-form/model';
 import { axiosInstance, IDataResponse, IParamsRequest } from '@/shared';
 
 class SourceApi {
@@ -17,7 +17,7 @@ class SourceApi {
   };
 
   createSource = async (
-    data: TCreateSourceForm
+    data: TSourceForm
   ): Promise<Omit<ISource, 'transaction_count'>> => {
     const response = await axiosInstance.post<
       Omit<ISource, 'transaction_count'>
@@ -26,7 +26,9 @@ class SourceApi {
     return response.data;
   };
 
-  // TODO: Edit Source
+  editSource = async (id: ISource['id'], data: TSourceForm): Promise<void> => {
+    await axiosInstance.put<void>(`/source/${id}`, data);
+  };
 
   deleteSource = async (id: ISource['id']): Promise<void> => {
     await axiosInstance.delete<void>(`/source/${id}`);

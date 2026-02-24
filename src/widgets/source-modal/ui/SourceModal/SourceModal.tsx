@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { Text } from 'react-native-gesture-handler';
-
 import { ISource } from '@/entities';
-import { CreateSourceForm } from '@/features';
+import { SourceForm } from '@/features';
 import { CustomModal, ICustomModalProps, Icon, colors } from '@/shared';
 
 interface IProps extends Pick<ICustomModalProps, 'isOpen' | 'onClose'> {
@@ -20,16 +18,7 @@ export const SourceModal = ({ isOpen, onClose, source }: IProps) => {
       title={isEdit ? 'Edit Source' : 'Add Source'}
       icon={<Icon family="ionicons" name="wallet" color={colors.blue} />}
     >
-      {isEdit ? (
-        // <UpdateSourceForm
-        //   initialValues={source}
-        //   onSuccess={onClose}
-        //   onCancel={onClose}
-        // />
-        <Text>{source.name}</Text>
-      ) : (
-        <CreateSourceForm onSuccess={onClose} onCancel={onClose} />
-      )}
+      <SourceForm source={source} onSuccess={onClose} onCancel={onClose} />
     </CustomModal>
   );
 };
