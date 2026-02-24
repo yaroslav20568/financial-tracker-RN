@@ -10,8 +10,8 @@ import { EditAccountForm } from '@/features';
 import { BorderLayout, CenterLayout, ErrorData, Loader } from '@/shared';
 
 export const AccountProfile = () => {
-  const { data, isLoading, isError, error } = useGetAccount();
   const [isShowEditForm, setIsShowEditForm] = useState(false);
+  const { data, isLoading, isError, error } = useGetAccount();
 
   const showEditForm = () => {
     setIsShowEditForm(true);

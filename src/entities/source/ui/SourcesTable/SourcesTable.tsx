@@ -19,12 +19,13 @@ import { useStyles } from '@/shared/ui/InfiniteTable/ui/TableRow/styles';
 
 const SOURCES_QUERY_KEY = ['sources'];
 
-export const SourcesTable = () => {
+interface IProps {
+  onEdit: (source: ISource) => void;
+}
+
+export const SourcesTable = ({ onEdit }: IProps) => {
   const tableRowS = useStyles();
-  const [selectedSource, setSelectedSource] = useState<Pick<
-    ISource,
-    'id' | 'name'
-  > | null>(null);
+  const [selectedSource, setSelectedSource] = useState<ISource | null>(null);
   const { mutateAsync: deleteSourceMutate, isPending } = useDeleteSource();
 
   const [confirmModal, openConfirmModal] = useConfirmModal({
@@ -41,9 +42,7 @@ export const SourcesTable = () => {
   const getRowActions = (source: ISource): Array<ITableAction> => [
     {
       iconProps: { family: 'feather', name: 'edit' },
-      onPress: () => {
-        console.log('Edit ID:', source.id);
-      }
+      onPress: () => onEdit(source)
     },
     {
       iconProps: {
@@ -52,9 +51,7 @@ export const SourcesTable = () => {
         color: colors.red
       },
       onPress: () => {
-        const { id, name } = source;
-
-        setSelectedSource({ id, name });
+        setSelectedSource(source);
         openConfirmModal();
       }
     }

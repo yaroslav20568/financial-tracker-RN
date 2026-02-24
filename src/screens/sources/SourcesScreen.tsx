@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { SourcesTable } from '@/entities';
-import { CreateSourceForm } from '@/features';
+import { ISource, SourcesTable } from '@/entities';
 import {
   Button,
-  CustomModal,
   HeadScreenLayout,
   Icon,
   ScreenLayout,
   colors,
   useModal
 } from '@/shared';
+import { SourceModal } from '@/widgets';
 
 export const SourcesScreen = () => {
+  const [selectedSource, setSelectedSource] = useState<ISource | null>(null);
   const [isOpen, openModal, closeModal] = useModal();
+
+  const handleCreate = () => {
+    setSelectedSource(null);
+    openModal();
+  };
+
+  const handleEdit = (source: ISource) => {
+    setSelectedSource(source);
+    openModal();
+  };
 
   return (
     <ScreenLayout isScrollable={false}>
@@ -23,7 +33,7 @@ export const SourcesScreen = () => {
         rightSlot={
           <Button
             title={'Add Source'}
-            onPress={openModal}
+            onPress={handleCreate}
             size="m"
             icon={
               <Icon
@@ -36,15 +46,12 @@ export const SourcesScreen = () => {
           />
         }
       />
-      <SourcesTable />
-      <CustomModal
+      <SourcesTable onEdit={handleEdit} />
+      <SourceModal
         isOpen={isOpen}
         onClose={closeModal}
-        title="Add Source"
-        icon={<Icon family="ionicons" name="wallet" color={colors.blue} />}
-      >
-        <CreateSourceForm onSuccess={closeModal} onCancel={closeModal} />
-      </CustomModal>
+        source={selectedSource}
+      />
     </ScreenLayout>
   );
 };
