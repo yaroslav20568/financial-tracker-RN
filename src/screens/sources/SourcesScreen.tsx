@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 
 import { ISource, SourcesTable } from '@/entities';
+import { SourceForm } from '@/features';
 import {
   Button,
+  CustomModal,
   HeadScreenLayout,
   Icon,
   ScreenLayout,
   colors,
   useModal
 } from '@/shared';
-import { SourceModal } from '@/widgets';
 
 export const SourcesScreen = () => {
   const [selectedSource, setSelectedSource] = useState<ISource | null>(null);
@@ -47,11 +48,18 @@ export const SourcesScreen = () => {
         }
       />
       <SourcesTable onEdit={handleEdit} />
-      <SourceModal
+      <CustomModal
         isOpen={isOpen}
         onClose={closeModal}
-        source={selectedSource}
-      />
+        title={selectedSource ? 'Edit Source' : 'Add Source'}
+        icon={<Icon family="ionicons" name="wallet" color={colors.blue} />}
+      >
+        <SourceForm
+          source={selectedSource}
+          onSuccess={closeModal}
+          onCancel={closeModal}
+        />
+      </CustomModal>
     </ScreenLayout>
   );
 };
