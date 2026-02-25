@@ -43,7 +43,8 @@ export const CustomModal = ({
         }
       });
     }
-  }, [isOpen, scale]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   const animatedContainerStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }]

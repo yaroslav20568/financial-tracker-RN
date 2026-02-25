@@ -6,6 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
 import { AuthProvider, NavigationProvider, TanstackProvider } from '@/app';
+import { toastConfig } from '@/shared';
 
 import '@/shared/config/theme/unistyles';
 import '@/entities/session/api/interceptors';
@@ -19,7 +20,7 @@ const App = () => {
           <NavigationProvider />
         </AuthProvider>
       </TanstackProvider>
-      <Toast />
+      <Toast config={toastConfig} />
     </SafeAreaProvider>
   );
 };
