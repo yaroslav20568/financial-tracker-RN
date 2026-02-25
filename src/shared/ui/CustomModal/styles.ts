@@ -6,22 +6,22 @@ export const useStyles = () => {
 
     return {
       overlay: {
-        flex: 1,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        ...StyleSheet.absoluteFillObject,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20
+        padding: 20,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        zIndex: 100
+      },
+      overlayTouch: {
+        ...StyleSheet.absoluteFillObject
       },
       container: {
         width: '100%',
         backgroundColor: colors.white,
         borderRadius: 8,
         padding: 20,
-        shadowColor: colors.black,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
+        shadowColor: colors.black
       },
       header: {
         flexDirection: 'row',
