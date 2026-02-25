@@ -9,7 +9,7 @@ import Animated, {
   withTiming
 } from 'react-native-reanimated';
 
-import { colors, IconButton } from '@/shared';
+import { IconButton, useTheme } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -29,6 +29,7 @@ export const CustomModal = ({
   children
 }: ICustomModalProps) => {
   const s = useStyles();
+  const { colors } = useTheme();
   const [shouldRender, setShouldRender] = useState(isOpen);
   const scale = useSharedValue(0.9);
 

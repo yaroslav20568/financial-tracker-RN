@@ -13,8 +13,8 @@ import {
   IconCell,
   InfiniteTable,
   TableActions,
-  colors,
-  useConfirmModal
+  useConfirmModal,
+  useTheme
 } from '@/shared';
 import { useStyles } from '@/shared/ui/InfiniteTable/ui/TableRow/styles';
 
@@ -25,6 +25,7 @@ interface IProps {
 
 export const SourcesTable = ({ filters, onEdit }: IProps) => {
   const tableRowS = useStyles();
+  const { colors } = useTheme();
   const queryKey = useMemo(() => ['sources', filters], [filters]);
   const [selectedSource, setSelectedSource] = useState<ISource | null>(null);
   const { mutateAsync: deleteSourceMutate, isPending } = useDeleteSource();

@@ -2,7 +2,13 @@ import React from 'react';
 
 import { View } from 'react-native';
 
-import { colors, IconButton, IOption, IParamsRequest, Select } from '@/shared';
+import {
+  IconButton,
+  IOption,
+  IParamsRequest,
+  Select,
+  useTheme
+} from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -18,6 +24,7 @@ interface IProps {
 
 export const SourcesFilters = ({ filters, onChange }: IProps) => {
   const s = useStyles();
+  const { colors } = useTheme();
   const { sortDirection } = filters;
 
   const handleSortBy = (value: string) =>

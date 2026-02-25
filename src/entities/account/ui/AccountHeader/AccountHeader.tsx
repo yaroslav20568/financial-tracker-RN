@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import { IAccount } from '@/entities/account/model';
-import { colors, Icon } from '@/shared';
+import { Icon, useTheme } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -11,6 +11,7 @@ interface IProps extends Partial<Pick<IAccount, 'id' | 'name'>> {}
 
 export const AccountHeader = ({ id, name }: IProps) => {
   const s = useStyles();
+  const { colors } = useTheme();
 
   return (
     <View style={s.container}>

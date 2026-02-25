@@ -2,7 +2,7 @@ import React from 'react';
 
 import { View, Text } from 'react-native';
 
-import { colors, Icon, TSizeSL } from '@/shared';
+import { Icon, TSizeSL, useTheme } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -13,6 +13,7 @@ interface IProps {
 export const LogoHeader = ({ size = 'l' }: IProps) => {
   const s = useStyles();
   s.useVariants({ size });
+  const { colors } = useTheme();
 
   const iconSize = size === 's' ? 20 : 30;
 

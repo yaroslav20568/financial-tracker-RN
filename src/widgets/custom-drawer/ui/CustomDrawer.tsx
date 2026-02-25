@@ -12,13 +12,14 @@ import {
 } from '@react-navigation/drawer';
 
 import { sessionUtils } from '@/entities';
-import { colors, Icon, LogoHeader } from '@/shared';
+import { Icon, LogoHeader, useTheme } from '@/shared';
 
 import { DrawerIconWrapper } from './DrawerIconWrapper';
 import { useStyles } from './styles';
 
 export const CustomDrawer = (props: DrawerContentComponentProps) => {
   const s = useStyles();
+  const { colors } = useTheme();
 
   const handleLogout = () => {
     sessionUtils.clearTokens();

@@ -9,11 +9,12 @@ import {
   IParamsRequest,
   Icon,
   ScreenLayout,
-  colors,
+  useTheme,
   useModal
 } from '@/shared';
 
 export const SourcesScreen = () => {
+  const { colors } = useTheme();
   const [selectedSource, setSelectedSource] = useState<ISource | null>(null);
   const [filters, setFilters] = useState<
     Pick<IParamsRequest, 'sortBy' | 'sortDirection'>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { View, Text, TextInput, TextInputProps } from 'react-native';
 
-import { colors, IconButton } from '@/shared';
+import { IconButton, useTheme } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -18,6 +18,7 @@ export const Input = ({
   secureTextEntry,
   ...props
 }: IInputProps) => {
+  const { colors } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
   const [isShowPassword, setIsShowPassword] = useState(false);
   const isPassword = secureTextEntry ? secureTextEntry : false;

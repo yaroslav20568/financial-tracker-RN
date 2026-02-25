@@ -4,38 +4,39 @@ import { View, Text } from 'react-native';
 
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
-import { Icon, colors } from '@/shared';
+import { Icon, useTheme } from '@/shared';
 
 import { useStyles } from './styles';
 
-const benefitItems = [
-  {
-    icon: (
-      <Icon family="fontAwesome6" name="arrow-trend-up" color={colors.blue} />
-    ),
-    title: 'Track Every Transaction',
-    text: 'Monitor income and expenses across multiple accounts with detailed categorization and filtering.'
-  },
-  {
-    icon: <Icon family="fontisto" name="world-o" color={colors.blue} />,
-    title: 'Multi-Currency Support',
-    text: 'Manage finances in USD, EUR, and BYN with automatic currency conversion and tracking.'
-  },
-  {
-    icon: <Icon family="entypo" name="bar-graph" color={colors.blue} />,
-    title: 'Insightful Analytics',
-    text: 'Visualize spending patterns and financial trends with comprehensive dashboard analytics.'
-  }
-] as const;
-
 export const BenefitList = () => {
   const s = useStyles();
+  const { colors } = useTheme();
+
+  const benefitItems = [
+    {
+      icon: (
+        <Icon family="fontAwesome6" name="arrow-trend-up" color={colors.blue} />
+      ),
+      title: 'Track Every Transaction',
+      text: 'Monitor income and expenses across multiple accounts with detailed categorization and filtering.'
+    },
+    {
+      icon: <Icon family="fontisto" name="world-o" color={colors.blue} />,
+      title: 'Multi-Currency Support',
+      text: 'Manage finances in USD, EUR, and BYN with automatic currency conversion and tracking.'
+    },
+    {
+      icon: <Icon family="entypo" name="bar-graph" color={colors.blue} />,
+      title: 'Insightful Analytics',
+      text: 'Visualize spending patterns and financial trends with comprehensive dashboard analytics.'
+    }
+  ] as const;
 
   return (
     <View style={s.list}>
       {benefitItems.map((benefit, index) => (
         <Animated.View
-          key={index}
+          key={benefit.title}
           style={s.benefit}
           entering={FadeInDown.delay(index * 400).duration(500)}
         >

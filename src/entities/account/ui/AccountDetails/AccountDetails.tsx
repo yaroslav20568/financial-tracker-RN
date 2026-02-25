@@ -3,7 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { IAccount } from '@/entities/account/model';
-import { colors, DateUtils, Icon } from '@/shared';
+import { DateUtils, Icon, useTheme } from '@/shared';
 
 import { AccountDetailsItem } from './AccountDetailsItem';
 import { useStyles } from './styles';
@@ -17,6 +17,7 @@ export const AccountDetails = ({
   updated_at
 }: IProps) => {
   const s = useStyles();
+  const { colors } = useTheme();
 
   return (
     <View>

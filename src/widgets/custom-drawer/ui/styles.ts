@@ -1,7 +1,9 @@
 import { StyleSheet } from 'react-native-unistyles';
 
 export const useStyles = () => {
-  return StyleSheet.create(() => {
+  return StyleSheet.create(theme => {
+    const { fonts } = theme;
+
     return {
       container: {
         flex: 1
@@ -18,7 +20,8 @@ export const useStyles = () => {
       },
       labelStyle: {
         fontSize: 14,
-        lineHeight: 16
+        lineHeight: 18,
+        fontFamily: fonts.interMedium
       }
     };
   });

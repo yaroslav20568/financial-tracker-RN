@@ -9,7 +9,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 
-import { colors } from '@/shared';
+import { useTheme } from '@/shared/lib';
 
 export const IconFamily = {
   entypo: Entypo,
@@ -31,10 +31,12 @@ export const Icon = ({
   family,
   name,
   size = 20,
-  color = colors.black,
+  color,
   ...props
 }: IIconProps) => {
+  const { colors } = useTheme();
   const IconComponent = IconFamily[family];
+  const iconColor = color || colors.black;
 
-  return <IconComponent name={name} size={size} color={color} {...props} />;
+  return <IconComponent name={name} size={size} color={iconColor} {...props} />;
 };

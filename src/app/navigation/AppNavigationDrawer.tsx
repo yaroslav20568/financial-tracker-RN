@@ -13,7 +13,7 @@ import {
   CategoriesScreen,
   SourcesScreen
 } from '@/screens';
-import { colors, Icon } from '@/shared';
+import { Icon, useTheme } from '@/shared';
 import { CustomDrawer, CustomHeaderDrawer, DrawerIconWrapper } from '@/widgets';
 
 export type TAppDrawerParamList = {
@@ -73,6 +73,8 @@ const renderDrawerHeder = (props: DrawerHeaderProps) => (
 );
 
 export const AppNavigationDrawer = () => {
+  const { fonts, colors } = useTheme();
+
   return (
     <Drawer.Navigator
       drawerContent={renderDrawerContent}
@@ -88,7 +90,8 @@ export const AppNavigationDrawer = () => {
         drawerItemStyle: { borderRadius: 10 },
         drawerLabelStyle: {
           fontSize: 14,
-          lineHeight: 16
+          lineHeight: 18,
+          fontFamily: fonts.interMedium
         }
       }}
     >

@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 import { Dropdown } from 'react-native-element-dropdown';
 
-import { colors } from '@/shared/config';
+import { useTheme } from '@/shared/lib';
 import { IOption } from '@/shared/model';
 import { Icon } from '@/shared/ui';
 
@@ -30,6 +30,7 @@ export const Select = <T = string,>({
   rightIcon
 }: IProps<T>) => {
   const s = useStyles();
+  const { colors } = useTheme();
   const [currValue, setCurrValue] = useState(
     isFirstDefaultValue ? options[0].value : value
   );
