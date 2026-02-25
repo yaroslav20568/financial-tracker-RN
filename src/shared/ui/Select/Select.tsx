@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
+
+import { View } from 'react-native';
 
 import { Dropdown } from 'react-native-element-dropdown';
 
+import { colors } from '@/shared/config';
 import { IOption } from '@/shared/model';
+import { Icon } from '@/shared/ui';
 
 import { useStyles } from './styles';
 
@@ -12,6 +16,8 @@ interface IProps<T> {
   onChange: (value: T) => void;
   placeholder?: string;
   isFirstDefaultValue?: boolean;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
 
 export const Select = <T = string,>({
@@ -19,7 +25,9 @@ export const Select = <T = string,>({
   value = null,
   onChange,
   placeholder = 'Select item',
-  isFirstDefaultValue = false
+  isFirstDefaultValue = false,
+  leftIcon,
+  rightIcon
 }: IProps<T>) => {
   const s = useStyles();
   const [currValue, setCurrValue] = useState(
@@ -39,6 +47,24 @@ export const Select = <T = string,>({
     }
   };
 
+  const renderLeftIcon = () =>
+    leftIcon ? <View style={s.leftIconWrapper}>{leftIcon}</View> : null;
+
+  const renderRightIcon = () => (
+    <View style={s.rightIconWrapper(isFocus)}>
+      {rightIcon ? (
+        rightIcon
+      ) : (
+        <Icon
+          family="entypo"
+          name="chevron-small-down"
+          size={22}
+          color={colors.gray}
+        />
+      )}
+    </View>
+  );
+
   return (
     <Dropdown
       data={options}
@@ -47,11 +73,13 @@ export const Select = <T = string,>({
       valueField="value"
       placeholder={placeholder}
       value={currValue}
+      onChange={handleChange}
       onFocus={handleFocus}
       onBlur={handleBlur}
-      onChange={handleChange}
       autoScroll={false}
       mode="auto"
+      renderLeftIcon={renderLeftIcon}
+      renderRightIcon={renderRightIcon}
       style={[s.dropdown(isFocus)]}
       placeholderStyle={s.placeholderStyle}
       selectedTextStyle={s.selectedTextStyle}

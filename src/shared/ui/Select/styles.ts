@@ -37,7 +37,14 @@ export const useStyles = () => {
         lineHeight: 14,
         fontFamily: fonts.interRegular,
         color: colors.black
-      }
+      },
+      leftIconWrapper: {
+        marginRight: 6
+      },
+      rightIconWrapper: (isFocus: boolean) => ({
+        marginLeft: 6,
+        transform: [{ rotate: isFocus ? '180deg' : '0deg' }]
+      })
     };
   });
 };
