@@ -15,6 +15,10 @@ export const useStyles = () => {
       },
       logoutDrawerItem: {
         marginTop: 10
+      },
+      labelStyle: {
+        fontSize: 14,
+        lineHeight: 16
       }
     };
   });

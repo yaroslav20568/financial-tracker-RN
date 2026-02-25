@@ -45,6 +45,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           onPress={handleLogout}
           inactiveTintColor={colors.red}
           style={s.logoutDrawerItem}
+          labelStyle={s.labelStyle}
           icon={renderIcon}
         />
       </DrawerContentScrollView>

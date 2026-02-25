@@ -85,7 +85,11 @@ export const AppNavigationDrawer = () => {
           borderTopRightRadius: 0,
           borderBottomRightRadius: 0
         },
-        drawerItemStyle: { borderRadius: 8 }
+        drawerItemStyle: { borderRadius: 10 },
+        drawerLabelStyle: {
+          fontSize: 14,
+          lineHeight: 16
+        }
       }}
     >
       {drawerItems.map(screen => (
