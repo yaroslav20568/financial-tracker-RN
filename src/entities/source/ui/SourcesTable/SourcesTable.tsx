@@ -37,6 +37,7 @@ export const SourcesTable = ({ filters, onEdit }: IProps) => {
         await deleteSourceMutate(selectedSource.id);
       }
     },
+    submitBtnColor: 'red',
     isLoading: isPending
   });
 

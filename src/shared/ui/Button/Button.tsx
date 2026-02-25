@@ -15,12 +15,14 @@ import { useStyles } from './styles';
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 type TVariant = 'background' | 'outline';
+type TColor = 'blue' | 'red';
 
-interface IProps extends PressableProps {
+export interface IButtonProps extends PressableProps {
   title: string;
   isLoading?: boolean;
   size?: TSize;
   variant?: TVariant;
+  color?: TColor;
   icon?: ReactNode;
 }
 
@@ -31,11 +33,12 @@ export const Button = ({
   isLoading,
   size = 'l',
   variant = 'background',
+  color = 'blue',
   icon,
   ...props
-}: IProps) => {
+}: IButtonProps) => {
   const s = useStyles();
-  s.useVariants({ size, variant });
+  s.useVariants({ size, variant, color });
 
   const scale = useSharedValue(1);
 
