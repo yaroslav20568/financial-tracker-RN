@@ -1,9 +1,10 @@
-import React, { JSX, memo, ReactNode, useCallback, useMemo } from 'react';
+import React, { ReactNode, useCallback, useMemo } from 'react';
 
 import { View, ScrollView, FlatList, ListRenderItem } from 'react-native';
 
 import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
 
+import { withMemo } from '@/shared/lib';
 import { CenterLayout, EmptyData, ErrorData, Loader } from '@/shared/ui';
 
 import { useStyles } from './styles';
@@ -124,8 +125,4 @@ const InfiniteTableComponent = <T extends Record<string, any>>({
   );
 };
 
-export const InfiniteTable = memo(InfiniteTableComponent) as <
-  T extends Record<string, any>
->(
-  props: IProps<T>
-) => JSX.Element;
+export const InfiniteTable = withMemo(InfiniteTableComponent);

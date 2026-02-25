@@ -1,7 +1,8 @@
-import React, { JSX, memo } from 'react';
+import React from 'react';
 
 import { View, Text } from 'react-native';
 
+import { withMemo } from '@/shared/lib';
 import { ITableColumn } from '@/shared/ui/InfiniteTable';
 
 import { useStyles } from './styles';
@@ -31,6 +32,4 @@ const TableRowComponent = <T,>({ item, columns }: IProps<T>) => {
   );
 };
 
-export const TableRow = memo(TableRowComponent) as <T>(
-  props: IProps<T>
-) => JSX.Element;
+export const TableRow = withMemo(TableRowComponent);
