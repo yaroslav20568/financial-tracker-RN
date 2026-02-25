@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { ISource, SourcesTable } from '@/entities';
+import { ISource, SourcesFilters, SourcesTable } from '@/entities';
 import { SourceForm } from '@/features';
 import {
   Button,
@@ -14,6 +14,10 @@ import {
 
 export const SourcesScreen = () => {
   const [selectedSource, setSelectedSource] = useState<ISource | null>(null);
+  // const [filters, setFilters] = useState({
+  //   sortBy: 'name',
+  //   sortDirection: 'ASC'
+  // });
   const [isOpen, openModal, closeModal] = useModal();
 
   const handleCreate = () => {
@@ -47,6 +51,7 @@ export const SourcesScreen = () => {
           />
         }
       />
+      <SourcesFilters />
       <SourcesTable onEdit={handleEdit} />
       <CustomModal
         isOpen={isOpen}

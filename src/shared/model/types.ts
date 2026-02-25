@@ -10,3 +10,8 @@ export interface IBaseModel extends ITimestamps {
 export type TSize = 's' | 'm' | 'l';
 
 export type TSizeSL = Exclude<TSize, 'm'>;
+
+export interface IOption<T = string> {
+  label: string;
+  value: T;
+}

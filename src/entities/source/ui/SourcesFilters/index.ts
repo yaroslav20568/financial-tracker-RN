@@ -1,2 +1,1 @@
-export * from './SourcesTable';
 export * from './SourcesFilters';

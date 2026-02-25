@@ -10,3 +10,4 @@ export * from './IconButton';
 export * from './InfiniteTable';
 export * from './CustomModal';
 export * from './ConfirmModal';
+export * from './Select';

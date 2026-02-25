@@ -10,7 +10,7 @@ export const useStyles = () => {
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: 30,
-        marginBottom: 16
+        marginBottom: 15
       },
       texts: {
         flex: 1
