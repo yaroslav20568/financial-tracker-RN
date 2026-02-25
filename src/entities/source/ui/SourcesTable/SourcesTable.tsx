@@ -6,6 +6,7 @@ import { sourceApi, useDeleteSource } from '@/entities/source/api';
 import { ISource } from '@/entities/source/model';
 import {
   DateUtils,
+  IParamsRequest,
   ITableAction,
   ITableColumn,
   Icon,
@@ -17,14 +18,14 @@ import {
 } from '@/shared';
 import { useStyles } from '@/shared/ui/InfiniteTable/ui/TableRow/styles';
 
-const SOURCES_QUERY_KEY = ['sources'];
-
 interface IProps {
+  filters: Pick<IParamsRequest, 'sortBy' | 'sortDirection'>;
   onEdit: (source: ISource) => void;
 }
 
-export const SourcesTable = ({ onEdit }: IProps) => {
+export const SourcesTable = ({ filters, onEdit }: IProps) => {
   const tableRowS = useStyles();
+  const queryKey = useMemo(() => ['sources', filters], [filters]);
   const [selectedSource, setSelectedSource] = useState<ISource | null>(null);
   const { mutateAsync: deleteSourceMutate, isPending } = useDeleteSource();
 
@@ -117,24 +118,28 @@ export const SourcesTable = ({ onEdit }: IProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const fetchSources = useCallback(async ({ pageParam = 0 }) => {
-    const response = await sourceApi.getSources({
-      page: pageParam,
-      size: 20
-    });
+  const fetchSources = useCallback(
+    async ({ pageParam = 0 }) => {
+      const response = await sourceApi.getSources({
+        page: pageParam,
+        size: 20,
+        ...filters
+      });
 
-    const { content, currentPage, totalPages } = response;
+      const { content, currentPage, totalPages } = response;
 
-    return {
-      data: content,
-      nextStart: currentPage < totalPages - 1 ? currentPage + 1 : undefined
-    };
-  }, []);
+      return {
+        data: content,
+        nextStart: currentPage < totalPages - 1 ? currentPage + 1 : undefined
+      };
+    },
+    [filters]
+  );
 
   return (
     <>
       <InfiniteTable<ISource>
-        queryKey={SOURCES_QUERY_KEY}
+        queryKey={queryKey}
         fetchFn={fetchSources}
         columns={columns}
       />

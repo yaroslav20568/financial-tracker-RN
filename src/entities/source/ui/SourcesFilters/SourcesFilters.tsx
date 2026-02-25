@@ -2,7 +2,7 @@ import React from 'react';
 
 import { View } from 'react-native';
 
-import { colors, IconButton, IOption, Select } from '@/shared';
+import { colors, IconButton, IOption, IParamsRequest, Select } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -11,20 +11,36 @@ const sortByOptions: Array<IOption> = [
   { label: 'Date Created', value: 'createdAt' }
 ];
 
-export const SourcesFilters = () => {
+interface IProps {
+  filters: Pick<IParamsRequest, 'sortBy' | 'sortDirection'>;
+  onChange: (value: Pick<IParamsRequest, 'sortBy' | 'sortDirection'>) => void;
+}
+
+export const SourcesFilters = ({ filters, onChange }: IProps) => {
   const s = useStyles();
+  const { sortDirection } = filters;
+
+  const handleSortBy = (value: string) =>
+    onChange({ ...filters, sortBy: value });
+
+  const toggleDirection = () => {
+    onChange({
+      ...filters,
+      sortDirection: filters.sortDirection === 'ASC' ? 'DESC' : 'ASC'
+    });
+  };
 
   return (
     <View style={s.container}>
-      <Select
+      <Select<string>
         options={sortByOptions}
         isFirstDefaultValue
-        onChange={() => console.log('onChange')}
+        onChange={handleSortBy}
       />
       <IconButton
-        onPress={() => {}}
+        onPress={toggleDirection}
         family="feather"
-        name="arrow-up"
+        name={sortDirection === 'ASC' ? 'arrow-up' : 'arrow-down'}
         size={18}
         color={colors.gray}
         style={s.iconButton}

@@ -1,9 +1,9 @@
 export type TSortDirection = 'ASC' | 'DESC';
 
-export interface IParamsRequest<T> {
+export interface IParamsRequest {
   page?: number;
   size?: number;
-  sortBy?: keyof T;
+  sortBy?: string;
   sortDirection?: TSortDirection;
 }
 

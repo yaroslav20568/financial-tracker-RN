@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX, memo } from 'react';
 
 import { View, Text } from 'react-native';
 
@@ -11,7 +11,7 @@ interface IProps<T> {
   columns: Array<ITableColumn<T>>;
 }
 
-export const TableRow = <T,>({ item, columns }: IProps<T>) => {
+const TableRowComponent = <T,>({ item, columns }: IProps<T>) => {
   const s = useStyles();
 
   return (
@@ -30,3 +30,7 @@ export const TableRow = <T,>({ item, columns }: IProps<T>) => {
     </View>
   );
 };
+
+export const TableRow = memo(TableRowComponent) as <T>(
+  props: IProps<T>
+) => JSX.Element;

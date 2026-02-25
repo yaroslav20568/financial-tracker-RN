@@ -2,7 +2,7 @@ import React, { JSX, memo, ReactNode, useCallback, useMemo } from 'react';
 
 import { View, ScrollView, FlatList, ListRenderItem } from 'react-native';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
 
 import { CenterLayout, EmptyData, ErrorData, Loader } from '@/shared/ui';
 
@@ -17,7 +17,7 @@ export interface ITableColumn<T> {
 }
 
 interface IProps<T> {
-  queryKey: Array<string>;
+  queryKey: Array<unknown>;
   fetchFn: (context: {
     pageParam?: any;
   }) => Promise<{ data: Array<T>; nextStart: number | undefined }>;
@@ -25,7 +25,7 @@ interface IProps<T> {
   initialPageParam?: number;
 }
 
-const InfiniteTableInner = <T extends Record<string, any>>({
+const InfiniteTableComponent = <T extends Record<string, any>>({
   queryKey,
   fetchFn,
   columns,
@@ -45,7 +45,8 @@ const InfiniteTableInner = <T extends Record<string, any>>({
     queryKey,
     queryFn: fetchFn,
     initialPageParam,
-    getNextPageParam: lastPage => lastPage.nextStart
+    getNextPageParam: lastPage => lastPage.nextStart,
+    placeholderData: keepPreviousData
   });
 
   const flatData = useMemo(
@@ -123,7 +124,7 @@ const InfiniteTableInner = <T extends Record<string, any>>({
   );
 };
 
-export const InfiniteTable = memo(InfiniteTableInner) as <
+export const InfiniteTable = memo(InfiniteTableComponent) as <
   T extends Record<string, any>
 >(
   props: IProps<T>

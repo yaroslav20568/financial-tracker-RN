@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useDeferredValue, useState } from 'react';
 
 import { ISource, SourcesFilters, SourcesTable } from '@/entities';
 import { SourceForm } from '@/features';
@@ -6,6 +6,7 @@ import {
   Button,
   CustomModal,
   HeadScreenLayout,
+  IParamsRequest,
   Icon,
   ScreenLayout,
   colors,
@@ -14,10 +15,13 @@ import {
 
 export const SourcesScreen = () => {
   const [selectedSource, setSelectedSource] = useState<ISource | null>(null);
-  // const [filters, setFilters] = useState({
-  //   sortBy: 'name',
-  //   sortDirection: 'ASC'
-  // });
+  const [filters, setFilters] = useState<
+    Pick<IParamsRequest, 'sortBy' | 'sortDirection'>
+  >({
+    sortBy: 'name',
+    sortDirection: 'ASC'
+  });
+  const deferredFilters = useDeferredValue(filters);
   const [isOpen, openModal, closeModal] = useModal();
 
   const handleCreate = () => {
@@ -51,8 +55,8 @@ export const SourcesScreen = () => {
           />
         }
       />
-      <SourcesFilters />
-      <SourcesTable onEdit={handleEdit} />
+      <SourcesFilters filters={filters} onChange={setFilters} />
+      <SourcesTable filters={deferredFilters} onEdit={handleEdit} />
       <CustomModal
         isOpen={isOpen}
         onClose={closeModal}
