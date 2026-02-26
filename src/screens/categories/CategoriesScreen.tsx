@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
-import { ICategory } from '@/entities';
+import { CategoriesTable, ICategory } from '@/entities';
 import { CategoryForm } from '@/features/category/manage-category-form';
 import {
   Button,
   CustomModal,
   HeadScreenLayout,
-  // IParamsRequest,
   Icon,
   ScreenLayout,
   useTheme,
@@ -22,6 +21,11 @@ export const CategoriesScreen = () => {
 
   const handleCreate = () => {
     setSelectedCategory(null);
+    openModal();
+  };
+
+  const handleEdit = (category: ICategory) => {
+    setSelectedCategory(category);
     openModal();
   };
 
@@ -46,6 +50,7 @@ export const CategoriesScreen = () => {
           />
         }
       />
+      <CategoriesTable onEdit={handleEdit} />
       <CustomModal
         isOpen={isOpen}
         onClose={closeModal}
