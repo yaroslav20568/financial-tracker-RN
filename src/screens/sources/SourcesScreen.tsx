@@ -61,7 +61,7 @@ export const SourcesScreen = () => {
       <CustomModal
         isOpen={isOpen}
         onClose={closeModal}
-        title={selectedSource ? 'Edit Source' : 'Add Source'}
+        title={`${selectedSource ? 'Edit' : 'Add'} Source`}
         icon={<Icon family="ionicons" name="wallet" color={colors.blue} />}
       >
         <SourceForm

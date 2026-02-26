@@ -57,8 +57,8 @@ const drawerItems = [
     name: 'Sources',
     label: 'Sources',
     component: SourcesScreen,
-    iconFamily: 'materialIcons',
-    iconName: 'source'
+    iconFamily: 'ionicons',
+    iconName: 'wallet'
   }
 ] as const;
 
