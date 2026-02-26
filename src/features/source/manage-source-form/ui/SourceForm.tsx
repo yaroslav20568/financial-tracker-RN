@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { View } from 'react-native';
 
@@ -26,8 +26,10 @@ export const SourceForm = ({ source, onSuccess, onCancel }: IProps) => {
   const isEdit = !!source;
   const isPending = isCreatePending || isEditPending;
 
-  const createSourceDefaultValues: TSourceForm =
-    FormUtils.getDefaultsValues(source);
+  const createSourceDefaultValues: TSourceForm = useMemo(
+    () => FormUtils.getDefaultsValues(source),
+    [source]
+  );
 
   const { control, handleSubmit } = useForm<TSourceForm>({
     resolver: yupResolver(sourceFormSchema),

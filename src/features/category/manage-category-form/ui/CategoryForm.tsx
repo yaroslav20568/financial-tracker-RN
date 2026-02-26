@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { View } from 'react-native';
 
@@ -26,8 +26,10 @@ export const CategoryForm = ({ category, onSuccess, onCancel }: IProps) => {
   const isEdit = !!category;
   const isPending = isCreatePending || isEditPending;
 
-  const createCategoryDefaultValues: TCategoryForm =
-    FormUtils.getDefaultsValues(category);
+  const createCategoryDefaultValues: TCategoryForm = useMemo(
+    () => FormUtils.getDefaultsValues(category),
+    [category]
+  );
 
   const { control, handleSubmit } = useForm<TCategoryForm>({
     resolver: yupResolver(categoryFormSchema),
