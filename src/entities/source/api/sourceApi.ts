@@ -4,7 +4,7 @@ import { axiosInstance, IDataResponse, IParamsRequest } from '@/shared';
 
 class SourceApi {
   getSources = async (
-    params?: IParamsRequest<ISource>
+    params?: IParamsRequest
   ): Promise<IDataResponse<ISource>> => {
     const response = await axiosInstance.get<IDataResponse<ISource>>(
       '/source',
@@ -26,8 +26,15 @@ class SourceApi {
     return response.data;
   };
 
-  editSource = async (id: ISource['id'], data: TSourceForm): Promise<void> => {
-    await axiosInstance.put<void>(`/source/${id}`, data);
+  editSource = async (
+    id: ISource['id'],
+    data: TSourceForm
+  ): Promise<Omit<ISource, 'transaction_count'>> => {
+    const response = await axiosInstance.put<
+      Omit<ISource, 'transaction_count'>
+    >(`/source/${id}`, data);
+
+    return response.data;
   };
 
   deleteSource = async (id: ISource['id']): Promise<void> => {
