@@ -19,12 +19,14 @@ interface IProps {
   children: ReactNode;
   paddingVertical?: number;
   paddingHorizontal?: number;
+  isScrollable?: boolean;
 }
 
 export const StackModalLayout = ({
   children,
   paddingVertical = 15,
-  paddingHorizontal = 20
+  paddingHorizontal = 20,
+  isScrollable = true
 }: IProps) => {
   const s = useStyles();
   const navigation = useNavigation();
@@ -77,6 +79,12 @@ export const StackModalLayout = ({
     transformOrigin: 'left'
   }));
 
+  const contentWrapperStyle = {
+    paddingTop: paddingVertical,
+    paddingBottom: paddingVertical + 10,
+    paddingHorizontal
+  };
+
   return (
     <Animated.View style={[s.container, animatedContainerStyle]}>
       <GestureDetector gesture={panGesture}>
@@ -87,16 +95,13 @@ export const StackModalLayout = ({
           </View>
         </View>
       </GestureDetector>
-      <ScrollView
-        scrollEventThrottle={16}
-        contentContainerStyle={{
-          paddingTop: paddingVertical,
-          paddingBottom: paddingVertical + 10,
-          paddingHorizontal
-        }}
-      >
-        {children}
-      </ScrollView>
+      {isScrollable ? (
+        <ScrollView contentContainerStyle={contentWrapperStyle}>
+          {children}
+        </ScrollView>
+      ) : (
+        <View style={contentWrapperStyle}>{children}</View>
+      )}
     </Animated.View>
   );
 };
