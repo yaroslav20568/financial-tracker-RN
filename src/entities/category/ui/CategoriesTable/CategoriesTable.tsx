@@ -167,7 +167,7 @@ export const CategoriesTable = ({ onEdit }: IProps) => {
         fetchFn={fetchCategories}
         columns={columns}
         rowOnPress={category => {
-          navigation.navigate('Category', { categoryId: category.id });
+          navigation.navigate('Subcategories', { categoryId: category.id });
         }}
       />
       {confirmModal}

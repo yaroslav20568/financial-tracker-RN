@@ -1,12 +1,11 @@
 import React, { ReactNode } from 'react';
 
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
   interpolate,
   runOnJS,
-  useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring
@@ -31,20 +30,6 @@ export const StackModalLayout = ({
   const navigation = useNavigation();
   const translateY = useSharedValue(0);
   const scrollDirection = useSharedValue(0);
-
-  const scrollHandler = useAnimatedScrollHandler({
-    onScroll: event => {
-      scrollDirection.value = withSpring(event.contentOffset.y > 0 ? 1 : -1);
-    },
-    onBeginDrag: event => {
-      if (event.contentOffset.y <= 0) {
-        scrollDirection.value = withSpring(-1);
-      }
-    },
-    onEndDrag: () => {
-      scrollDirection.value = withSpring(0);
-    }
-  });
 
   const panGesture = Gesture.Pan()
     .onUpdate(event => {
@@ -102,8 +87,7 @@ export const StackModalLayout = ({
           </View>
         </View>
       </GestureDetector>
-      <Animated.ScrollView
-        onScroll={scrollHandler}
+      <ScrollView
         scrollEventThrottle={16}
         contentContainerStyle={{
           paddingTop: paddingVertical,
@@ -112,7 +96,7 @@ export const StackModalLayout = ({
         }}
       >
         {children}
-      </Animated.ScrollView>
+      </ScrollView>
     </Animated.View>
   );
 };

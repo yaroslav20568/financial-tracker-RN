@@ -4,7 +4,7 @@ import { CategoriesScreen, SubcategoriesScreen } from '@/screens';
 
 export type TCategoriesStackParamList = {
   Categories: undefined;
-  Category: { categoryId: string };
+  Subcategories: { categoryId: string };
 };
 
 const CategoriesStack = createStackNavigator<TCategoriesStackParamList>();
@@ -21,7 +21,7 @@ export const CategoriesNavigatorStack = () => {
         }}
       >
         <CategoriesStack.Screen
-          name="Category"
+          name="Subcategories"
           component={SubcategoriesScreen}
         />
       </CategoriesStack.Group>
