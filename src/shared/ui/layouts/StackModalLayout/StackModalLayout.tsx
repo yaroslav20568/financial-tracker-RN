@@ -2,14 +2,11 @@ import React, { ReactNode } from 'react';
 
 import { View } from 'react-native';
 
-import {
-  GestureHandlerRootView,
-  ScrollView,
-  GestureDetector,
-  Gesture
-} from 'react-native-gesture-handler';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
+  interpolate,
   runOnJS,
+  useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring
@@ -32,14 +29,31 @@ export const StackModalLayout = ({
 }: IProps) => {
   const s = useStyles();
   const navigation = useNavigation();
-
   const translateY = useSharedValue(0);
+  const scrollDirection = useSharedValue(0);
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: event => {
+      scrollDirection.value = withSpring(event.contentOffset.y > 0 ? 1 : -1);
+    },
+    onBeginDrag: event => {
+      if (event.contentOffset.y <= 0) {
+        scrollDirection.value = withSpring(-1);
+      }
+    },
+    onEndDrag: () => {
+      scrollDirection.value = withSpring(0);
+    }
+  });
 
   const panGesture = Gesture.Pan()
     .onUpdate(event => {
       translateY.value = Math.max(0, event.translationY);
+      scrollDirection.value = -1;
     })
     .onEnd(event => {
+      scrollDirection.value = withSpring(0);
+
       if (event.translationY > 150) {
         translateY.value = withSpring(1000, { damping: 50 });
         runOnJS(navigation.goBack)();
@@ -48,28 +62,57 @@ export const StackModalLayout = ({
       }
     });
 
-  const animatedStyle = useAnimatedStyle(() => ({
+  const animatedContainerStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: translateY.value }]
   }));
 
+  const leftHandleStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        rotate: `${interpolate(
+          scrollDirection.value,
+          [-1, 0, 1],
+          [10, 0, -10]
+        )}deg`
+      }
+    ],
+    transformOrigin: 'right'
+  }));
+
+  const rightHandleStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        rotate: `${interpolate(
+          scrollDirection.value,
+          [-1, 0, 1],
+          [-10, 0, 10]
+        )}deg`
+      }
+    ],
+    transformOrigin: 'left'
+  }));
+
   return (
-    <GestureHandlerRootView>
-      <Animated.View style={[s.container, animatedStyle]}>
-        <GestureDetector gesture={panGesture}>
-          <View style={s.gestureZone}>
-            <View style={s.handle} />
+    <Animated.View style={[s.container, animatedContainerStyle]}>
+      <GestureDetector gesture={panGesture}>
+        <View style={s.gestureZone}>
+          <View style={s.handleWrapper}>
+            <Animated.View style={[s.handle, leftHandleStyle]} />
+            <Animated.View style={[s.handle, rightHandleStyle]} />
           </View>
-        </GestureDetector>
-        <ScrollView
-          contentContainerStyle={{
-            paddingTop: paddingVertical,
-            paddingBottom: paddingVertical + 10,
-            paddingHorizontal
-          }}
-        >
-          {children}
-        </ScrollView>
-      </Animated.View>
-    </GestureHandlerRootView>
+        </View>
+      </GestureDetector>
+      <Animated.ScrollView
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        contentContainerStyle={{
+          paddingTop: paddingVertical,
+          paddingBottom: paddingVertical + 10,
+          paddingHorizontal
+        }}
+      >
+        {children}
+      </Animated.ScrollView>
+    </Animated.View>
   );
 };

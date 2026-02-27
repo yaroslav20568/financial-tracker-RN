@@ -13,16 +13,19 @@ export const useStyles = () => {
         overflow: 'hidden'
       },
       gestureZone: {
-        height: 50,
+        height: 40,
         backgroundColor: colors.white,
         alignItems: 'center',
         justifyContent: 'center'
       },
+      handleWrapper: {
+        flexDirection: 'row'
+      },
       handle: {
-        width: 40,
-        height: 5,
-        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        borderRadius: 3
+        width: 20,
+        height: 4,
+        backgroundColor: colors.gray,
+        borderRadius: 2
       }
     };
   });

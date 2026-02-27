@@ -2,6 +2,7 @@ import React from 'react';
 
 import { StatusBar } from 'react-native';
 
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
@@ -13,15 +14,17 @@ import '@/entities/session/api/interceptors';
 
 const App = () => {
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle="dark-content" />
-      <TanstackProvider>
-        <AuthProvider>
-          <NavigationProvider />
-        </AuthProvider>
-      </TanstackProvider>
-      <Toast config={toastConfig} />
-    </SafeAreaProvider>
+    <GestureHandlerRootView>
+      <SafeAreaProvider>
+        <StatusBar barStyle="dark-content" />
+        <TanstackProvider>
+          <AuthProvider>
+            <NavigationProvider />
+          </AuthProvider>
+        </TanstackProvider>
+        <Toast config={toastConfig} />
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 };
 
