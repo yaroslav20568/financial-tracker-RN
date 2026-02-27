@@ -34,21 +34,16 @@ export const AccountProfile = () => {
   }
 
   return (
-    <BorderLayout
-      header={<AccountHeader id={data?.id} name={data?.name} />}
-      content={
-        <>
-          <AccountToolbar
-            isShowEditForm={isShowEditForm}
-            showEditForm={showEditForm}
-          />
-          {!isShowEditForm ? (
-            <AccountDetails {...data} />
-          ) : (
-            <EditAccountForm account={data} closeEditForm={closeEditForm} />
-          )}
-        </>
-      }
-    />
+    <BorderLayout header={<AccountHeader id={data?.id} name={data?.name} />}>
+      <AccountToolbar
+        isShowEditForm={isShowEditForm}
+        showEditForm={showEditForm}
+      />
+      {!isShowEditForm ? (
+        <AccountDetails {...data} />
+      ) : (
+        <EditAccountForm account={data} closeEditForm={closeEditForm} />
+      )}
+    </BorderLayout>
   );
 };

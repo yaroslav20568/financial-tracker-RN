@@ -6,16 +6,16 @@ import { useStyles } from './styles';
 
 interface IProps {
   header?: ReactNode;
-  content: ReactNode;
+  children: ReactNode;
 }
 
-export const BorderLayout = ({ header, content }: IProps) => {
+export const BorderLayout = ({ header, children }: IProps) => {
   const s = useStyles();
 
   return (
     <View>
       {header && <View style={s.header}>{header}</View>}
-      <View style={s.content(!!header)}>{content}</View>
+      <View style={s.content(!!header)}>{children}</View>
     </View>
   );
 };
