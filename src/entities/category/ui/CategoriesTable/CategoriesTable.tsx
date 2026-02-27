@@ -2,6 +2,10 @@ import React, { useCallback, useMemo, useState } from 'react';
 
 import { Text } from 'react-native';
 
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
+
+import { TCategoriesStackParamList } from '@/app';
 import { categoryApi, useDeleteCategory } from '@/entities/category/api';
 import { ICategory } from '@/entities/category/model';
 import {
@@ -30,6 +34,8 @@ export const CategoriesTable = ({ onEdit }: IProps) => {
     null
   );
   const { mutateAsync: deleteCategoryMutate, isPending } = useDeleteCategory();
+  const navigation =
+    useNavigation<DrawerNavigationProp<TCategoriesStackParamList>>();
 
   const [confirmModal, openConfirmModal] = useConfirmModal({
     title: 'Delete Category',
@@ -86,13 +92,7 @@ export const CategoriesTable = ({ onEdit }: IProps) => {
         width: 150,
         render: item => (
           <IconCell
-            icon={
-              <Icon
-                family="fontAwesome6"
-                name="money-bill-1-wave"
-                color={colors.blue}
-              />
-            }
+            icon={<Icon family="entypo" name="layers" color={colors.blue} />}
             title={item.subcategories.length || 0}
           />
         )
@@ -166,6 +166,9 @@ export const CategoriesTable = ({ onEdit }: IProps) => {
         queryKey={queryKey}
         fetchFn={fetchCategories}
         columns={columns}
+        rowOnPress={category => {
+          navigation.navigate('Category', { categoryId: category.id });
+        }}
       />
       {confirmModal}
     </>

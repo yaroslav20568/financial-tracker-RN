@@ -1,22 +1,33 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import { withMemo } from '@/shared/lib';
 import { ITableColumn } from '@/shared/ui/InfiniteTable';
 
 import { useStyles } from './styles';
 
-interface IProps<T> {
+export interface ITableRowProps<T> {
   item: T;
   columns: Array<ITableColumn<T>>;
+  onPress?: (item: T) => void;
 }
 
-const TableRowComponent = <T,>({ item, columns }: IProps<T>) => {
+const TableRowComponent = <T,>({
+  item,
+  columns,
+  onPress
+}: ITableRowProps<T>) => {
   const s = useStyles();
 
+  const handleOnPress = () => onPress?.(item);
+
   return (
-    <View style={s.row}>
+    <TouchableOpacity
+      onPress={handleOnPress}
+      activeOpacity={onPress ? 0.5 : 1}
+      style={s.row}
+    >
       {columns.map(col => (
         <View key={String(col.key)} style={[s.column, { width: col.width }]}>
           {col.render ? (
@@ -28,7 +39,7 @@ const TableRowComponent = <T,>({ item, columns }: IProps<T>) => {
           )}
         </View>
       ))}
-    </View>
+    </TouchableOpacity>
   );
 };
 

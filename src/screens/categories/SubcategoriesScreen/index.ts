@@ -1,2 +1,1 @@
-export * from './CategoriesScreen';
 export * from './SubcategoriesScreen';

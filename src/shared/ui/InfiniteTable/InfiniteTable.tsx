@@ -8,7 +8,7 @@ import { withMemo } from '@/shared/lib';
 import { CenterLayout, EmptyData, ErrorData, Loader } from '@/shared/ui';
 
 import { useStyles } from './styles';
-import { TableHeader, TableRow } from './ui';
+import { ITableRowProps, TableHeader, TableRow } from './ui';
 
 export interface ITableColumn<T> {
   key: keyof T | string;
@@ -20,17 +20,19 @@ export interface ITableColumn<T> {
 interface IProps<T> {
   queryKey: Array<unknown>;
   fetchFn: (context: {
-    pageParam?: any;
+    pageParam?: number;
   }) => Promise<{ data: Array<T>; nextStart: number | undefined }>;
   columns: Array<ITableColumn<T>>;
   initialPageParam?: number;
+  rowOnPress?: ITableRowProps<T>['onPress'];
 }
 
 const InfiniteTableComponent = <T extends Record<string, any>>({
   queryKey,
   fetchFn,
   columns,
-  initialPageParam = 0
+  initialPageParam = 0,
+  rowOnPress
 }: IProps<T>) => {
   const s = useStyles();
 
@@ -65,8 +67,10 @@ const InfiniteTableComponent = <T extends Record<string, any>>({
   }, [columns]);
 
   const renderItem: ListRenderItem<T> = useCallback(
-    ({ item }) => <TableRow item={item} columns={columns} />,
-    [columns]
+    ({ item }) => (
+      <TableRow item={item} columns={columns} onPress={rowOnPress} />
+    ),
+    [columns, rowOnPress]
   );
 
   const keyExtractor = useCallback((item: T, index: number) => {

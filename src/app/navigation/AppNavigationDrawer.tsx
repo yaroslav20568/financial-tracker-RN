@@ -10,11 +10,12 @@ import {
   DashboardScreen,
   MyTransactionsScreen,
   AccountScreen,
-  CategoriesScreen,
   SourcesScreen
 } from '@/screens';
 import { Icon, useTheme } from '@/shared';
 import { CustomDrawer, CustomHeaderDrawer, DrawerIconWrapper } from '@/widgets';
+
+import { CategoriesNavigatorStack } from './stacks';
 
 export type TAppDrawerParamList = {
   Dashboard: undefined;
@@ -49,7 +50,7 @@ const drawerItems = [
   {
     name: 'Categories',
     label: 'Categories',
-    component: CategoriesScreen,
+    component: CategoriesNavigatorStack,
     iconFamily: 'fontAwesome6',
     iconName: 'layer-group'
   },
