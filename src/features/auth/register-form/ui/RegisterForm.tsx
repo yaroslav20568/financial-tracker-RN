@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
-import { useRegisterMutation } from '@/entities';
+import { useRegister } from '@/entities';
 import {
   registerSchema,
   TRegisterForm
@@ -23,7 +23,7 @@ const registerDefaultValues: TRegisterForm = {
 
 export const RegisterForm = () => {
   const s = useStyles();
-  const { mutate: registerMutate, isPending } = useRegisterMutation();
+  const { mutate: registerMutate, isPending } = useRegister();
 
   const { control, handleSubmit } = useForm<TRegisterForm>({
     resolver: yupResolver(registerSchema),

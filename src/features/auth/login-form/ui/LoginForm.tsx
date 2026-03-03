@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
-import { useLoginMutation } from '@/entities';
+import { useLogin } from '@/entities';
 import { loginSchema, TLoginForm } from '@/features/auth/login-form/model';
 import { Button, FormInput } from '@/shared';
 
@@ -18,7 +18,7 @@ const loginDefaultValues: TLoginForm = {
 
 export const LoginForm = () => {
   const s = useStyles();
-  const { mutate: loginMutate, isPending } = useLoginMutation();
+  const { mutate: loginMutate, isPending } = useLogin();
 
   const { control, handleSubmit } = useForm<TLoginForm>({
     resolver: yupResolver(loginSchema),

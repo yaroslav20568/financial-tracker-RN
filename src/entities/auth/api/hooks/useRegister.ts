@@ -5,11 +5,11 @@ import { useMutation } from '@tanstack/react-query';
 import { authApi } from '@/entities/auth/api';
 import { useAuth } from '@/entities/session';
 
-export const useLoginMutation = () => {
+export const useRegister = () => {
   const { setToken } = useAuth();
 
   return useMutation({
-    mutationFn: authApi.login,
+    mutationFn: authApi.register,
     onSuccess: async tokens => {
       if (tokens.accessToken && tokens.refreshToken) {
         await setToken(tokens);
@@ -17,14 +17,14 @@ export const useLoginMutation = () => {
 
       Toast.show({
         type: 'success',
-        text1: 'Login Success',
-        text2: 'You are logged in'
+        text1: 'Register Success',
+        text2: 'You are registered'
       });
     },
     onError: error => {
       Toast.show({
         type: 'error',
-        text1: 'Login Error',
+        text1: 'Register Error',
         text2: error.message
       });
     }
