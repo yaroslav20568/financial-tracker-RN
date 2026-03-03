@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { CategoriesScreen, SubcategoriesScreen } from '@/screens';
 
 export type TCategoriesStackParamList = {
-  Categories: undefined;
+  CategoriesMain: undefined;
   Subcategories: { categoryId: string };
 };
 
@@ -12,7 +12,10 @@ const CategoriesStack = createStackNavigator<TCategoriesStackParamList>();
 export const CategoriesNavigatorStack = () => {
   return (
     <CategoriesStack.Navigator screenOptions={{ headerShown: false }}>
-      <CategoriesStack.Screen name="Categories" component={CategoriesScreen} />
+      <CategoriesStack.Screen
+        name="CategoriesMain"
+        component={CategoriesScreen}
+      />
       <CategoriesStack.Group
         screenOptions={{
           presentation: 'transparentModal',

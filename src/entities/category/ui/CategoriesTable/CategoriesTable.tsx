@@ -160,15 +160,21 @@ export const CategoriesTable = ({ onEdit }: IProps) => {
     };
   }, []);
 
+  const handleRow = useCallback(
+    (category: ICategory) => {
+      navigation.navigate('Subcategories', { categoryId: category.id });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
   return (
     <>
       <InfiniteTable<ICategory>
         queryKey={queryKey}
         fetchFn={fetchCategories}
         columns={columns}
-        rowOnPress={category => {
-          navigation.navigate('Subcategories', { categoryId: category.id });
-        }}
+        rowOnPress={handleRow}
       />
       {confirmModal}
     </>
