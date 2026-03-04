@@ -23,11 +23,11 @@ export const SubcategoryItem = ({ name, created_at }: IProps) => {
   const actions: Array<ITableAction> = useMemo(() => {
     return [
       {
-        iconProps: { family: 'feather', name: 'edit' },
+        iconData: { family: 'feather', name: 'edit' },
         onPress: () => {}
       },
       {
-        iconProps: {
+        iconData: {
           family: 'materialIcons',
           name: 'delete-outline',
           color: colors.red

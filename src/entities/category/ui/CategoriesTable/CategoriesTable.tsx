@@ -47,11 +47,11 @@ export const CategoriesTable = ({ onEdit }: IProps) => {
 
   const getRowActions = (category: ICategory): Array<ITableAction> => [
     {
-      iconProps: { family: 'feather', name: 'edit' },
+      iconData: { family: 'feather', name: 'edit' },
       onPress: () => onEdit(category)
     },
     {
-      iconProps: {
+      iconData: {
         family: 'materialIcons',
         name: 'delete-outline',
         color: colors.red

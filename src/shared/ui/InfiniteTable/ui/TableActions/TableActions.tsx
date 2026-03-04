@@ -7,7 +7,7 @@ import { IconButton, IIconProps } from '@/shared/ui';
 import { useStyles } from './styles';
 
 export interface ITableAction {
-  iconProps: Omit<IIconProps, 'style'>;
+  iconData: Omit<IIconProps, 'style'>;
   onPress: () => void;
 }
 
@@ -21,11 +21,7 @@ export const TableActions = ({ actions }: IProps) => {
   return (
     <View style={s.container}>
       {actions.map((action, index) => (
-        <IconButton
-          key={index}
-          {...action.iconProps}
-          onPress={action.onPress}
-        />
+        <IconButton key={index} {...action.iconData} onPress={action.onPress} />
       ))}
     </View>
   );

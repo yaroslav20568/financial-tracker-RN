@@ -44,11 +44,11 @@ export const SourcesTable = ({ filters, onEdit }: IProps) => {
 
   const getRowActions = (source: ISource): Array<ITableAction> => [
     {
-      iconProps: { family: 'feather', name: 'edit' },
+      iconData: { family: 'feather', name: 'edit' },
       onPress: () => onEdit(source)
     },
     {
-      iconProps: {
+      iconData: {
         family: 'materialIcons',
         name: 'delete-outline',
         color: colors.red
