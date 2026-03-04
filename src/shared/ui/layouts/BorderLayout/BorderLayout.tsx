@@ -2,23 +2,23 @@ import React, { ReactNode } from 'react';
 
 import { View } from 'react-native';
 
+import { TPadding } from '@/shared/model';
+
 import { useStyles } from './styles';
 
 interface IProps {
   header?: ReactNode;
   children: ReactNode;
-  paddingVertical?: number;
-  paddingHorizontal?: number;
+  padding?: TPadding;
 }
 
 export const BorderLayout = ({
   header,
   children,
-  paddingVertical = 20,
-  paddingHorizontal = 20
+  padding = [20, 20]
 }: IProps) => {
   const s = useStyles();
-  const style = { paddingVertical, paddingHorizontal };
+  const style = { paddingVertical: padding[0], paddingHorizontal: padding[1] };
 
   return (
     <View style={s.container}>

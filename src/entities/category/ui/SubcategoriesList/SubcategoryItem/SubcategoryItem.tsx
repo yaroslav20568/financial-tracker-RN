@@ -39,7 +39,7 @@ export const SubcategoryItem = ({ name, created_at }: IProps) => {
   }, []);
 
   return (
-    <BorderLayout paddingVertical={10} paddingHorizontal={15}>
+    <BorderLayout padding={[10, 15]}>
       <View style={s.container}>
         <View style={s.textsWrapper}>
           <View style={s.iconWrapper}>

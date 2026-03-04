@@ -6,12 +6,13 @@ import { Edges, SafeAreaView } from 'react-native-safe-area-context';
 
 import { useHeaderHeight } from '@react-navigation/elements';
 
+import { TPadding } from '@/shared/model';
+
 import { useStyles } from './styles';
 
 export interface IScreenLayoutProps {
   children: ReactNode;
-  paddingVertical?: number;
-  paddingHorizontal?: number;
+  padding?: TPadding;
   isCenter?: boolean;
   isScrollable?: boolean;
   isBottomSpace?: boolean;
@@ -19,8 +20,7 @@ export interface IScreenLayoutProps {
 
 export const ScreenLayout = ({
   children,
-  paddingVertical = 15,
-  paddingHorizontal = 20,
+  padding = [15, 20],
   isScrollable = true,
   isCenter = false,
   isBottomSpace = false
@@ -37,9 +37,9 @@ export const ScreenLayout = ({
   const containerStyle = [
     s.scrollContainer(isCenter),
     {
-      paddingVertical,
-      paddingHorizontal,
-      paddingBottom: paddingVertical + bottomSpace
+      paddingVertical: padding[0],
+      paddingHorizontal: padding[1],
+      paddingBottom: padding[0] + bottomSpace
     }
   ];
 
