@@ -8,12 +8,13 @@ import { useHeaderHeight } from '@react-navigation/elements';
 
 import { useStyles } from './styles';
 
-interface IProps {
+export interface IScreenLayoutProps {
   children: ReactNode;
   paddingVertical?: number;
   paddingHorizontal?: number;
   isCenter?: boolean;
   isScrollable?: boolean;
+  isBottomSpace?: boolean;
 }
 
 export const ScreenLayout = ({
@@ -21,10 +22,12 @@ export const ScreenLayout = ({
   paddingVertical = 15,
   paddingHorizontal = 20,
   isScrollable = true,
-  isCenter = false
-}: IProps) => {
+  isCenter = false,
+  isBottomSpace = false
+}: IScreenLayoutProps) => {
   const s = useStyles();
   const headerHeight = useHeaderHeight();
+  const bottomSpace = isBottomSpace ? 10 : 0;
 
   const edges: Edges =
     headerHeight > 0
@@ -33,7 +36,11 @@ export const ScreenLayout = ({
 
   const containerStyle = [
     s.scrollContainer(isCenter),
-    { paddingVertical, paddingHorizontal }
+    {
+      paddingVertical,
+      paddingHorizontal,
+      paddingBottom: paddingVertical + bottomSpace
+    }
   ];
 
   return (

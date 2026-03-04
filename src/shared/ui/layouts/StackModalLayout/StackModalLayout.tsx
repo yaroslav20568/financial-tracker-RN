@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -13,21 +13,13 @@ import Animated, {
 
 import { useNavigation } from '@react-navigation/native';
 
+import { IScreenLayoutProps, ScreenLayout } from '@/shared/ui';
+
 import { useStyles } from './styles';
 
-interface IProps {
-  children: ReactNode;
-  paddingVertical?: number;
-  paddingHorizontal?: number;
-  isScrollable?: boolean;
-}
+interface IProps extends IScreenLayoutProps {}
 
-export const StackModalLayout = ({
-  children,
-  paddingVertical = 15,
-  paddingHorizontal = 20,
-  isScrollable = true
-}: IProps) => {
+export const StackModalLayout = ({ children, ...props }: IProps) => {
   const s = useStyles();
   const navigation = useNavigation();
   const translateY = useSharedValue(0);
@@ -79,11 +71,12 @@ export const StackModalLayout = ({
     transformOrigin: 'left'
   }));
 
-  const contentWrapperStyle = {
-    paddingTop: paddingVertical,
-    paddingBottom: paddingVertical + 10,
-    paddingHorizontal
-  };
+  // const contentWrapperStyle = {
+  //   flex: 1,
+  //   paddingTop: paddingVertical,
+  //   paddingBottom: paddingVertical + 10,
+  //   paddingHorizontal
+  // };
 
   return (
     <Animated.View style={[s.container, animatedContainerStyle]}>
@@ -95,13 +88,14 @@ export const StackModalLayout = ({
           </View>
         </View>
       </GestureDetector>
-      {isScrollable ? (
+      {/* {isScrollable ? (
         <ScrollView contentContainerStyle={contentWrapperStyle}>
           {children}
         </ScrollView>
       ) : (
         <View style={contentWrapperStyle}>{children}</View>
-      )}
+      )} */}
+      <ScreenLayout {...props}>{children}</ScreenLayout>
     </Animated.View>
   );
 };

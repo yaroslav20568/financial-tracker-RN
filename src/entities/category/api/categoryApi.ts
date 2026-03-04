@@ -1,4 +1,4 @@
-import { ICategory } from '@/entities/category/model';
+import { ICategory, ISubcategory } from '@/entities/category/model';
 import { TCategoryForm } from '@/features/category/manage-category-form/model';
 import { axiosInstance, IDataResponse, IParamsRequest } from '@/shared';
 
@@ -41,6 +41,19 @@ class CategoryApi {
 
   deleteCategory = async (id: ICategory['id']): Promise<void> => {
     await axiosInstance.delete<void>(`/category/${id}`);
+  };
+
+  getSubcategories = async (
+    categoryId: ICategory['id'],
+    params?: IParamsRequest
+  ): Promise<IDataResponse<Omit<ISubcategory, 'transaction_count'>>> => {
+    const response = await axiosInstance.get<
+      IDataResponse<Omit<ISubcategory, 'transaction_count'>>
+    >(`/subcategory/category/${categoryId}`, {
+      params
+    });
+
+    return response.data;
   };
 }
 

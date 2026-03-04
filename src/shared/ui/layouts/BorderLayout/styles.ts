@@ -8,13 +8,13 @@ export const useStyles = () => {
 
     const generalStyle = {
       backgroundColor: colors.white,
-      padding: 20,
       borderColor: colors.borderGray,
       borderWidth: 1,
       borderRadius: 10
     } satisfies ViewStyle;
 
     return {
+      container: { flex: 1 },
       header: {
         ...generalStyle,
         borderBottomWidth: 0,
@@ -23,6 +23,7 @@ export const useStyles = () => {
       },
       content: (isHeader: boolean) => ({
         ...generalStyle,
+        flex: 1,
         borderTopLeftRadius: isHeader ? 0 : 10,
         borderTopRightRadius: isHeader ? 0 : 10
       })

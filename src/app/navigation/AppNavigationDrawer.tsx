@@ -69,7 +69,7 @@ const renderDrawerContent = (props: DrawerContentComponentProps) => (
   <CustomDrawer {...props} />
 );
 
-const renderDrawerHeder = (props: DrawerHeaderProps) => (
+const renderDrawerHeader = (props: DrawerHeaderProps) => (
   <CustomHeaderDrawer {...props} />
 );
 
@@ -80,7 +80,7 @@ export const AppNavigationDrawer = () => {
     <Drawer.Navigator
       drawerContent={renderDrawerContent}
       screenOptions={{
-        header: renderDrawerHeder,
+        header: renderDrawerHeader,
         drawerActiveBackgroundColor: colors.blue,
         drawerActiveTintColor: colors.white,
         drawerStyle: {

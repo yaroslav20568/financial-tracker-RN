@@ -162,7 +162,10 @@ export const CategoriesTable = ({ onEdit }: IProps) => {
 
   const handleRow = useCallback(
     (category: ICategory) => {
-      navigation.navigate('Subcategories', { categoryId: category.id });
+      navigation.navigate('Subcategories', {
+        categoryId: category.id,
+        categoryName: category.name
+      });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []

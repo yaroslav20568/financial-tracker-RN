@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { HeadScreenLayout, ScreenLayout, useRefreshOnFocus } from '@/shared';
+import { HeadScreenLayout, ScreenLayout } from '@/shared';
 import { AccountProfile } from '@/widgets';
 
 export const AccountScreen = () => {
-  useRefreshOnFocus();
-
   return (
     <ScreenLayout>
       <HeadScreenLayout

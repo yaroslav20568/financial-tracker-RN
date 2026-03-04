@@ -1,6 +1,6 @@
 import { IBaseModel } from '@/shared';
 
-interface ISubcategory extends IBaseModel {
+export interface ISubcategory extends IBaseModel {
   name: string;
   transaction_count: number;
 }

@@ -1,10 +1,14 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { ICategory } from '@/entities';
 import { CategoriesScreen, SubcategoriesScreen } from '@/screens';
 
 export type TCategoriesStackParamList = {
   CategoriesMain: undefined;
-  Subcategories: { categoryId: string };
+  Subcategories: {
+    categoryId: ICategory['id'];
+    categoryName: ICategory['name'];
+  };
 };
 
 const CategoriesStack = createStackNavigator<TCategoriesStackParamList>();
