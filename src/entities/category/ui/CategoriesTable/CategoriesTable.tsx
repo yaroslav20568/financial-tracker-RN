@@ -2,10 +2,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 
 import { Text } from 'react-native';
 
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { useNavigation } from '@react-navigation/native';
-
-import { TCategoriesStackParamList } from '@/app';
 import { categoryApi, useDeleteCategory } from '@/entities/category/api';
 import { ICategory } from '@/entities/category/model';
 import {
@@ -17,7 +13,8 @@ import {
   InfiniteTable,
   TableActions,
   useConfirmModal,
-  useTheme
+  useTheme,
+  useTypedNavigation
 } from '@/shared';
 import { useStyles } from '@/shared/ui/InfiniteTable/ui/TableRow/styles';
 
@@ -34,8 +31,7 @@ export const CategoriesTable = ({ onEdit }: IProps) => {
     null
   );
   const { mutateAsync: deleteCategoryMutate, isPending } = useDeleteCategory();
-  const navigation =
-    useNavigation<DrawerNavigationProp<TCategoriesStackParamList>>();
+  const navigation = useTypedNavigation();
 
   const [confirmModal, openConfirmModal] = useConfirmModal({
     title: 'Delete Category',

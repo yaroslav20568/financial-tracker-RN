@@ -2,19 +2,19 @@ import React from 'react';
 
 import { Text, View } from 'react-native';
 
-import { ICategory } from '@/entities/category/model';
-import { Button, Icon, useTheme } from '@/shared';
+import { Button, Icon, useTheme, useTypedRoute } from '@/shared';
 
 import { useStyles } from './styles';
 
 interface IProps {
-  categoryName: ICategory['name'];
   onPress: () => void;
 }
 
-export const SubcategoriesHeader = ({ categoryName, onPress }: IProps) => {
+export const SubcategoriesHeader = ({ onPress }: IProps) => {
   const s = useStyles();
   const { colors } = useTheme();
+  const { params } = useTypedRoute<'Subcategories'>();
+  const { categoryName } = params;
 
   return (
     <View style={s.container}>

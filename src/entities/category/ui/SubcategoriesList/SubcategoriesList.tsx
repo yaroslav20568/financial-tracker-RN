@@ -3,19 +3,22 @@ import React, { useCallback } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
 
 import { useGetSubcategories } from '@/entities/category/api';
-import { ICategory, ISubcategory } from '@/entities/category/model';
-import { CenterLayout, EmptyData, ErrorData, Loader } from '@/shared';
+import { ISubcategory } from '@/entities/category/model';
+import {
+  CenterLayout,
+  EmptyData,
+  ErrorData,
+  Loader,
+  useTypedRoute
+} from '@/shared';
 
 import { useStyles } from './styles';
 import { SubcategoryItem } from './SubcategoryItem';
 
-interface IProps {
-  categoryId: ICategory['id'];
-  categoryName: ICategory['name'];
-}
-
-export const SubcategoriesList = ({ categoryId, categoryName }: IProps) => {
+export const SubcategoriesList = () => {
   const s = useStyles();
+  const { params } = useTypedRoute<'Subcategories'>();
+  const { categoryId, categoryName } = params;
   const { data, isLoading, isError, error } = useGetSubcategories(categoryId);
   const subcategories = data?.content;
 

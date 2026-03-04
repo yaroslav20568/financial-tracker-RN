@@ -11,8 +11,7 @@ import Animated, {
   withSpring
 } from 'react-native-reanimated';
 
-import { useNavigation } from '@react-navigation/native';
-
+import { useTypedNavigation } from '@/shared/lib';
 import { IScreenLayoutProps, ScreenLayout } from '@/shared/ui';
 
 import { useStyles } from './styles';
@@ -21,7 +20,7 @@ interface IProps extends IScreenLayoutProps {}
 
 export const StackModalLayout = ({ children, ...props }: IProps) => {
   const s = useStyles();
-  const navigation = useNavigation();
+  const navigation = useTypedNavigation();
   const translateY = useSharedValue(0);
   const scrollDirection = useSharedValue(0);
 
