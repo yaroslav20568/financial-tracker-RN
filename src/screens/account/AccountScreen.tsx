@@ -13,12 +13,15 @@ import {
   ErrorData,
   HeadScreenLayout,
   Loader,
-  ScreenLayout
+  ScreenLayout,
+  useRefreshOnFocus
 } from '@/shared';
 
 export const AccountScreen = () => {
   const [isShowEditForm, setIsShowEditForm] = useState(false);
   const { data, isLoading, isError, error } = useGetAccount();
+
+  useRefreshOnFocus(['account']);
 
   const showEditForm = () => {
     setIsShowEditForm(true);

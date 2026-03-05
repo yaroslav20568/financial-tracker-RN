@@ -9,7 +9,8 @@ import {
   Icon,
   ScreenLayout,
   useTheme,
-  useModal
+  useModal,
+  useRefreshOnFocus
 } from '@/shared';
 
 export const CategoriesScreen = () => {
@@ -18,6 +19,8 @@ export const CategoriesScreen = () => {
     null
   );
   const [isOpen, openModal, closeModal] = useModal();
+
+  useRefreshOnFocus(['categories']);
 
   const handleCreate = () => {
     setSelectedCategory(null);

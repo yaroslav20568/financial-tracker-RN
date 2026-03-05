@@ -10,7 +10,8 @@ import {
   Icon,
   ScreenLayout,
   useTheme,
-  useModal
+  useModal,
+  useRefreshOnFocus
 } from '@/shared';
 
 export const SourcesScreen = () => {
@@ -24,6 +25,8 @@ export const SourcesScreen = () => {
   });
   const deferredFilters = useDeferredValue(filters);
   const [isOpen, openModal, closeModal] = useModal();
+
+  useRefreshOnFocus(['sources']);
 
   const handleCreate = () => {
     setSelectedSource(null);
