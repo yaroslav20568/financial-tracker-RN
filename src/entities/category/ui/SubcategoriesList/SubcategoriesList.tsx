@@ -42,15 +42,6 @@ export const SubcategoriesList = () => {
     return <ErrorData title={error.message} />;
   }
 
-  if (!subcategories?.length && !isError) {
-    return (
-      <EmptyData
-        title={`Category ${categoryName} has no subcategories`}
-        text="No data available. Please create a new record to see it here."
-      />
-    );
-  }
-
   return (
     <FlatList
       data={subcategories}
