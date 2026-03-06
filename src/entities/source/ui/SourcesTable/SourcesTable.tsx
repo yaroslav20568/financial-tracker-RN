@@ -5,6 +5,7 @@ import { Text } from 'react-native';
 import { sourceApi, useDeleteSource } from '@/entities/source/api';
 import { ISource } from '@/entities/source/model';
 import {
+  QUERY_KEYS,
   DateUtils,
   IParamsRequest,
   ITableAction,
@@ -26,7 +27,7 @@ interface IProps {
 export const SourcesTable = ({ filters, onEdit }: IProps) => {
   const tableRowS = useStyles();
   const { colors } = useTheme();
-  const queryKey = useMemo(() => ['sources', filters], [filters]);
+  const queryKey = useMemo(() => [QUERY_KEYS.SOURCES, filters], [filters]);
   const [selectedSource, setSelectedSource] = useState<ISource | null>(null);
   const { mutateAsync: deleteSourceMutate, isPending } = useDeleteSource();
 

@@ -3,12 +3,13 @@ import Toast from 'react-native-toast-message';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { accountApi } from '@/entities/account/api';
+import { MUTATION_KEYS, QUERY_KEYS } from '@/shared';
 
 export const useEditAccount = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['editAccount'],
+    mutationKey: [MUTATION_KEYS.ACCOUNT.EDIT],
     mutationFn: accountApi.editAccount,
     onSuccess: () => {
       Toast.show({
@@ -17,7 +18,7 @@ export const useEditAccount = () => {
         text2: 'Your changes have been saved'
       });
 
-      queryClient.invalidateQueries({ queryKey: ['account'] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ACCOUNT] });
     },
     onError: error => {
       Toast.show({

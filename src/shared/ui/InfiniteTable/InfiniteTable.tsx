@@ -2,7 +2,11 @@ import React, { ReactNode, useCallback, useMemo } from 'react';
 
 import { View, ScrollView, FlatList, ListRenderItem } from 'react-native';
 
-import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
+import {
+  keepPreviousData,
+  QueryKey,
+  useInfiniteQuery
+} from '@tanstack/react-query';
 
 import { withMemo } from '@/shared/lib';
 import { CenterLayout, EmptyData, ErrorData, Loader } from '@/shared/ui';
@@ -18,7 +22,7 @@ export interface ITableColumn<T> {
 }
 
 interface IProps<T> {
-  queryKey: Array<unknown>;
+  queryKey: QueryKey;
   fetchFn: (context: {
     pageParam?: number;
   }) => Promise<{ data: Array<T>; nextStart: number | undefined }>;

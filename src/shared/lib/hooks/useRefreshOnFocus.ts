@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 
 import { useFocusEffect } from '@react-navigation/native';
+import { QueryKey, useQueryClient } from '@tanstack/react-query';
 
-import { queryClient } from '@/app';
+export const useRefreshOnFocus = (queryKey: QueryKey) => {
+  const queryClient = useQueryClient();
 
-export const useRefreshOnFocus = (queryKey: Array<string>) => {
   useFocusEffect(
     useCallback(() => {
       queryClient.invalidateQueries({
@@ -12,6 +13,6 @@ export const useRefreshOnFocus = (queryKey: Array<string>) => {
         type: 'active',
         stale: true
       });
-    }, [queryKey])
+    }, [queryClient, queryKey])
   );
 };

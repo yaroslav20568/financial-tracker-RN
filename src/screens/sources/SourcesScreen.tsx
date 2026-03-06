@@ -11,7 +11,8 @@ import {
   ScreenLayout,
   useTheme,
   useModal,
-  useRefreshOnFocus
+  useRefreshOnFocus,
+  QUERY_ARR_KEYS
 } from '@/shared';
 
 export const SourcesScreen = () => {
@@ -26,7 +27,7 @@ export const SourcesScreen = () => {
   const deferredFilters = useDeferredValue(filters);
   const [isOpen, openModal, closeModal] = useModal();
 
-  useRefreshOnFocus(['sources']);
+  useRefreshOnFocus(QUERY_ARR_KEYS.SOURCES);
 
   const handleCreate = () => {
     setSelectedSource(null);

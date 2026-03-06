@@ -13,6 +13,7 @@ import {
   ErrorData,
   HeadScreenLayout,
   Loader,
+  QUERY_ARR_KEYS,
   ScreenLayout,
   useRefreshOnFocus
 } from '@/shared';
@@ -21,7 +22,7 @@ export const AccountScreen = () => {
   const [isShowEditForm, setIsShowEditForm] = useState(false);
   const { data, isLoading, isError, error } = useGetAccount();
 
-  useRefreshOnFocus(['account']);
+  useRefreshOnFocus(QUERY_ARR_KEYS.ACCOUNT);
 
   const showEditForm = () => {
     setIsShowEditForm(true);

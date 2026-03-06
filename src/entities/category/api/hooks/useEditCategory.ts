@@ -4,12 +4,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { categoryApi } from '@/entities/category/api';
 import { TCategoryForm } from '@/features/category/manage-category-form/model';
+import { MUTATION_KEYS, QUERY_KEYS } from '@/shared';
 
 export const useEditCategory = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['editCategory'],
+    mutationKey: [MUTATION_KEYS.CATEGORY.EDIT],
     mutationFn: ({ id, data }: { id: string; data: TCategoryForm }) =>
       categoryApi.editCategory(id, data),
     onSuccess: () => {
@@ -19,7 +20,7 @@ export const useEditCategory = () => {
         text2: 'Your changes have been saved'
       });
 
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.CATEGORIES] });
     },
     onError: error => {
       Toast.show({

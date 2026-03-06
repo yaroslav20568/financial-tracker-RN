@@ -3,12 +3,13 @@ import Toast from 'react-native-toast-message';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { sourceApi } from '@/entities/source/api';
+import { MUTATION_KEYS, QUERY_KEYS } from '@/shared';
 
 export const useCreateSource = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['createSource'],
+    mutationKey: [MUTATION_KEYS.SOURCE.CREATE],
     mutationFn: sourceApi.createSource,
     onSuccess: () => {
       Toast.show({
@@ -17,7 +18,7 @@ export const useCreateSource = () => {
         text2: 'Your changes have been saved'
       });
 
-      queryClient.invalidateQueries({ queryKey: ['sources'] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.SOURCES] });
     },
     onError: error => {
       Toast.show({

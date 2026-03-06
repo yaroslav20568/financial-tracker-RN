@@ -10,7 +10,8 @@ import {
   ScreenLayout,
   useTheme,
   useModal,
-  useRefreshOnFocus
+  useRefreshOnFocus,
+  QUERY_ARR_KEYS
 } from '@/shared';
 
 export const CategoriesScreen = () => {
@@ -20,7 +21,7 @@ export const CategoriesScreen = () => {
   );
   const [isOpen, openModal, closeModal] = useModal();
 
-  useRefreshOnFocus(['categories']);
+  useRefreshOnFocus(QUERY_ARR_KEYS.CATEGORIES);
 
   const handleCreate = () => {
     setSelectedCategory(null);

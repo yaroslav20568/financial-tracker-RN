@@ -11,14 +11,13 @@ import {
   Icon,
   IconCell,
   InfiniteTable,
+  QUERY_ARR_KEYS,
   TableActions,
   useConfirmModal,
   useTheme,
   useTypedNavigation
 } from '@/shared';
 import { useStyles } from '@/shared/ui/InfiniteTable/ui/TableRow/styles';
-
-const queryKey = ['categories'];
 
 interface IProps {
   onEdit: (category: ICategory) => void;
@@ -170,7 +169,7 @@ export const CategoriesTable = ({ onEdit }: IProps) => {
   return (
     <>
       <InfiniteTable<ICategory>
-        queryKey={queryKey}
+        queryKey={QUERY_ARR_KEYS.CATEGORIES}
         fetchFn={fetchCategories}
         columns={columns}
         rowOnPress={handleRow}

@@ -3,12 +3,13 @@ import Toast from 'react-native-toast-message';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { categoryApi } from '@/entities/category/api';
+import { MUTATION_KEYS, QUERY_KEYS } from '@/shared';
 
 export const useDeleteCategory = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['deleteCategory'],
+    mutationKey: [MUTATION_KEYS.CATEGORY.DELETE],
     mutationFn: categoryApi.deleteCategory,
     onSuccess: () => {
       Toast.show({
@@ -17,7 +18,7 @@ export const useDeleteCategory = () => {
         text2: 'Your changes have been saved'
       });
 
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.CATEGORIES] });
     },
     onError: error => {
       Toast.show({

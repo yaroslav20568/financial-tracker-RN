@@ -4,12 +4,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { sourceApi } from '@/entities/source/api';
 import { TSourceForm } from '@/features/source/manage-source-form/model';
+import { MUTATION_KEYS, QUERY_KEYS } from '@/shared';
 
 export const useEditSource = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['editSource'],
+    mutationKey: [MUTATION_KEYS.SOURCE],
     mutationFn: ({ id, data }: { id: string; data: TSourceForm }) =>
       sourceApi.editSource(id, data),
     onSuccess: () => {
@@ -19,7 +20,7 @@ export const useEditSource = () => {
         text2: 'Your changes have been saved'
       });
 
-      queryClient.invalidateQueries({ queryKey: ['sources'] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.SOURCES] });
     },
     onError: error => {
       Toast.show({
