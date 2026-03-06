@@ -70,13 +70,6 @@ export const StackModalLayout = ({ children, ...props }: IProps) => {
     transformOrigin: 'left'
   }));
 
-  // const contentWrapperStyle = {
-  //   flex: 1,
-  //   paddingTop: paddingVertical,
-  //   paddingBottom: paddingVertical + 10,
-  //   paddingHorizontal
-  // };
-
   return (
     <Animated.View style={[s.container, animatedContainerStyle]}>
       <GestureDetector gesture={panGesture}>
@@ -87,13 +80,6 @@ export const StackModalLayout = ({ children, ...props }: IProps) => {
           </View>
         </View>
       </GestureDetector>
-      {/* {isScrollable ? (
-        <ScrollView contentContainerStyle={contentWrapperStyle}>
-          {children}
-        </ScrollView>
-      ) : (
-        <View style={contentWrapperStyle}>{children}</View>
-      )} */}
       <ScreenLayout {...props}>{children}</ScreenLayout>
     </Animated.View>
   );

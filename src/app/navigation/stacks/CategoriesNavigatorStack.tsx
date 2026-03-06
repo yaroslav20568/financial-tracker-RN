@@ -24,6 +24,7 @@ export const CategoriesNavigatorStack = () => {
         screenOptions={{
           presentation: 'transparentModal',
           gestureEnabled: false,
+          animation: 'reveal_from_bottom',
           cardStyle: { top: 10 }
         }}
       >

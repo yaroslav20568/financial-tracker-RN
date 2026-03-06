@@ -93,7 +93,8 @@ export const AppNavigationDrawer = () => {
           fontSize: 14,
           lineHeight: 18,
           fontFamily: fonts.interMedium
-        }
+        },
+        popToTopOnBlur: true
       }}
     >
       {drawerItems.map(screen => (
