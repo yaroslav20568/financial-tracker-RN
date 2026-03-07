@@ -20,6 +20,11 @@ export const MUTATION_KEYS = {
     EDIT: 'editCategory',
     DELETE: 'deleteCategory'
   },
+  SUBCATEGORY: {
+    CREATE: 'createSubcategory',
+    EDIT: 'editSubcategory',
+    DELETE: 'deleteSubcategory'
+  },
   SOURCE: {
     CREATE: 'createSource',
     EDIT: 'editSource',

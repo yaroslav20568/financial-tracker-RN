@@ -24,10 +24,10 @@ const App = () => {
             <AuthProvider>
               <NavigationProvider />
             </AuthProvider>
+            <PortalHost name={portalHostName} />
           </TanstackProvider>
-          <Toast config={toastConfig} />
-          <PortalHost name={portalHostName} />
         </SafeAreaProvider>
+        <Toast config={toastConfig} />
       </PortalProvider>
     </GestureHandlerRootView>
   );

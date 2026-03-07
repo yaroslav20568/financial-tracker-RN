@@ -9,7 +9,7 @@ import Animated, {
   withTiming
 } from 'react-native-reanimated';
 
-import { IconButton, useTheme } from '@/shared';
+import { IconButton, PortalLayout, useTheme } from '@/shared';
 
 import { useStyles } from './styles';
 
@@ -54,27 +54,29 @@ export const CustomModal = ({
   if (!shouldRender) return null;
 
   return (
-    <View style={s.overlay}>
-      <Pressable
-        style={[StyleSheet.absoluteFill, s.overlayTouch]}
-        onPress={onClose}
-      />
-      <Animated.View style={[s.container, animatedContainerStyle]}>
-        <View style={s.header}>
-          <View style={s.headerContent}>
-            {icon}
-            <Text style={s.title}>{title}</Text>
+    <PortalLayout>
+      <View style={s.overlay}>
+        <Pressable
+          style={[StyleSheet.absoluteFill, s.overlayTouch]}
+          onPress={onClose}
+        />
+        <Animated.View style={[s.container, animatedContainerStyle]}>
+          <View style={s.header}>
+            <View style={s.headerContent}>
+              {icon}
+              <Text style={s.title}>{title}</Text>
+            </View>
+            <IconButton
+              onPress={onClose}
+              family="ionicons"
+              name="close"
+              size={25}
+              color={colors.gray}
+            />
           </View>
-          <IconButton
-            onPress={onClose}
-            family="ionicons"
-            name="close"
-            size={25}
-            color={colors.gray}
-          />
-        </View>
-        <View>{children}</View>
-      </Animated.View>
-    </View>
+          <View>{children}</View>
+        </Animated.View>
+      </View>
+    </PortalLayout>
   );
 };

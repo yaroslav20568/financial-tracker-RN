@@ -55,6 +55,10 @@ class CategoryApi {
 
     return response.data;
   };
+
+  deleteSubcategory = async (id: ISubcategory['id']): Promise<void> => {
+    await axiosInstance.delete<void>(`/subcategory/${id}`);
+  };
 }
 
 export const categoryApi = new CategoryApi();
