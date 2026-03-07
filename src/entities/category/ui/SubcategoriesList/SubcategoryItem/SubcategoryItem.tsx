@@ -30,7 +30,6 @@ export const SubcategoryItem = ({ id, name, created_at }: IProps) => {
     onPress: async () => {
       await deleteSubcategoryMutate(id);
     },
-    submitBtnColor: 'red',
     isLoading: isPending
   });
 

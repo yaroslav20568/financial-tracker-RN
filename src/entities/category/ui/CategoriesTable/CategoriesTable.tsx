@@ -40,7 +40,6 @@ export const CategoriesTable = ({ onEdit }: IProps) => {
         await deleteCategoryMutate(selectedCategory.id);
       }
     },
-    submitBtnColor: 'red',
     isLoading: isPending
   });
 

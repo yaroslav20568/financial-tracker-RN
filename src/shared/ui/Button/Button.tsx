@@ -17,7 +17,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 type TVariant = 'background' | 'outline';
 type TColor = 'blue' | 'red';
 
-export interface IButtonProps extends PressableProps {
+interface IProps extends PressableProps {
   title: string;
   isLoading?: boolean;
   size?: TSize;
@@ -36,7 +36,7 @@ export const Button = ({
   color = 'blue',
   icon,
   ...props
-}: IButtonProps) => {
+}: IProps) => {
   const s = useStyles();
   s.useVariants({ size, variant, color });
 

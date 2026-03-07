@@ -6,7 +6,6 @@ import {
   Button,
   ButtonGroupLayout,
   CustomModal,
-  IButtonProps,
   ICustomModalProps
 } from '@/shared/ui';
 
@@ -16,7 +15,6 @@ export interface IConfirmModalProps
   extends Omit<ICustomModalProps, 'icon' | 'children'> {
   text?: string;
   onPress: () => void;
-  submitBtnColor?: IButtonProps['color'];
   isDelete?: boolean;
   isLoading?: boolean;
 }
@@ -27,7 +25,6 @@ export const ConfirmModal = ({
   title,
   text = 'Are you sure you want to confirm your action?',
   onPress,
-  submitBtnColor,
   isDelete = true,
   isLoading
 }: IConfirmModalProps) => {
@@ -42,7 +39,7 @@ export const ConfirmModal = ({
           title={!isDelete ? 'Confirm' : 'Delete'}
           onPress={onPress}
           size="m"
-          color={submitBtnColor}
+          color={isDelete ? 'red' : 'blue'}
           disabled={isLoading}
           isLoading={isLoading}
         />
