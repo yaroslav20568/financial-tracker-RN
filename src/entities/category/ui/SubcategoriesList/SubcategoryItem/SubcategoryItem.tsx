@@ -8,7 +8,9 @@ import {
   DateUtils,
   Icon,
   ITableAction,
+  PortalLayout,
   TableActions,
+  useConfirmModal,
   useTheme
 } from '@/shared';
 
@@ -19,6 +21,18 @@ interface IProps extends Omit<ISubcategory, 'transaction_count'> {}
 export const SubcategoryItem = ({ name, created_at }: IProps) => {
   const s = useStyles();
   const { colors } = useTheme();
+
+  const [confirmModal, openConfirmModal] = useConfirmModal({
+    title: 'Delete Source',
+    text: `You want to delete a source with the name: ${name}?`,
+    onPress: async () => {
+      // if (selectedSource) {
+      //   await deleteSourceMutate(selectedSource.id);
+      // }
+    },
+    submitBtnColor: 'red'
+    // isLoading: isPending
+  });
 
   const actions: Array<ITableAction> = useMemo(() => {
     return [
@@ -32,7 +46,7 @@ export const SubcategoryItem = ({ name, created_at }: IProps) => {
           name: 'delete-outline',
           color: colors.red
         },
-        onPress: () => {}
+        onPress: openConfirmModal
       }
     ];
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,6 +67,7 @@ export const SubcategoryItem = ({ name, created_at }: IProps) => {
         </View>
         <TableActions actions={actions} />
       </View>
+      <PortalLayout>{confirmModal}</PortalLayout>
     </BorderLayout>
   );
 };
