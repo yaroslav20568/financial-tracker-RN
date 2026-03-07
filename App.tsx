@@ -7,14 +7,24 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
 import { PortalProvider, PortalHost } from '@gorhom/portal';
+import { useNetworkActivityDevTools } from '@rozenite/network-activity-plugin';
+import { useTanStackQueryDevTools } from '@rozenite/tanstack-query-plugin';
 
-import { AuthProvider, NavigationProvider, TanstackProvider } from '@/app';
+import {
+  AuthProvider,
+  NavigationProvider,
+  queryClient,
+  TanstackProvider
+} from '@/app';
 import { portalHostName, toastConfig } from '@/shared';
 
 import '@/shared/config/theme/unistyles';
 import '@/entities/session/api/interceptors';
 
 const App = () => {
+  useTanStackQueryDevTools(queryClient);
+  useNetworkActivityDevTools();
+
   return (
     <GestureHandlerRootView>
       <PortalProvider>
